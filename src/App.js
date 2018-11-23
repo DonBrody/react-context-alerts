@@ -10,7 +10,10 @@ const theme = createMuiTheme({
     primary: { main: '#2196F3' },
     secondary: { main: '#FFF' },
     accent: { main: '#FF4081' },
-    error: { main: '#F44336' },
+    info: { light: '#2196f3', main: '#1976d2' },
+    success: { light: '#4caf50', main: '#388e3c' },
+    warning: { light: '#ff9800', main: '#f57c00' },
+    error: { light: '#f44336', main: '#d32f2f' },
     contrastThreshold: 3,
     tonalOffset: 0.2,
   },
@@ -47,8 +50,10 @@ class App extends Component {
               </BrowserRouter>
             </main>
           </NotificationsProvider>
-          <footer>
-            Footer
+          <footer style={{ marginTop: 60, textAlign: 'center' }}>
+            <Typography variant="caption" component="aside">
+              MIT Licensed Software
+            </Typography>
           </footer>
         </div>
       </MuiThemeProvider>
