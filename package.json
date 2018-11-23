@@ -1,17 +1,36 @@
 {
   "name": "react-context-notifications",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
-  },
+  "description": "A responsive notification manager implemented with React Context",
+  "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "version:patch": "npm --no-git-tag-version version patch",
+    "version:minor": "npm --no-git-tag-version version minor",
+    "version:major": "npm --no-git-tag-version version major"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DonBrody/react-context-notifications.git"
+  },
+  "author": "Don Brody",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DonBrody/react-context-notifications/issues"
+  },
+  "homepage": "https://github.com/DonBrody/react-context-notifications#readme",
+  "devDependencies": {
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
+  },
+  "dependencies": {
+    "react-scripts": "2.1.1"
+  },
+  "peerDependencies": {
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
   },
   "eslintConfig": {
     "extends": "react-app"
