@@ -31,20 +31,15 @@ export const AlertsConsumer = AlertsContext.Consumer;
 
 let count = 0;
 class AlertsProvider extends Component {
-  constructor(props) {
-    super(props);
-    this.state = DEFAULT_STATE;
-    this.createAlertObject = this.createAlertObject.bind(this);
-    this.onAlertClose = this.onAlertClose.bind(this);
-  }
+  state = DEFAULT_STATE;
 
-  createAlertObject(type, header, message) {
+  createAlertObject = (type, header, message) => {
     return {
       id: count++, type, header, message
     };
   };
 
-  onAlertClose(alert) {
+  onAlertClose = (alert) => {
     this.setState({ alerts: this.state.alerts.filter((current) => (
       alert !== current
     ))});
