@@ -1,3 +1,2 @@
-export { createRcnTheme } from './components';
-export { AlertsProvider } from './context';
-export { AlertsConsumer } from './context/AlertsProvider';
+export { default as createRcnTheme } from './components/createRcnTheme';
+export { default as AlertsProvider, AlertsConsumer } from './context/AlertsProvder';

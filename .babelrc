@@ -6,8 +6,7 @@
         ["inline-react-svg", {
           "svgo": false
         }],
-        ["transform-replace-object-assign", { "moduleSpecifier": "object.assign" }],
-        "./scripts/pure-component-fallback.js"
+        ["transform-replace-object-assign", { "moduleSpecifier": "object.assign" }]
       ]
     }
   }
