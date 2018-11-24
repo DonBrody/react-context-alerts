@@ -1,6 +1,6 @@
 {
   "name": "react-context-alerts",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A responsive Alert manager implemented with React Context",
   "main": "index.js",
   "scripts": {
