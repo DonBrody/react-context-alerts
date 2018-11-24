@@ -6,6 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:heroku": "npm run build && git commit build -m \"Build for Heroku deployment\" && git push heroku master",
     "build:npm": "npm run build:cjs --optimize",
     "build:cjs": "BABEL_ENV=cjs babel src/shared -d lib/",
     "tag": "git tag v$npm_package_version",
