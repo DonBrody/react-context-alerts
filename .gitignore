@@ -11,6 +11,9 @@
 # production
 /build
 
+# npm build
+/lib
+
 # misc
 .DS_Store
 .env.local
