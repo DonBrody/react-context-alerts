@@ -1,7 +1,7 @@
 {
-  "name": "react-context-notifications",
+  "name": "react-context-alerts",
   "version": "0.1.0",
-  "description": "A responsive notification manager implemented with React Context",
+  "description": "A responsive Alert manager implemented with React Context",
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DonBrody/react-context-notifications.git"
+    "url": "git+https://github.com/DonBrody/react-context-alerts.git"
   },
   "author": "Don Brody",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DonBrody/react-context-notifications/issues"
+    "url": "https://github.com/DonBrody/react-context-alerts/issues"
   },
-  "homepage": "https://github.com/DonBrody/react-context-notifications#readme",
+  "homepage": "https://github.com/DonBrody/react-context-alerts#readme",
   "devDependencies": {
     "@material-ui/core": "^3.5.1",
     "@material-ui/icons": "^3.0.1",

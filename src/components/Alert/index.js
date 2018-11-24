@@ -17,7 +17,7 @@ const styles = {
   },
 };
 
-class Notification extends Component {
+class Alert extends Component {
   state = {
     timedOut: false,
     collapse: false,
@@ -91,7 +91,7 @@ class Notification extends Component {
   }
 };
 
-Notification.propTypes = {
+Alert.propTypes = {
   id: PropTypes.number.isRequired,
   onClose: PropTypes.func,
   header: PropTypes.string,
@@ -101,7 +101,7 @@ Notification.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-Notification.defaultProps = {
+Alert.defaultProps = {
   onClose: () => {},
   header: null,
   message: '',
@@ -109,4 +109,4 @@ Notification.defaultProps = {
   timeout: 3000,
 };
 
-export default withStyles(styles)(Notification);
+export default withStyles(styles)(Alert);

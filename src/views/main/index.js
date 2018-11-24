@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { NotificationsConsumer } from '../../context/NotificationsProvider';
+import { AlertsConsumer } from '../../context/AlertsProvider';
 
 const baseButtonStyles = {
   display: 'block',
@@ -68,7 +68,7 @@ class Main extends Component {
     const { classes } = this.props;
 
     return (
-      <NotificationsConsumer>
+      <AlertsConsumer>
         {context => (
           <section className={classes.buttonGroup}>
             <Button
@@ -101,7 +101,7 @@ class Main extends Component {
             </Button>
           </section>
         )}
-      </NotificationsConsumer>
+      </AlertsConsumer>
     );
   }
 };

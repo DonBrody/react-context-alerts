@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import createRcnTheme from './components/createRcnTheme';
-import NotificationsProvider from './context/NotificationsProvider';
+import AlertsProvider from './context/AlertsProvider';
 import Main from './views/main';
 
 const muiTheme = createMuiTheme({
@@ -48,12 +48,12 @@ class App extends Component {
             <AppBar position="static" color="primary">
               <Toolbar>
                 <Typography variant="h5" component="h1" color="secondary">
-                  React Context Notifications
+                  React Context Alerts
                 </Typography>
               </Toolbar>
             </AppBar>
           </header>
-          <NotificationsProvider theme={rcnTheme}>
+          <AlertsProvider theme={rcnTheme}>
             <main role="main">
               <BrowserRouter>
                 <Switch>
@@ -62,7 +62,7 @@ class App extends Component {
                 </Switch>
               </BrowserRouter>
             </main>
-          </NotificationsProvider>
+          </AlertsProvider>
           <footer style={{ marginTop: 60, textAlign: 'center' }}>
             <Typography variant="caption" component="aside">
               MIT Licensed Software
