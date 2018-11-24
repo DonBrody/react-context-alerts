@@ -6,7 +6,8 @@
         ["inline-react-svg", {
           "svgo": false
         }],
-        ["transform-replace-object-assign", { "moduleSpecifier": "object.assign" }]
+        ["transform-replace-object-assign", { "moduleSpecifier": "object.assign" }],
+        "@babel/plugin-proposal-class-properties"
       ]
     }
   }
