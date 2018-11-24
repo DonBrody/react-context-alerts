@@ -25,7 +25,6 @@
   "bugs": {
     "url": "https://github.com/DonBrody/react-context-alerts/issues"
   },
-  "homepage": "https://github.com/DonBrody/react-context-alerts#readme",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
