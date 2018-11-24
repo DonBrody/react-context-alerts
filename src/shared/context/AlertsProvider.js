@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Alert from '../components/Alert';
 import DefaultTheme from '../theme';
 
@@ -14,6 +15,12 @@ const styles = {
     zIndex: 100000,
   },
 };
+
+const muiTheme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
+});
 
 const DEFAULT_STATE = {
   alerts: [],
@@ -68,19 +75,21 @@ class AlertsProvider extends Component {
         }}
       >
         {this.props.children}
-        <aside className={classes.alertWrapper}>
-          {this.state.alerts.map((alert) => (
-            <Alert
-              key={alert.id}
-              id={alert.id}
-              header={alert.header}
-              message={alert.message}
-              type={alert.type}
-              onClose={() => this.onAlertClose(alert)}
-              theme={theme}
-            />
-          ))}
-        </aside>
+        <MuiThemeProvider theme={muiTheme}>
+          <aside className={classes.alertWrapper}>
+            {this.state.alerts.map((alert) => (
+              <Alert
+                key={alert.id}
+                id={alert.id}
+                header={alert.header}
+                message={alert.message}
+                type={alert.type}
+                onClose={() => this.onAlertClose(alert)}
+                theme={theme}
+              />
+            ))}
+          </aside>
+        </MuiThemeProvider>
       </AlertsContext.Provider>
     );
   }
