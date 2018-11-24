@@ -1,13 +1,13 @@
 {
-  "main.css": "/DonBrody/react-context-alerts/static/css/main.4631faf2.chunk.css",
-  "main.js": "/DonBrody/react-context-alerts/static/js/main.0dc81eb4.chunk.js",
-  "main.js.map": "/DonBrody/react-context-alerts/static/js/main.0dc81eb4.chunk.js.map",
-  "static/js/1.5ce4a0d6.chunk.js": "/DonBrody/react-context-alerts/static/js/1.5ce4a0d6.chunk.js",
-  "static/js/1.5ce4a0d6.chunk.js.map": "/DonBrody/react-context-alerts/static/js/1.5ce4a0d6.chunk.js.map",
-  "runtime~main.js": "/DonBrody/react-context-alerts/static/js/runtime~main.98e5817e.js",
-  "runtime~main.js.map": "/DonBrody/react-context-alerts/static/js/runtime~main.98e5817e.js.map",
-  "static/css/main.4631faf2.chunk.css.map": "/DonBrody/react-context-alerts/static/css/main.4631faf2.chunk.css.map",
-  "index.html": "/DonBrody/react-context-alerts/index.html",
-  "precache-manifest.3bee2b48c1a6fd2388e43fda6e508bd3.js": "/DonBrody/react-context-alerts/precache-manifest.3bee2b48c1a6fd2388e43fda6e508bd3.js",
-  "service-worker.js": "/DonBrody/react-context-alerts/service-worker.js"
+  "main.css": "/static/css/main.4631faf2.chunk.css",
+  "main.js": "/static/js/main.0dc81eb4.chunk.js",
+  "main.js.map": "/static/js/main.0dc81eb4.chunk.js.map",
+  "static/js/1.5ce4a0d6.chunk.js": "/static/js/1.5ce4a0d6.chunk.js",
+  "static/js/1.5ce4a0d6.chunk.js.map": "/static/js/1.5ce4a0d6.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
+  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
+  "static/css/main.4631faf2.chunk.css.map": "/static/css/main.4631faf2.chunk.css.map",
+  "index.html": "/index.html",
+  "precache-manifest.e8c702336c72072dc7799c57bebe3c3a.js": "/precache-manifest.e8c702336c72072dc7799c57bebe3c3a.js",
+  "service-worker.js": "/service-worker.js"
 }
