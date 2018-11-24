@@ -46,8 +46,6 @@ const styles = theme => ({
 });
 
 class Main extends Component {
-  state = {};
-
   onInfo = (context, header, message) => {
     context.info(header, message);
   };

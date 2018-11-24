@@ -24,14 +24,6 @@ const muiTheme = createMuiTheme({
 
 const rcnTheme = createRcnTheme({
   palette: {
-    // info: {
-    //   background: '#1976d2',
-    //   color: 'yellow',
-    //   adornment: {
-    //     background: '#1976d2',
-    //     color: 'yellow',
-    //   },
-    // },
   },
 });
 

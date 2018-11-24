@@ -18,11 +18,14 @@ const styles = {
 };
 
 class Alert extends Component {
-  state = {
-    timedOut: false,
-    collapse: false,
-    timeoutFunction: null,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      timedOut: false,
+      collapse: false,
+      timeoutFunction: null,
+    };
+  }
 
   componentDidMount() {
     const timeoutFunction = setTimeout(() => {

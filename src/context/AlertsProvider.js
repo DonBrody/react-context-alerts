@@ -24,7 +24,10 @@ export const AlertsConsumer = AlertsContext.Consumer;
 
 let count = 0;
 class AlertsProvider extends Component {
-  state = DEFAULT_STATE;
+  constructor(props) {
+    super(props);
+    this.state = DEFAULT_STATE;
+  }
 
   createAlertObject = (type, header, message) => {
     return {
