@@ -1,0 +1,14 @@
+{
+  "env": {
+    "cjs": {
+      "presets": [["airbnb", { "removePropTypes": true }]],
+      "plugins": [
+        ["inline-react-svg", {
+          "svgo": false
+        }],
+        ["transform-replace-object-assign", { "moduleSpecifier": "object.assign" }],
+        "./scripts/pure-component-fallback.js"
+      ]
+    }
+  }
+}
