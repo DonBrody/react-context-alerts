@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Notification from '../components/Notification';
+import DefaultTheme from '../theme';
 
 const styles = {
   notificationWrapper: {
@@ -24,9 +26,9 @@ let count = 0;
 class NotificationsProvider extends Component {
   state = DEFAULT_STATE;
 
-  createNotificationObject = (status, header, message) => {
+  createNotificationObject = (type, header, message) => {
     return {
-      id: count++, status, header, message
+      id: count++, type, header, message
     };
   };
 
@@ -37,8 +39,7 @@ class NotificationsProvider extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-    console.log(this.state);
+    const { classes, theme } = this.props;
     return (
       <NotificationsContext.Provider
         value={{
@@ -69,14 +70,23 @@ class NotificationsProvider extends Component {
               id={notification.id}
               header={notification.header}
               message={notification.message}
-              status={notification.status}
+              type={notification.type}
               onClose={() => this.onNotificationClose(notification)}
+              theme={theme}
             />
           ))}
         </aside>
       </NotificationsContext.Provider>
     );
   }
+};
+
+NotificationsProvider.propTypes = {
+  theme: PropTypes.object,
+};
+
+NotificationsProvider.defaultProps = {
+  theme: DefaultTheme,
 };
 
 export default withStyles(styles)(NotificationsProvider);

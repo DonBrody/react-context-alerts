@@ -2,22 +2,36 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import createRcnTheme from './components/createRcnTheme';
 import NotificationsProvider from './context/NotificationsProvider';
 import Main from './views/main';
 
-const theme = createMuiTheme({
+const muiTheme = createMuiTheme({
   palette: {
     primary: { main: '#2196F3' },
     secondary: { main: '#FFF' },
-    info: { light: '#2196f3', main: '#1976d2' },
-    success: { light: '#4caf50', main: '#388e3c' },
-    warning: { light: '#ff9800', main: '#f57c00' },
-    error: { light: '#f44336', main: '#d32f2f' },
+    info: { light: '#2196f3', main: '#1976d2', darker: '#0d47a1' },
+    success: { light: '#4caf50', main: '#388e3c', darker: '#1b5e20' },
+    warning: { light: '#ff9800', main: '#f57c00', darker: '#e65100' },
+    error: { light: '#f44336', main: '#d32f2f', darker: '#b71c1c' },
     contrastThreshold: 3,
     tonalOffset: 0.2,
   },
   typography: {
     useNextVariants: true,
+  },
+});
+
+const rcnTheme = createRcnTheme({
+  palette: {
+    // info: {
+    //   background: '#1976d2',
+    //   color: 'yellow',
+    //   adornment: {
+    //     background: '#1976d2',
+    //     color: 'yellow',
+    //   },
+    // },
   },
 });
 
@@ -28,7 +42,7 @@ const AppBase = () => (
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={muiTheme}>
         <div>
           <header role="banner">
             <AppBar position="static" color="primary">
@@ -39,7 +53,7 @@ class App extends Component {
               </Toolbar>
             </AppBar>
           </header>
-          <NotificationsProvider>
+          <NotificationsProvider theme={rcnTheme}>
             <main role="main">
               <BrowserRouter>
                 <Switch>

@@ -20,7 +20,7 @@ const styles = {
 class Notification extends Component {
   state = {
     timedOut: false,
-    slideOutComplete: false,
+    collapse: false,
     timeoutFunction: null,
   };
 
@@ -33,15 +33,7 @@ class Notification extends Component {
 
   onClose = () => {
     this.clearCurrentTimeout();
-    this.setState({ timedOut: true, timeoutFunction: null }, () => {
-      setTimeout(() => {
-        this.setState({ slideOutComplete: true }, () => {
-          setTimeout(() => {
-            this.props.onClose();
-          }, 250);
-        });
-      }, 150);
-    });
+    this.setState({ timedOut: true, timeoutFunction: null });
   };
 
   clearCurrentTimeout = () => {
@@ -50,17 +42,47 @@ class Notification extends Component {
     }
   };
 
+  onSlideExited = () => {
+    this.setState({ collapse: true });
+  };
+
+  onCollapsed = () => {
+    this.props.onClose();
+  };
+
+  wrapperStyles = () => {
+    const { palette } = this.props.theme;
+    switch(this.props.type) {
+      case 'info': return { background: palette.info.background };
+      case 'success': return { background: palette.success.background };
+      case 'warning': return { background: palette.warning.background };
+      case 'error': return { background: palette.error.background };
+      default: return { background: palette.info.background };
+    }
+  };
+
+  textStyles = () => {
+    const { palette } = this.props.theme;
+    switch(this.props.type) {
+      case 'info': return { color: palette.info.color };
+      case 'success': return { color: palette.success.color };
+      case 'warning': return { color: palette.warning.color };
+      case 'error': return { color: palette.error.color };
+      default: return { color: palette.info.color };
+    }
+  };
+
   render() {
-    const { timedOut, slideOutComplete } = this.state;
-    const { classes, header, message, status } = this.props;
+    const { timedOut, collapse } = this.state;
+    const { classes, header, message, type, theme } = this.props;
     return (
-      <Collapse in={!slideOutComplete} unmountOnExit>
-        <Slide direction={'left'} in={!timedOut}>
-          <Paper className={classes.componentWrapper} elevation={10}>
-            <IndicatorIcon status={status}/>
-            <div className={classes.textWrapper}>
-              {header && <Typography component="h5" variant="h6">{header}</Typography>}
-              <Typography component="p" variant="body1">{message}</Typography>
+      <Collapse in={!collapse} onExited={this.onCollapsed} unmountOnExit>
+        <Slide direction={'left'} in={!timedOut} onExited={this.onSlideExited}>
+          <Paper className={classes.componentWrapper} style={this.wrapperStyles()} elevation={10}>
+            <IndicatorIcon type={type} theme={theme} />
+            <div className={classes.textWrapper} style={this.textStyles()}>
+              {header && <Typography component="h5" variant="h6" color="inherit">{header}</Typography>}
+              <Typography component="p" variant="body1" color="inherit">{message}</Typography>
             </div>
           </Paper>
         </Slide>
@@ -74,15 +96,16 @@ Notification.propTypes = {
   onClose: PropTypes.func,
   header: PropTypes.string,
   message: PropTypes.string,
-  status: PropTypes.oneOf(['info', 'success', 'warning', 'error']).isRequired,
+  type: PropTypes.oneOf(['info', 'success', 'warning', 'error']).isRequired,
   timeout: PropTypes.number,
+  theme: PropTypes.object.isRequired,
 };
 
 Notification.defaultProps = {
   onClose: () => {},
   header: null,
   message: '',
-  status: 'success',
+  type: 'success',
   timeout: 3000,
 };
 

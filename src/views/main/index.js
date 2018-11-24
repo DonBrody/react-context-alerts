@@ -19,28 +19,28 @@ const styles = theme => ({
     ...baseButtonStyles,
     backgroundColor: theme.palette.info.main,
     '&:hover': {
-      backgroundColor: theme.palette.info.light,
+      backgroundColor: theme.palette.info.darker,
     },
   },
   success: {
     ...baseButtonStyles,
     backgroundColor: theme.palette.success.main,
     '&:hover': {
-      backgroundColor: theme.palette.success.light,
+      backgroundColor: theme.palette.success.darker,
     },
   },
   warning: {
     ...baseButtonStyles,
     backgroundColor: theme.palette.warning.main,
     '&:hover': {
-      backgroundColor: theme.palette.warning.light,
+      backgroundColor: theme.palette.warning.darker,
     },
   },
   error: {
     ...baseButtonStyles,
     backgroundColor: theme.palette.error.main,
     '&:hover': {
-      backgroundColor: theme.palette.error.light,
+      backgroundColor: theme.palette.error.darker,
     },
   },
 });

@@ -18,44 +18,50 @@ const styles = {
   icon: {
     width: 30,
     height: 30,
-    color: 'white',
   },
 };
 
 const IndicatorIcon = props => {
-  let background;
+  const { palette } = props.theme;
+  const info = palette.info.adornment;
+  const success = palette.success.adornment;
+  const warning = palette.warning.adornment;
+  const error = palette.error.adornment;
+
   let icon;
-  switch(props.status) {
+  let styles;
+  switch(props.type) {
     case 'info':
-      background = '#1976d2';
+      styles= { background: info.background, color: info.color };
       icon = <Info className={props.classes.icon} />;
     break;
     case 'success':
-      background = '#388e3c';
+    styles= { background: success.background, color: success.color };
       icon = <CheckCircle className={props.classes.icon} />;
     break;
     case 'warning':
-      background = '#f57c00';
+      styles= { background: warning.background, color: warning.color };
       icon = <Warning className={props.classes.icon} />;
     break;
     case 'error':
-      background = '#d32f2f';
+      styles= { background: error.background, color: error.color };
       icon = <Error className={props.classes.icon} />;
     break;
     default:
-      background = 'white';
+      styles= { background: info.background, color: info.color };
       icon = null;
   }
 
   return (
-    <div style={{ background }} className={props.classes.wrapper}>
+    <div style={styles} className={props.classes.wrapper}>
       {icon}
     </div>
   );
 };
 
 IndicatorIcon.propTypes = {
-  status: PropTypes.oneOf(['info', 'success', 'warning', 'error']).isRequired,  
+  type: PropTypes.oneOf(['info', 'success', 'warning', 'error']).isRequired,
+  theme: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(IndicatorIcon);
