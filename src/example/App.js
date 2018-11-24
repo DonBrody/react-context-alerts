@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import createRcnTheme from './components/createRcnTheme';
-import AlertsProvider from './context/AlertsProvider';
+import createRcnTheme from '../shared/components/createRcnTheme';
+import AlertsProvider from '../shared/context/AlertsProvider';
 import Main from './views/main';
 
 const muiTheme = createMuiTheme({

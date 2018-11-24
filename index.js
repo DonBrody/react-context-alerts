@@ -1,1 +1,1 @@
-export { default as AlertsProvider } from './src/context/AlertsProvider';
+module.exports = require('./lib');

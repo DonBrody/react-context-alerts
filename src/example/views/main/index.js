@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { AlertsConsumer } from '../../context/AlertsProvider';
+import { AlertsConsumer } from '../../../shared/context/AlertsProvider';
 
 const baseButtonStyles = {
   display: 'block',
