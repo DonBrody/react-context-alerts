@@ -25,6 +25,12 @@ class Alert extends Component {
       collapse: false,
       timeoutFunction: null,
     };
+    this.onClose = this.onClose.bind(this);
+    this.clearCurrentTimeout = this.clearCurrentTimeout.bind(this);
+    this.onSlideExited = this.onSlideExited.bind(this);
+    this.onCollapsed = this.onCollapsed.bind(this);
+    this.wrapperStyles = this.wrapperStyles.bind(this);
+    this.textStyles = this.textStyles.bind(this);
   }
 
   componentDidMount() {
@@ -34,26 +40,26 @@ class Alert extends Component {
     this.setState({ timeoutFunction });
   };
 
-  onClose = () => {
+  onClose() {
     this.clearCurrentTimeout();
     this.setState({ timedOut: true, timeoutFunction: null });
   };
 
-  clearCurrentTimeout = () => {
+  clearCurrentTimeout() {
     if (this.state.timeoutFunction) {
       clearTimeout(this.state.timeoutFunction);
     }
   };
 
-  onSlideExited = () => {
+  onSlideExited() {
     this.setState({ collapse: true });
   };
 
-  onCollapsed = () => {
+  onCollapsed() {
     this.props.onClose();
   };
 
-  wrapperStyles = () => {
+  wrapperStyles() {
     const { palette } = this.props.theme;
     switch(this.props.type) {
       case 'info': return { background: palette.info.background };
@@ -64,7 +70,7 @@ class Alert extends Component {
     }
   };
 
-  textStyles = () => {
+  textStyles() {
     const { palette } = this.props.theme;
     switch(this.props.type) {
       case 'info': return { color: palette.info.color };
