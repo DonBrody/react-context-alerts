@@ -40,7 +40,7 @@ class App extends Component {
             <AppBar position="static" color="primary">
               <Toolbar>
                 <Typography variant="h5" component="h1" color="secondary">
-                  React Context Alerts
+                  React Context Alerts Demo
                 </Typography>
               </Toolbar>
             </AppBar>
