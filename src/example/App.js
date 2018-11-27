@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import createRcnTheme from '../shared/components/createRcnTheme';
+import createRcaTheme from '../shared/components/createRcaTheme';
 import AlertsProvider from '../shared/context/AlertsProvider';
 import Main from './views/main';
 
@@ -22,7 +22,7 @@ const muiTheme = createMuiTheme({
   },
 });
 
-const rcnTheme = createRcnTheme({
+const rcaTheme = createRcaTheme({
   palette: {
   },
 });
@@ -45,7 +45,7 @@ class App extends Component {
               </Toolbar>
             </AppBar>
           </header>
-          <AlertsProvider theme={rcnTheme}>
+          <AlertsProvider theme={rcaTheme}>
             <main role="main">
               <BrowserRouter>
                 <Switch>

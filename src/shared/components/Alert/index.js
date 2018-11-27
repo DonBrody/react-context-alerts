@@ -78,7 +78,7 @@ class Alert extends Component {
     return (
       <Collapse in={!collapse} onExited={this.onCollapsed} unmountOnExit>
         <Slide direction={'left'} in={!timedOut} onExited={this.onSlideExited}>
-          <Paper className={classes.componentWrapper} style={this.wrapperStyles()} elevation={10}>
+          <Paper className={classes.componentWrapper} style={this.wrapperStyles()} elevation={4}>
             <IndicatorIcon type={type} theme={theme} />
             <div className={classes.textWrapper} style={this.textStyles()}>
               {header && <Typography component="h5" variant="h6" color="inherit">{header}</Typography>}
@@ -106,7 +106,7 @@ Alert.defaultProps = {
   header: null,
   message: '',
   type: 'success',
-  timeout: 3000,
+  timeout: 5000,
 };
 
 export default withStyles(styles)(Alert);

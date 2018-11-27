@@ -14,6 +14,8 @@ const styles = {
     left: 0,
     width: 50,
     textAlign: 'center',
+    borderTopLeftRadius: 4,
+    borderBottomLeftRadius: 4,
   },
   icon: {
     width: 30,
