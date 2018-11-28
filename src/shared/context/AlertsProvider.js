@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Alert from '../components/Alert';
 import DefaultTheme from '../theme';
+import DefaultSettings from '../settings';
 
 const styles = {
   alertWrapper: {
@@ -46,7 +47,7 @@ class AlertsProvider extends Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, settings } = this.props;
     return (
       <AlertsContext.Provider
         value={{
@@ -79,6 +80,7 @@ class AlertsProvider extends Component {
                 header={alert.header}
                 message={alert.message}
                 type={alert.type}
+                timeout={settings.timeout}
                 onClose={() => this.onAlertClose(alert)}
                 theme={theme}
               />
@@ -92,10 +94,12 @@ class AlertsProvider extends Component {
 
 AlertsProvider.propTypes = {
   theme: PropTypes.object,
+  settings: PropTypes.object,
 };
 
 AlertsProvider.defaultProps = {
   theme: DefaultTheme,
+  settings: DefaultSettings,
 };
 
 export default withStyles(styles)(AlertsProvider);

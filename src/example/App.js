@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import createRcaTheme from '../shared/components/createRcaTheme';
+import createRcaSettings from '../shared/components/createRcaSettings';
 import AlertsProvider from '../shared/context/AlertsProvider';
 import Main from './views/main';
 
@@ -27,6 +28,10 @@ const rcaTheme = createRcaTheme({
   },
 });
 
+const rcaSettings = createRcaSettings({
+  timeout: 3000,
+});
+
 const AppBase = () => (
   <Redirect to ="/" />
 );
@@ -45,7 +50,7 @@ class App extends Component {
               </Toolbar>
             </AppBar>
           </header>
-          <AlertsProvider theme={rcaTheme}>
+          <AlertsProvider theme={rcaTheme} settings={rcaSettings}>
             <main role="main">
               <BrowserRouter>
                 <Switch>
