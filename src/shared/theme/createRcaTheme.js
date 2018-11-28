@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
-import defaultTheme from './index';
+import rcaDefaults from './index';
 
-export default customTheme => {
+export default (customTheme, defaultTheme = rcaDefaults) => {
   return customTheme ? deepmerge(defaultTheme, customTheme) : defaultTheme;
 };

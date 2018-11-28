@@ -6,6 +6,7 @@ import Alert from '../components/Alert';
 import DefaultTheme from '../theme';
 import DefaultSettings from '../settings';
 import createRcaSettings from '../settings/createRcaSettings';
+import createRcaTheme from '../theme/createRcaTheme';
 
 const styles = {
   alertWrapper: {
@@ -35,21 +36,28 @@ let count = 0;
 class AlertsProvider extends Component {
   state = DEFAULT_STATE;
 
+  onAlertClose = (alert) => {
+    this.setState({ alerts: this.state.alerts.filter((current) => (
+      alert !== current
+    ))});
+  };
+
   createAlertObject = (type, header, message, instanceSettings) => {
-    const globalSettings = this.props.settings;
     return {
       id: count++,
       type,
       header,
       message,
-      settings: createRcaSettings(instanceSettings, globalSettings),
+      settings: this.createCustomSettings(instanceSettings),
     };
   };
 
-  onAlertClose = (alert) => {
-    this.setState({ alerts: this.state.alerts.filter((current) => (
-      alert !== current
-    ))});
+  createCustomTheme = (overrides) => {
+    return createRcaTheme(overrides, this.props.theme);
+  };
+
+  createCustomSettings = (overrides) => {
+    return createRcaSettings(overrides, this.props.settings);
   };
 
   render() {
@@ -75,6 +83,12 @@ class AlertsProvider extends Component {
             const error = this.createAlertObject('error', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, error ] });
           },
+          updateDefaultTheme: (theme = {}) => {
+            this.setState({ theme: this.createCustomTheme(theme) });
+          },
+          updateDefaultSettings: (settings = {}) => {
+            this.setState({ settings: this.createCustomSettings(settings) });
+          },
         }}
       >
         {this.props.children}
@@ -87,9 +101,9 @@ class AlertsProvider extends Component {
                 header={alert.header}
                 message={alert.message}
                 type={alert.type}
-                settings={alert.settings}
                 onClose={() => this.onAlertClose(alert)}
                 theme={theme}
+                settings={alert.settings}
               />
             ))}
           </aside>
