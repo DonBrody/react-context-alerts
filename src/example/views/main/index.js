@@ -46,22 +46,6 @@ const styles = theme => ({
 });
 
 class Main extends Component {
-  onInfo = (context, header, message) => {
-    context.info(header, message);
-  };
-
-  onSuccess = (context, header, message) => {
-    context.success(header, message);
-  };
-
-  onWarning = (context, header, message) => {
-    context.warning(header, message);
-  };
-
-  onError = (context, header, message) => {
-    context.error(header, message);
-  };
-
   render() {
     const { classes } = this.props;
 
@@ -72,28 +56,28 @@ class Main extends Component {
             <Button
               className={classes.info}
               variant="contained"
-              onClick={() => this.onInfo(context, 'Header', '')}
+              onClick={() => context.info('Header', '', { timeout: null })}
             >
               Info
             </Button>
             <Button
               className={classes.success}
               variant="contained"
-              onClick={() => this.onSuccess(context, 'Header', 'message!')}
+              onClick={() => context.success('Header', 'message!', { timeout: 1000 })}
             >
               Success
             </Button>
             <Button
               className={classes.warning}
               variant="contained"
-              onClick={() => this.onWarning(context, '', 'message!')}
+              onClick={() => context.warning('', 'message!', { timeout: 10000 })}
             >
               Warning
             </Button>
             <Button
               className={classes.error}
               variant="contained"
-              onClick={() => this.onError(context, 'Header', 'message!')}
+              onClick={() => context.error('Header', 'message!')}
             >
               Error
             </Button>

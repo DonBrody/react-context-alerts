@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import createRcaTheme from '../shared/components/createRcaTheme';
-import createRcaSettings from '../shared/components/createRcaSettings';
+import createRcaTheme from '../shared/theme/createRcaTheme';
+import createRcaSettings from '../shared/settings/createRcaSettings';
 import AlertsProvider from '../shared/context/AlertsProvider';
 import Main from './views/main';
 

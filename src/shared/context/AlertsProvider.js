@@ -5,6 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Alert from '../components/Alert';
 import DefaultTheme from '../theme';
 import DefaultSettings from '../settings';
+import createRcaSettings from '../settings/createRcaSettings';
 
 const styles = {
   alertWrapper: {
@@ -34,9 +35,14 @@ let count = 0;
 class AlertsProvider extends Component {
   state = DEFAULT_STATE;
 
-  createAlertObject = (type, header, message) => {
+  createAlertObject = (type, header, message, instanceSettings) => {
+    const globalSettings = this.props.settings;
     return {
-      id: count++, type, header, message
+      id: count++,
+      type,
+      header,
+      message,
+      settings: createRcaSettings(instanceSettings, globalSettings),
     };
   };
 
@@ -47,25 +53,26 @@ class AlertsProvider extends Component {
   };
 
   render() {
-    const { classes, theme, settings } = this.props;
+    const { classes, theme } = this.props;
     return (
       <AlertsContext.Provider
         value={{
           state: this.state,
-          info: (header, message) => {
-            const info = this.createAlertObject('info', header, message);
+          info: (header, message, settings = {}) => {
+            const info = this.createAlertObject('info', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, info ] });
           },
-          success: (header, message) => {
-            const success = this.createAlertObject('success', header, message);
+          success: (header, message, settings = {}) => {
+            console.log(settings);
+            const success = this.createAlertObject('success', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, success ] });
           },
-          warning: (header, message) => {
-            const warning = this.createAlertObject('warning', header, message);
+          warning: (header, message, settings = {}) => {
+            const warning = this.createAlertObject('warning', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, warning ] });
           },
-          error: (header, message) => {
-            const error = this.createAlertObject('error', header, message);
+          error: (header, message, settings = {}) => {
+            const error = this.createAlertObject('error', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, error ] });
           },
         }}
@@ -80,7 +87,7 @@ class AlertsProvider extends Component {
                 header={alert.header}
                 message={alert.message}
                 type={alert.type}
-                timeout={settings.timeout}
+                settings={alert.settings}
                 onClose={() => this.onAlertClose(alert)}
                 theme={theme}
               />

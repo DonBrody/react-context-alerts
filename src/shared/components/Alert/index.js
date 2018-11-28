@@ -25,10 +25,13 @@ class Alert extends Component {
   };
 
   componentDidMount() {
-    const timeoutFunction = setTimeout(() => {
-      this.onClose();
-    }, this.props.timeout);
-    this.setState({ timeoutFunction });
+    const timeout = this.props.settings.timeout;
+    if (timeout) {
+      const timeoutFunction = setTimeout(() => {
+        this.onClose();
+      }, timeout);
+      this.setState({ timeoutFunction });
+    }
   };
 
   onClose = () => {
@@ -97,8 +100,8 @@ Alert.propTypes = {
   header: PropTypes.string,
   message: PropTypes.string,
   type: PropTypes.oneOf(['info', 'success', 'warning', 'error']).isRequired,
-  timeout: PropTypes.number,
   theme: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
 };
 
 Alert.defaultProps = {
@@ -106,7 +109,6 @@ Alert.defaultProps = {
   header: null,
   message: '',
   type: 'success',
-  timeout: 5000,
 };
 
 export default withStyles(styles)(Alert);
