@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.3.0
+- [new] Settings exposed to user.
+- [new] Timeout configurable.
+- [new] Optional close button.
+
 ## 0.2.4
 - [fix] createRcnTheme function renamed to createRcaTheme.
 - [fix] Border radius added to left top and bottom alert corners.
