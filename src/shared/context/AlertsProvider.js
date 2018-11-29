@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Alert from '../components/Alert';
 import DefaultTheme from '../theme';
+import DefaultSettings from '../settings';
+import createRcaSettings from '../settings/createRcaSettings';
+import createRcaTheme from '../theme/createRcaTheme';
 
 const styles = {
   alertWrapper: {
@@ -33,16 +36,28 @@ let count = 0;
 class AlertsProvider extends Component {
   state = DEFAULT_STATE;
 
-  createAlertObject = (type, header, message) => {
-    return {
-      id: count++, type, header, message
-    };
-  };
-
   onAlertClose = (alert) => {
     this.setState({ alerts: this.state.alerts.filter((current) => (
       alert !== current
     ))});
+  };
+
+  createAlertObject = (type, header, message, instanceSettings) => {
+    return {
+      id: count++,
+      type,
+      header,
+      message,
+      settings: this.createCustomSettings(instanceSettings),
+    };
+  };
+
+  createCustomTheme = (overrides) => {
+    return createRcaTheme(overrides, this.props.theme);
+  };
+
+  createCustomSettings = (overrides) => {
+    return createRcaSettings(overrides, this.props.settings);
   };
 
   render() {
@@ -51,21 +66,28 @@ class AlertsProvider extends Component {
       <AlertsContext.Provider
         value={{
           state: this.state,
-          info: (header, message) => {
-            const info = this.createAlertObject('info', header, message);
+          info: (header, message, settings = {}) => {
+            const info = this.createAlertObject('info', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, info ] });
           },
-          success: (header, message) => {
-            const success = this.createAlertObject('success', header, message);
+          success: (header, message, settings = {}) => {
+            console.log(settings);
+            const success = this.createAlertObject('success', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, success ] });
           },
-          warning: (header, message) => {
-            const warning = this.createAlertObject('warning', header, message);
+          warning: (header, message, settings = {}) => {
+            const warning = this.createAlertObject('warning', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, warning ] });
           },
-          error: (header, message) => {
-            const error = this.createAlertObject('error', header, message);
+          error: (header, message, settings = {}) => {
+            const error = this.createAlertObject('error', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, error ] });
+          },
+          updateDefaultTheme: (theme = {}) => {
+            this.setState({ theme: this.createCustomTheme(theme) });
+          },
+          updateDefaultSettings: (settings = {}) => {
+            this.setState({ settings: this.createCustomSettings(settings) });
           },
         }}
       >
@@ -81,6 +103,7 @@ class AlertsProvider extends Component {
                 type={alert.type}
                 onClose={() => this.onAlertClose(alert)}
                 theme={theme}
+                settings={alert.settings}
               />
             ))}
           </aside>
@@ -92,10 +115,12 @@ class AlertsProvider extends Component {
 
 AlertsProvider.propTypes = {
   theme: PropTypes.object,
+  settings: PropTypes.object,
 };
 
 AlertsProvider.defaultProps = {
   theme: DefaultTheme,
+  settings: DefaultSettings,
 };
 
 export default withStyles(styles)(AlertsProvider);

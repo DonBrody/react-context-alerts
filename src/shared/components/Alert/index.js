@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Slide, Collapse, Paper, Typography } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
+import { Slide, Collapse, Paper, IconButton, Typography } from '@material-ui/core';
 import IndicatorIcon from './IndicatorIcon';
 
 const styles = {
@@ -11,9 +12,19 @@ const styles = {
     display: 'block',
   },
   textWrapper: {
-    padding: 5,
+    padding: 10,
     marginLeft: 60,
+    marginRight: 10,
     wordWrap: 'break-word',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 3,
+    right: 3,
+  },
+  closeIcon: {
+    width: 15,
+    height: 15,
   },
 };
 
@@ -25,10 +36,13 @@ class Alert extends Component {
   };
 
   componentDidMount() {
-    const timeoutFunction = setTimeout(() => {
-      this.onClose();
-    }, this.props.timeout);
-    this.setState({ timeoutFunction });
+    const timeout = this.props.settings.timeout;
+    if (timeout) {
+      const timeoutFunction = setTimeout(() => {
+        this.onClose();
+      }, timeout);
+      this.setState({ timeoutFunction });
+    }
   };
 
   onClose = () => {
@@ -72,18 +86,42 @@ class Alert extends Component {
     }
   };
 
+  headerStyles = () => {
+    return this.props.settings.showCloseButton ? { marginRight: 10 } : {};
+  };
+
   render() {
     const { timedOut, collapse } = this.state;
-    const { classes, header, message, type, theme } = this.props;
+    const { classes, header, message, type, theme, settings } = this.props;
     return (
       <Collapse in={!collapse} onExited={this.onCollapsed} unmountOnExit>
         <Slide direction={'left'} in={!timedOut} onExited={this.onSlideExited}>
           <Paper className={classes.componentWrapper} style={this.wrapperStyles()} elevation={4}>
             <IndicatorIcon type={type} theme={theme} />
             <div className={classes.textWrapper} style={this.textStyles()}>
-              {header && <Typography component="h5" variant="h6" color="inherit">{header}</Typography>}
-              <Typography component="p" variant="body1" color="inherit">{message}</Typography>
+              {header && header.length > 0 &&
+                <Typography
+                  style={this.headerStyles()}
+                  component="h5"
+                  variant="h6"
+                  color="inherit"
+                >
+                  {header}
+                </Typography>
+              }
+              <Typography
+                component="p"
+                variant="body1"
+                color="inherit"
+              >
+                {message}
+              </Typography>
             </div>
+            {settings.showCloseButton &&
+              <IconButton className={classes.closeButton} onClick={this.onClose}>
+                <Close className={classes.closeIcon} />
+              </IconButton>
+            }
           </Paper>
         </Slide>
       </Collapse>
@@ -97,8 +135,8 @@ Alert.propTypes = {
   header: PropTypes.string,
   message: PropTypes.string,
   type: PropTypes.oneOf(['info', 'success', 'warning', 'error']).isRequired,
-  timeout: PropTypes.number,
   theme: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
 };
 
 Alert.defaultProps = {
@@ -106,7 +144,6 @@ Alert.defaultProps = {
   header: null,
   message: '',
   type: 'success',
-  timeout: 5000,
 };
 
 export default withStyles(styles)(Alert);

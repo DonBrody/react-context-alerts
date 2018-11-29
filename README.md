@@ -43,6 +43,7 @@ And that's it! The above code is all you need to get up and running with default
 
 ## Customization
 ### Theming
+#### Global Theming
 The `AlertsProvider` exposes a `theme` prop that expects an object. You can override the default theme by using the provided `createRcaTheme` function. Here is how we can customize the theme for the example above:
 ```
 import React from 'react';
@@ -59,9 +60,22 @@ const rcaTheme = createRcaTheme({
   },
 });
 
-ReactDOM.render(<AlertsProvider theme={rcaTheme}><App /></AlertsProvider>, document.getElementById('root'));
+ReactDOM.render(
+  <AlertsProvider theme={rcaTheme}>
+    <App />
+  </AlertsProvider>, document.getElementById('root'));
 ```
-The example above will set the background of the info alert body to the same color as the adornment (The adornment background is blue by default and the body background is white. The above code overrides the background and text color of the body to match the adornment).
+The example above will set the background of the info alert body to the same color as the adornment (The adornment background is blue by default and the body background is white. The above code overrides the background and text color of the body to match the adornment).  
+  
+There is also a function exposed by the `AlertsConsumer` context that allows you to update the global theme. This function will update the current global theme, not the default theme (unless you have not already overridden the default theme). The code below will update the global theme to set the color of the error icon to yellow.
+```
+<AlertsConsumer>
+  {alerts => {
+    alerts.updateDefaultTheme({ palette: { error: { adornment: { color: 'yellow' } } } });
+    return null; 
+  }}
+</AlertsConsumer>
+```
 #### Full Default Theme
 ```
 palette: {
@@ -99,12 +113,66 @@ palette: {
   },
 },
 ```
+### Settings
+#### Global Settings
+The `AlertsProvider` exposes a `settings` prop that expects an object. You can override the default settings by using the provided `createRcaSettings` function. Here is how we can customize the settings for the example above:
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AlertsProvider, createRcaTheme, createRcaSettings } from 'react-context-alerts';
+import App from './App';
+
+const rcaTheme = createRcaTheme({
+  palette: {
+    info: {
+      background: '#1976d2',
+      color: 'white',
+    },
+  },
+});
+
+const rcaSettings = createRcaSettings({
+  timeout: null,
+  showCloseButton: true,
+});
+
+ReactDOM.render(
+  <AlertsProvider theme={rcaTheme} settings={rcaSettings}>
+    <App />
+  </AlertsProvider>, document.getElementById('root'));
+```
+The example above will disable the default timeout (you can provide a timeout in ms - default is 5000) and enable a close button.  
+  
+There is also a function exposed by the `AlertsConsumer` context that allows you to update the global settings. This function will update the current global settings, not the default settings (unless you have not already overridden the default settings). The code below will update the global settings to enable the close button on all alerts.
+```
+<AlertsConsumer>
+  {alerts => {
+    alerts.updateDefaultSettings({ showCloseButton: true });
+    return null; 
+  }}
+</AlertsConsumer>
+```
+#### Instance Settings
+Settings may also be updated for individual alerts. There is an optional third settings parameter for all alerts. Overriding the instance settings will override the current global settings, not the default settings. Updating an alert's instance settings does not affect the global settings. The code below will override the info alert's timeout setting for this instance only.
+```
+<button onClick={() => alerts.info('Info Header', 'Info message', { timeout: 3000 })}>
+  Info Alert
+</button>
+```
+#### Full Default Settings
+```
+{
+  timeout: 5000,
+  showCloseButton: false,
+}
+```
+More settings will be added soon!
+
 ## Future Updates
 This is a new and evolving library. There are currently very limited options for customizing your alerts. Future updates will allow you to add default settings and individual settings for alerts. Settings that will be exposed shortly:
-* Timeout duration (including no timeout option)
-* Manual close option (close button in corner of alert)
-* Action button (with onClick even exposed to the user)
+* Action button (with onClick exposed to the user)
 * Timeout progress (along bottom of alert)
+* Optional click away listener
 
 ## Next Steps
 Add `react-context-alerts` to any (and hopefully all :) of your projects, customize the alerts in any way that fits your needs, and enjoy!
