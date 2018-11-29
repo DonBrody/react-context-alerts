@@ -3,6 +3,10 @@
   "version": "0.3.1",
   "description": "A responsive Alert manager implemented with React Context",
   "main": "index.js",
+  "engines": {
+    "npm": "5.6.0",
+    "node": "8.11.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
