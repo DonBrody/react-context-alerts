@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.3.0
+## 0.3.1
 - [new] Settings exposed to user.
 - [new] Timeout configurable.
 - [new] Optional close button.
