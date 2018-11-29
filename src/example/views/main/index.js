@@ -45,6 +45,8 @@ const styles = theme => ({
   },
 });
 
+const longText = 'This is a really long message. It\'s super super super long!';
+
 class Main extends Component {
   render() {
     const { classes } = this.props;
@@ -56,7 +58,9 @@ class Main extends Component {
             <Button
               className={classes.info}
               variant="contained"
-              onClick={() => context.info('Header', '', { timeout: null })}
+              onClick={() => context.info(
+                longText, longText, { timeout: null, showCloseButton: true })
+              }
             >
               Info
             </Button>
