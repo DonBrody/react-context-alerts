@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.3.2
+- [fix] Update global theme through context.
+- [fix] Update global settings through context.
+- [new] Optional callback added to global theme updates.
+- [new] Optional callback added to global settings updates.
+
 ## 0.3.1
 - [new] Settings exposed to user.
 - [new] Timeout configurable.
