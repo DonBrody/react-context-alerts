@@ -5,6 +5,8 @@
 - [fix] Update global settings through context.
 - [new] Optional callback added to global theme updates.
 - [new] Optional callback added to global settings updates.
+- [fix] updateDefaultTheme renamed to updateGlobalTheme.
+- [fix] updateDefaultSettings renamed to updateGlobalSettings.
 
 ## 0.3.1
 - [new] Settings exposed to user.
