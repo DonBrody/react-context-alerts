@@ -107,12 +107,12 @@ class AlertsProvider extends Component {
             const error = this.createAlertObject('error', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, error ] });
           },
-          updateDefaultTheme: (theme = {}, callback = () => {}) => {
+          updateGlobalTheme: (theme = {}, callback = () => {}) => {
             this.setState({ theme: this.createCustomTheme(theme) }, () => {
               callback();
             });
           },
-          updateDefaultSettings: (settings = {}, callback = () => {}) => {
+          updateGlobalSettings: (settings = {}, callback = () => {}) => {
             this.setState({ settings: this.createCustomSettings(settings) }, () => {
               callback();
             });
