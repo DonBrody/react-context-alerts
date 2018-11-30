@@ -1,7 +1,7 @@
 {
   "name": "react-context-alerts",
   "version": "0.3.2",
-  "description": "A responsive Alert manager implemented with React Context",
+  "description": "A responsive alerts manager implemented with React Context",
   "main": "index.js",
   "engines": {
     "npm": "5.6.0",
@@ -26,9 +26,15 @@
   },
   "author": "Don Brody",
   "license": "MIT",
+  "homepage": "https://github.com/DonBrody/react-context-alerts#readme",
   "bugs": {
     "url": "https://github.com/DonBrody/react-context-alerts/issues"
   },
+  "keywords": [
+    "alert",
+    "notification",
+    "context"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
