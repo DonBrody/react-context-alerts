@@ -11,10 +11,10 @@ const muiTheme = createMuiTheme({
   palette: {
     primary: { main: '#2196F3' },
     secondary: { main: '#FFF' },
-    info: { light: '#2196f3', main: '#1976d2', darker: '#0d47a1' },
-    success: { light: '#4caf50', main: '#388e3c', darker: '#1b5e20' },
-    warning: { light: '#ff9800', main: '#f57c00', darker: '#e65100' },
-    error: { light: '#f44336', main: '#d32f2f', darker: '#b71c1c' },
+    info: { main: '#1976d2', darker: '#0d47a1' },
+    success: { main: '#388e3c', darker: '#1b5e20' },
+    warning: { main: '#f57c00', darker: '#e65100' },
+    error: { main: '#d32f2f', darker: '#b71c1c' },
     contrastThreshold: 3,
     tonalOffset: 0.2,
   },
@@ -29,7 +29,6 @@ const rcaTheme = createRcaTheme({
 });
 
 const rcaSettings = createRcaSettings({
-  timeout: 3000,
 });
 
 const AppBase = () => (

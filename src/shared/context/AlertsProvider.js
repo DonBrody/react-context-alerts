@@ -27,6 +27,8 @@ const muiTheme = createMuiTheme({
 
 const DEFAULT_STATE = {
   alerts: [],
+  theme: DefaultTheme,
+  settings: DefaultSettings,
 };
 
 const AlertsContext = React.createContext(DEFAULT_STATE);
@@ -35,6 +37,28 @@ export const AlertsConsumer = AlertsContext.Consumer;
 let count = 0;
 class AlertsProvider extends Component {
   state = DEFAULT_STATE;
+
+  componentDidMount() {
+    this.onThemePropsUpdated(null, this.props.theme);
+    this.onSettingsPropsUpdated(null, this.props.settings);
+  }
+
+  componentDidUpdate(prevProps) {
+    this.onThemePropsUpdated(prevProps.theme, this.props.theme);
+    this.onSettingsPropsUpdated(prevProps.settings, this.props.settings);
+  }
+
+  onThemePropsUpdated = (prevTheme, theme) => {
+    if (theme !== prevTheme) {
+      this.setState({ theme: this.createCustomTheme(theme) });
+    }
+  };
+
+  onSettingsPropsUpdated = (prevSettings, settings) => {
+    if (settings !== prevSettings) {
+      this.setState({ settings: this.createCustomSettings(settings) });
+    }
+  };
 
   onAlertClose = (alert) => {
     this.setState({ alerts: this.state.alerts.filter((current) => (
@@ -53,15 +77,16 @@ class AlertsProvider extends Component {
   };
 
   createCustomTheme = (overrides) => {
-    return createRcaTheme(overrides, this.props.theme);
+    return createRcaTheme(overrides, this.state.theme);
   };
 
   createCustomSettings = (overrides) => {
-    return createRcaSettings(overrides, this.props.settings);
+    return createRcaSettings(overrides, this.state.settings);
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
+    const { theme } = this.state;
     return (
       <AlertsContext.Provider
         value={{
@@ -71,7 +96,6 @@ class AlertsProvider extends Component {
             this.setState({ alerts: [...this.state.alerts, info ] });
           },
           success: (header, message, settings = {}) => {
-            console.log(settings);
             const success = this.createAlertObject('success', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, success ] });
           },
@@ -83,11 +107,15 @@ class AlertsProvider extends Component {
             const error = this.createAlertObject('error', header, message, settings);
             this.setState({ alerts: [...this.state.alerts, error ] });
           },
-          updateDefaultTheme: (theme = {}) => {
-            this.setState({ theme: this.createCustomTheme(theme) });
+          updateDefaultTheme: (theme = {}, callback = () => {}) => {
+            this.setState({ theme: this.createCustomTheme(theme) }, () => {
+              callback();
+            });
           },
-          updateDefaultSettings: (settings = {}) => {
-            this.setState({ settings: this.createCustomSettings(settings) });
+          updateDefaultSettings: (settings = {}, callback = () => {}) => {
+            this.setState({ settings: this.createCustomSettings(settings) }, () => {
+              callback();
+            });
           },
         }}
       >

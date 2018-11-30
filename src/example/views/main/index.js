@@ -45,48 +45,45 @@ const styles = theme => ({
   },
 });
 
-const longText = 'This is a really long message. It\'s super super super long!';
-
 class Main extends Component {
   render() {
     const { classes } = this.props;
 
     return (
       <AlertsConsumer>
-        {context => (
-          <section className={classes.buttonGroup}>
-            <Button
-              className={classes.info}
-              variant="contained"
-              onClick={() => context.info(
-                longText, longText, { timeout: null, showCloseButton: true })
-              }
-            >
-              Info
-            </Button>
-            <Button
-              className={classes.success}
-              variant="contained"
-              onClick={() => context.success('Header', 'message!', { timeout: 1000 })}
-            >
-              Success
-            </Button>
-            <Button
-              className={classes.warning}
-              variant="contained"
-              onClick={() => context.warning('', 'message!', { timeout: 10000 })}
-            >
-              Warning
-            </Button>
-            <Button
-              className={classes.error}
-              variant="contained"
-              onClick={() => context.error('Header', 'message!')}
-            >
-              Error
-            </Button>
-          </section>
-        )}
+        {context => {
+          return (
+            <section className={classes.buttonGroup}>
+              <Button
+                className={classes.info}
+                variant="contained"
+                onClick={() => context.info('Header', 'message!')}
+              >
+                Info
+              </Button>
+              <Button
+                className={classes.success}
+                variant="contained"
+                onClick={() => context.success('Header', 'message!')}
+              >
+                Success
+              </Button>
+              <Button
+                className={classes.warning}
+                variant="contained"
+                onClick={() => context.warning(null, 'message!')}
+              >
+                Warning
+              </Button>
+              <Button
+                className={classes.error}
+                variant="contained"
+                onClick={() => context.error('Header', 'message!')}
+              >
+                Error
+              </Button>
+            </section>
+        )}}
       </AlertsConsumer>
     );
   }
