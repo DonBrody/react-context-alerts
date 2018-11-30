@@ -69,9 +69,12 @@ The example above will set the background of the info alert body to the same col
   
 There is also a function exposed by the `AlertsConsumer` context that allows you to update the global theme. This function will update the current global theme, not the default theme (unless you have not already overridden the default theme). The code below will update the global theme to set the color of the error icon to yellow.
 ```
+const themeOverride = { palette: { error: { adornment: { color: 'yellow' } } } };
 <AlertsConsumer>
   {alerts => {
-    alerts.updateDefaultTheme({ palette: { error: { adornment: { color: 'yellow' } } } });
+    alerts.updateGlobalTheme(themeOverride, () => {
+      // optional callback
+    });
     return null; 
   }}
 </AlertsConsumer>
@@ -147,7 +150,9 @@ There is also a function exposed by the `AlertsConsumer` context that allows you
 ```
 <AlertsConsumer>
   {alerts => {
-    alerts.updateDefaultSettings({ showCloseButton: true });
+    alerts.updateGlobalSettings({ showCloseButton: true }, () => {
+      // optional callback
+    });
     return null; 
   }}
 </AlertsConsumer>
