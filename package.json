@@ -16,8 +16,9 @@
     "version:patch": "npm --no-git-tag-version version patch",
     "version:minor": "npm --no-git-tag-version version minor",
     "version:major": "npm --no-git-tag-version version major",
-    "postversion": "git commit package.json -m \"Version $npm_package_version\" && npm run tag && git push && git push --tags && npm publish --registry=https://registry.npmjs.org/",
-    "prepublish": "npm run build:npm && git add -A && git commit lib --allow-empty -m \"Build for npm publish\" && git push"
+    "postversion": "git commit package.json -m \"Version $npm_package_version\" && npm run tag && git push && git push --tags && npm run publish:npm",
+    "prepublish:npm": "npm run build:npm && git add -A && git commit lib --allow-empty -m \"Build for npm publish\" && git push",
+    "publish:npm": "npm run prepublish:npm && npm publish --registry=https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
