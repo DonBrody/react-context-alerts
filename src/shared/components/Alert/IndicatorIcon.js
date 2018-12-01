@@ -1,7 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Info, CheckCircle, Warning, Error } from '@material-ui/icons';
 
 const styles = {
   wrapper: {
@@ -24,30 +23,30 @@ const styles = {
 };
 
 const IndicatorIcon = props => {
-  const { palette } = props.theme;
-  const info = palette.info.adornment;
-  const success = palette.success.adornment;
-  const warning = palette.warning.adornment;
-  const error = palette.error.adornment;
+  const { theme } = props;
+  const info = theme.info.adornment;
+  const success = theme.success.adornment;
+  const warning = theme.warning.adornment;
+  const error = theme.error.adornment;
 
   let icon;
   let styles;
   switch(props.type) {
     case 'info':
       styles= { background: info.background, color: info.color };
-      icon = <Info className={props.classes.icon} />;
+      icon = info.icon;
     break;
     case 'success':
     styles= { background: success.background, color: success.color };
-      icon = <CheckCircle className={props.classes.icon} />;
+      icon = success.icon;
     break;
     case 'warning':
       styles= { background: warning.background, color: warning.color };
-      icon = <Warning className={props.classes.icon} />;
+      icon = warning.icon;
     break;
     case 'error':
       styles= { background: error.background, color: error.color };
-      icon = <Error className={props.classes.icon} />;
+      icon = error.icon;
     break;
     default:
       styles= { background: info.background, color: info.color };

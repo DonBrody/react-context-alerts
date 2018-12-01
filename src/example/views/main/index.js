@@ -17,30 +17,30 @@ const styles = theme => ({
   },
   info: {
     ...baseButtonStyles,
-    backgroundColor: theme.palette.info.main,
+    backgroundColor: theme.info.main,
     '&:hover': {
-      backgroundColor: theme.palette.info.darker,
+      backgroundColor: theme.info.darker,
     },
   },
   success: {
     ...baseButtonStyles,
-    backgroundColor: theme.palette.success.main,
+    backgroundColor: theme.success.main,
     '&:hover': {
-      backgroundColor: theme.palette.success.darker,
+      backgroundColor: theme.success.darker,
     },
   },
   warning: {
     ...baseButtonStyles,
-    backgroundColor: theme.palette.warning.main,
+    backgroundColor: theme.warning.main,
     '&:hover': {
-      backgroundColor: theme.palette.warning.darker,
+      backgroundColor: theme.warning.darker,
     },
   },
   error: {
     ...baseButtonStyles,
-    backgroundColor: theme.palette.error.main,
+    backgroundColor: theme.error.main,
     '&:hover': {
-      backgroundColor: theme.palette.error.darker,
+      backgroundColor: theme.error.darker,
     },
   },
 });

@@ -65,24 +65,24 @@ class Alert extends Component {
   };
 
   wrapperStyles = () => {
-    const { palette } = this.props.theme;
+    const { theme } = this.props;
     switch(this.props.type) {
-      case 'info': return { background: palette.info.background };
-      case 'success': return { background: palette.success.background };
-      case 'warning': return { background: palette.warning.background };
-      case 'error': return { background: palette.error.background };
-      default: return { background: palette.info.background };
+      case 'info': return { background: theme.info.background };
+      case 'success': return { background: theme.success.background };
+      case 'warning': return { background: theme.warning.background };
+      case 'error': return { background: theme.error.background };
+      default: return { background: theme.info.background };
     }
   };
 
   textStyles = () => {
-    const { palette } = this.props.theme;
+    const { theme } = this.props;
     switch(this.props.type) {
-      case 'info': return { color: palette.info.color };
-      case 'success': return { color: palette.success.color };
-      case 'warning': return { color: palette.warning.color };
-      case 'error': return { color: palette.error.color };
-      default: return { color: palette.info.color };
+      case 'info': return { color: theme.info.color };
+      case 'success': return { color: theme.success.color };
+      case 'warning': return { color: theme.warning.color };
+      case 'error': return { color: theme.error.color };
+      default: return { color: theme.info.color };
     }
   };
 

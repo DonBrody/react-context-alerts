@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.0
+- [new] Remove 'palette' wrapper object from theme object.
+- [new] Attach adornment icons to theme object.
+
 ## 0.3.2
 - [fix] Update global theme through context.
 - [fix] Update global settings through context.

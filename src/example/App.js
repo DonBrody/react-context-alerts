@@ -24,8 +24,6 @@ const muiTheme = createMuiTheme({
 });
 
 const rcaTheme = createRcaTheme({
-  palette: {
-  },
 });
 
 const rcaSettings = createRcaSettings({
