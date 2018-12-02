@@ -168,6 +168,7 @@ Settings may also be updated for individual alerts. There is an optional third s
 {
   timeout: 5000,
   showCloseButton: false,
+  enableClickAwayListener: false,
 }
 ```
 More settings will be added soon!

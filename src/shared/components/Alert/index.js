@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Close } from '@material-ui/icons';
-import { Slide, Collapse, Paper, IconButton, Typography } from '@material-ui/core';
+import { Slide, Collapse, Paper, IconButton, Typography, ClickAwayListener } from '@material-ui/core';
 import IndicatorIcon from './IndicatorIcon';
 
 const styles = {
@@ -90,41 +90,59 @@ class Alert extends Component {
     return this.props.settings.showCloseButton ? { marginRight: 10 } : {};
   };
 
+  mouseEventType = (settings) => {
+    return settings.enableClickAwayListener ? 'onMouseUp' : false;
+  };
+
+  touchEventType = (settings) => {
+    return settings.enableClickAwayListener ? 'onTouchEnd' : false;
+  };
+
+  onClickAway = () => {
+    this.onClose();
+  };
+
   render() {
     const { timedOut, collapse } = this.state;
     const { classes, header, message, type, theme, settings } = this.props;
     return (
-      <Collapse in={!collapse} onExited={this.onCollapsed} unmountOnExit>
-        <Slide direction={'left'} in={!timedOut} onExited={this.onSlideExited}>
-          <Paper className={classes.componentWrapper} style={this.wrapperStyles()} elevation={4}>
-            <IndicatorIcon type={type} theme={theme} />
-            <div className={classes.textWrapper} style={this.textStyles()}>
-              {header && header.length > 0 &&
+      <ClickAwayListener
+        mouseEvent={this.mouseEventType(settings)}
+        touchEvent={this.touchEventType(settings)}
+        onClickAway={this.onClickAway}
+      >
+        <Collapse in={!collapse} onExited={this.onCollapsed} unmountOnExit>
+          <Slide direction={'left'} in={!timedOut} onExited={this.onSlideExited}>
+            <Paper className={classes.componentWrapper} style={this.wrapperStyles()} elevation={4}>
+              <IndicatorIcon type={type} theme={theme} />
+              <div className={classes.textWrapper} style={this.textStyles()}>
+                {header && header.length > 0 &&
+                  <Typography
+                    style={this.headerStyles()}
+                    component="h5"
+                    variant="h6"
+                    color="inherit"
+                  >
+                    {header}
+                  </Typography>
+                }
                 <Typography
-                  style={this.headerStyles()}
-                  component="h5"
-                  variant="h6"
+                  component="p"
+                  variant="body1"
                   color="inherit"
                 >
-                  {header}
+                  {message}
                 </Typography>
+              </div>
+              {settings.showCloseButton &&
+                <IconButton className={classes.closeButton} onClick={this.onClose}>
+                  <Close className={classes.closeIcon} />
+                </IconButton>
               }
-              <Typography
-                component="p"
-                variant="body1"
-                color="inherit"
-              >
-                {message}
-              </Typography>
-            </div>
-            {settings.showCloseButton &&
-              <IconButton className={classes.closeButton} onClick={this.onClose}>
-                <Close className={classes.closeIcon} />
-              </IconButton>
-            }
-          </Paper>
-        </Slide>
-      </Collapse>
+            </Paper>
+          </Slide>
+        </Collapse>
+      </ClickAwayListener>
     );
   }
 };
