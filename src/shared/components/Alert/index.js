@@ -135,8 +135,12 @@ class Alert extends Component {
                 </Typography>
               </div>
               {settings.showCloseButton &&
-                <IconButton className={classes.closeButton} onClick={this.onClose}>
-                  <Close className={classes.closeIcon} />
+                <IconButton
+                  className={classes.closeButton}
+                  style={this.textStyles()}
+                  onClick={this.onClose}
+                >
+                  <Close className={classes.closeIcon} color="inherit" />
                 </IconButton>
               }
             </Paper>
