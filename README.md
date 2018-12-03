@@ -80,39 +80,35 @@ const themeOverride = { error: { adornment: { color: 'yellow' } } };
   }}
 </AlertsConsumer>
 ```
-#### Full Default Theme
+#### Default Theme
 ```
 {
   info: {
     background: 'white',
     color: '#51525d',
+    button: {theme/components/ActionButton.js element},
+    buttonWrapper: {theme/components/ButtonWrapper.js element},
     adornment: {
       background: '#1976d2',
       color: 'white',
     },
   },
   success: {
-    background: 'white',
-    color: '#51525d',
+    ...
     adornment: {
-      background: '#388e3c',
-      color: 'white',
+      ...
     },
   },
   warning: {
-    background: 'white',
-    color: '#51525d',
+    ...
     adornment: {
-      background: '#f57c00',
-      color: 'white',
+      ...
     },
   },
   error: {
-    background: 'white',
-    color: '#51525d',
+    ...
     adornment: {
-      background: '#d32f2f',
-      color: 'white',
+      ...
     },
   },
 }
@@ -163,12 +159,15 @@ Settings may also be updated for individual alerts. There is an optional third s
   Info Alert
 </button>
 ```
-#### Full Default Settings
+#### Default Settings
 ```
 {
   timeout: 5000,
   showCloseButton: false,
+  showActionButton: false,
   enableClickAwayListener: false,
+  actionText: null,
+  actionClickListener: null,
 }
 ```
 More settings will be added soon!

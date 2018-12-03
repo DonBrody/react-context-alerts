@@ -19,8 +19,8 @@ const styles = {
   },
   closeButton: {
     position: 'absolute',
-    top: 3,
-    right: 3,
+    top: 2,
+    right: 2,
   },
   closeIcon: {
     width: 15,
@@ -86,6 +86,45 @@ class Alert extends Component {
     }
   };
 
+  buttonWrapper = (text, onClick) => {
+    const { theme } = this.props;
+  
+    let wrapper;
+    switch(this.props.type) {
+      case 'info':
+      wrapper = theme.info.buttonWrapper
+      if (wrapper && typeof wrapper === 'function') {
+        return theme.info.buttonWrapper(
+          theme.info.button(text, onClick), this.textStyles());
+      } break;
+      case 'success':
+        wrapper = theme.success.buttonWrapper
+        if (wrapper && typeof wrapper === 'function') {
+          return theme.success.buttonWrapper(
+            theme.success.button(text, onClick), this.textStyles());
+        } break;
+      case 'warning':
+        wrapper = theme.warning.buttonWrapper
+        if (wrapper && typeof wrapper === 'function') {
+          return theme.warning.buttonWrapper(
+            theme.warning.button(text, onClick), this.textStyles());
+        } break;
+      case 'error':
+        wrapper = theme.error.buttonWrapper
+        if (wrapper && typeof wrapper === 'function') {
+          return theme.error.buttonWrapper(
+            theme.error.button(text, onClick), this.textStyles());
+        } break;
+      default:
+        wrapper = theme.info.buttonWrapper
+        if (wrapper && typeof wrapper === 'function') {
+          return theme.succeinfoss.buttonWrapper(
+            theme.info.button(text, onClick), this.textStyles());
+        } break;
+    }
+    return null;
+  };
+
   headerStyles = () => {
     return this.props.settings.showCloseButton ? { marginRight: 10 } : {};
   };
@@ -105,6 +144,7 @@ class Alert extends Component {
   render() {
     const { timedOut, collapse } = this.state;
     const { classes, header, message, type, theme, settings } = this.props;
+    const { actionText, actionClickListener } = settings;
     return (
       <ClickAwayListener
         mouseEvent={this.mouseEventType(settings)}
@@ -142,6 +182,9 @@ class Alert extends Component {
                 >
                   <Close className={classes.closeIcon} color="inherit" />
                 </IconButton>
+              }
+              {settings.showActionButton && actionText && actionClickListener &&
+                this.buttonWrapper(actionText, actionClickListener)
               }
             </Paper>
           </Slide>

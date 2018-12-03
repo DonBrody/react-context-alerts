@@ -4,6 +4,7 @@
 - [new] Remove 'palette' wrapper object from theme object.
 - [new] Attach adornment icons to theme object.
 - [new] Optional click away listener setting.
+- [new] Optional action button theme and settings.
 
 ## 0.3.2
 - [fix] Update global theme through context.

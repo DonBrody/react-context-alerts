@@ -45,6 +45,15 @@ const styles = theme => ({
   },
 });
 
+const infoSettings = {
+  timeout: null,
+  showCloseButton: true,
+  showActionButton: true,
+  enableClickAwayListener: true,
+  actionText: 'Custom Message!!!',
+  actionClickListener: () => { console.log('Listener triggered!'); },
+};
+
 class Main extends Component {
   render() {
     const { classes } = this.props;
@@ -57,7 +66,7 @@ class Main extends Component {
               <Button
                 className={classes.info}
                 variant="contained"
-                onClick={() => context.info('Header', 'message!')}
+                onClick={() => context.info('Header', 'message!', infoSettings)}
               >
                 Info
               </Button>
