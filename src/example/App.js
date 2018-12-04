@@ -35,6 +35,9 @@ const rcaSettings = createRcaSettings({
   // showActionButton: true,
 });
 
+const rcaStyles = {
+};
+
 const AppBase = () => (
   <Redirect to ="/" />
 );
@@ -53,7 +56,7 @@ class App extends Component {
               </Toolbar>
             </AppBar>
           </header>
-          <AlertsProvider theme={rcaTheme} settings={rcaSettings}>
+          <AlertsProvider theme={rcaTheme} settings={rcaSettings} style={rcaStyles}>
             <main role="main">
               <BrowserRouter>
                 <Switch>

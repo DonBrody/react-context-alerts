@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Alert from '../components/Alert';
 import DefaultTheme from '../theme';
@@ -8,16 +7,14 @@ import DefaultSettings from '../settings';
 import createRcaSettings from '../settings/createRcaSettings';
 import createRcaTheme from '../theme/createRcaTheme';
 
-const styles = {
-  alertWrapper: {
-    width: '80%',
-    maxWidth: 450,
-    minWidth: 320,
-    position: 'fixed',
-    top: 75,
-    right: 16,
-    zIndex: 100000,
-  },
+const defaultStyles = {
+  width: '80%',
+  maxWidth: 450,
+  minWidth: 320,
+  position: 'fixed',
+  top: 75,
+  right: 16,
+  zIndex: 100000,
 };
 
 const muiTheme = createMuiTheme({
@@ -86,7 +83,6 @@ class AlertsProvider extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     const { theme } = this.state;
     return (
       <AlertsContext.Provider
@@ -122,7 +118,7 @@ class AlertsProvider extends Component {
       >
         {this.props.children}
         <MuiThemeProvider theme={muiTheme}>
-          <aside className={classes.alertWrapper}>
+          <aside style={{ ...defaultStyles, ...this.props.style }}>
             {this.state.alerts.map((alert) => (
               <Alert
                 key={alert.id}
@@ -145,11 +141,13 @@ class AlertsProvider extends Component {
 AlertsProvider.propTypes = {
   theme: PropTypes.object,
   settings: PropTypes.object,
+  style: PropTypes.object,
 };
 
 AlertsProvider.defaultProps = {
   theme: DefaultTheme,
   settings: DefaultSettings,
+  style: {},
 };
 
-export default withStyles(styles)(AlertsProvider);
+export default AlertsProvider;
