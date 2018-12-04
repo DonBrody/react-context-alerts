@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.1
+- [fix] README.md updated to match current project configuration.
+
 ## 0.4.0
 - [new] Remove 'palette' wrapper object from theme object (simplify theme object).
 - [new] Optional click away listener setting.
