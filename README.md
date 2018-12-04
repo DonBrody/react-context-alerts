@@ -2,7 +2,7 @@
 Simple and configurable alert library utilizing React Context
 
 ## Demo
-Demo utilizes alerts with default theming only. The demo will be updated shortly to include custom theming.  
+Demo utilizes alerts with default theming on all alers except the info alert. The info alert demonstrates an alert with a close button, action button, click away listener, and disabled timeout. Future updates to the demo will allow for custom configuration in the browser.
 [react-context-alerts demo](https://react-context-alerts.herokuapp.com/)
 
 ## Prerequisites
@@ -82,34 +82,58 @@ const themeOverride = { error: { adornment: { color: 'yellow' } } };
 ```
 #### Default Theme
 ```
+// These base elements can be overriden, and proivded with a function
+// that takes in the parameters in the signatures below and returns an element/component.
+const baseElements = {
+  body: {
+    wrapper: createBodyWrapper, // const createBodyWrapper = (header, message, style) => ...
+    header: createHeader, // const createHeader = (text, style) => ...
+    message: createMessage, // const createMessage = (text, style) => ...
+  },
+  adornment: {
+    wrapper: createAdornmentWrapper, // const createAdornmentWrapper = (child, style) => ...
+  },
+  action: {
+    wrapper: createActionWrapper, // const createActionWrapper = (child, style) => ...
+    button: createActionButton, // const createActionButton = (text, onClick, style) => ...
+  },
+};
+
+const bodyColor = '#51525D';
+const bodyBackground = '#FFF';
+const adornmentColor = '#FFF';
+const info = '#1976D2';
+const success = '#388E3C';
+const warning = '#F57C00';
+const error = '#D32F2F';
+
 {
   info: {
-    background: 'white',
-    color: '#51525d',
-    button: {theme/components/ActionButton.js element},
-    buttonWrapper: {theme/components/ButtonWrapper.js element},
+    body: {
+      background: bodyBackground,
+      color: bodyColor,
+      ...baseElements.body,
+    },
     adornment: {
-      background: '#1976d2',
-      color: 'white',
+      background: info,
+      color: adornmentColor,
+      icon: <Info />,
+      ...baseElements.adornment,
+    },
+    action: {
+      background: bodyBackground,
+      color: info,
+      ...baseElements.action,
     },
   },
   success: {
     ...
-    adornment: {
-      ...
-    },
   },
   warning: {
     ...
-    adornment: {
-      ...
-    },
   },
   error: {
     ...
-    adornment: {
-      ...
-    },
   },
 }
 ```
@@ -163,8 +187,9 @@ Settings may also be updated for individual alerts. There is an optional third s
 ```
 {
   timeout: 5000,
-  showCloseButton: false,
+  showAdornment: true,
   showActionButton: false,
+  showCloseButton: false,
   enableClickAwayListener: false,
   actionText: null,
   actionClickListener: null,
@@ -172,11 +197,10 @@ Settings may also be updated for individual alerts. There is an optional third s
 ```
 More settings will be added soon!
 
-## Future Updates
-This is a new and evolving library. There are currently very limited options for customizing your alerts. Future updates will allow you to add default settings and individual settings for alerts. Settings that will be exposed shortly:
-* Action button (with onClick exposed to the user)
+## In the Pipeline
+This is a new and evolving library. Here are some of the upcoming updates being worked on:
 * Timeout progress (along bottom of alert)
-* Optional click away listener
+* Alerts component (will obfuscate the use of the AlertsConsumer -- this will not depreacte the current option to trigger alerts through funciton calls)
 
 ## Next Steps
 Add `react-context-alerts` to any (and hopefully all :) of your projects, customize the alerts in any way that fits your needs, and enjoy!
