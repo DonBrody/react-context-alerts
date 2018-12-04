@@ -124,6 +124,7 @@ export default {
     action: {
       background: bodyBackground,
       color: error,
+      fontWeight: 'bold',
       ...baseElements.action,
     },
   },

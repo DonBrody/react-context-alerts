@@ -1,10 +1,14 @@
 # Change Log
 
 ## 0.4.0
-- [new] Remove 'palette' wrapper object from theme object.
-- [new] Attach adornment icons to theme object.
+- [new] Remove 'palette' wrapper object from theme object (simplify theme object).
 - [new] Optional click away listener setting.
 - [new] Optional action button theme and settings.
+- [new] Attach adornment icons to theme object.
+- [new] Attach adornment components to theme object.
+- [new] Attach body components to theme object.
+- [new] Attach action button components to theme object.
+- [new] Expose alerts wrapper styles through AlertsProvider props.
 
 ## 0.3.2
 - [fix] Update global theme through context.

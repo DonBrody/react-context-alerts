@@ -31,7 +31,7 @@ class Alert extends Component {
   };
 
   componentDidMount() {
-    const timeout = this.props.settings.timeout;
+    const { timeout } = this.props.settings;
     if (timeout) {
       const timeoutFunction = setTimeout(() => {
         this.onClose();
@@ -46,8 +46,9 @@ class Alert extends Component {
   };
 
   clearCurrentTimeout = () => {
-    if (this.state.timeoutFunction) {
-      clearTimeout(this.state.timeoutFunction);
+    const { timeoutFunction } = this.state;
+    if (timeoutFunction) {
+      clearTimeout(timeoutFunction);
     }
   };
 
@@ -60,17 +61,17 @@ class Alert extends Component {
   };
 
   wrapperStyles = () => {
-    const { theme } = this.props;
+    const { type, theme } = this.props;
     return {
-      background: theme[this.props.type].body.background,
+      background: theme[type].body.background,
     };
   };
 
   bodyStyles = () => {
-    const { theme } = this.props;
+    const { type, theme } = this.props;
     return {
-      color: theme[this.props.type].body.color,
-      background: theme[this.props.type].body.background,
+      color: theme[type].body.color,
+      background: theme[type].body.background,
     };
   };
 
@@ -84,10 +85,10 @@ class Alert extends Component {
   };
 
   adornmentStyles = () => {
-    const { theme } = this.props;
+    const { type, theme } = this.props;
     return {
-      color: theme[this.props.type].adornment.color,
-      background: theme[this.props.type].adornment.background,
+      color: theme[type].adornment.color,
+      background: theme[type].adornment.background,
     };
   };
 
@@ -98,10 +99,11 @@ class Alert extends Component {
   };
   
   actionStyles = () => {
-    const { theme } = this.props;
+    const { type, theme } = this.props;
     return {
-      color: theme[this.props.type].action.color,
-      background: theme[this.props.type].action.background,
+      color: theme[type].action.color,
+      background: theme[type].action.background,
+      fontWeight: theme[type].action.fontWeight,
     };
   };
 
@@ -114,9 +116,9 @@ class Alert extends Component {
   };
 
   closeButtonStyles = () => {
-    const { theme } = this.props;
+    const { type, theme } = this.props;
     return {
-      color: theme[this.props.type].body.color,
+      color: theme[type].body.color,
     };
   };
 
@@ -210,7 +212,7 @@ Alert.propTypes = {
   onClose: PropTypes.func,
   header: PropTypes.string,
   message: PropTypes.string,
-  type: PropTypes.oneOf([types.info, types.success, types.warning, types.error]).isRequired,
+  type: PropTypes.oneOf([types.info, types.success, types.warning, types.error]),
   theme: PropTypes.object.isRequired,
   settings: PropTypes.object.isRequired,
 };
