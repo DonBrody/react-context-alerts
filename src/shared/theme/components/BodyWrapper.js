@@ -1,37 +1,25 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { AlertsConsumer } from '../../context/AlertsProvider';
-import utils from '../utils';
 
 const defaultStyle = {
   display: 'block',
   maxWidth:  '100%',
   maxHeight: '100%',
-  padding: 10,
+  paddingTop: 10,
+  paddingBottom: 10,
   wordWrap: 'break-word',
-  background: 'cyan',
 };
 
-const position = settings => ({
-  width: `${utils.bodyWidth + settings.showActionButton ? utils.actionButtonWidth : 0}%`,
-  marginLeft: `${settings.showAdornment ? utils.adornmentWidth : 0}%`,
-});
-
 const BodyWrapper = props => (
-  <AlertsConsumer>
-    {alerts => (
-      <div
-        style={{
-            ...defaultStyle,
-            // ...position(alerts.state.settings),
-            ...props.style
-        }}
-      >
-      {props.header}
-      {props.message}
-      </div>
-    )}
-  </AlertsConsumer>
+  <div
+    style={{
+      ...defaultStyle,
+      ...props.style
+    }}
+  >
+    {props.header}
+    {props.message}
+  </div>
 );
 
 BodyWrapper.propTypes = {

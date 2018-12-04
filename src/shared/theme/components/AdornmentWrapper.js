@@ -1,25 +1,19 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import utils from '../utils';
 
 const defaultStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  minWidth:  '100%',
+  maxWidth: '80%',
   minHeight: '100%',
   borderTopLeftRadius: 4,
   borderBottomLeftRadius: 4,
-  background: '#6CC',
-};
-
-const position = {
-  width: `${utils.adornmentWidth}%`,
 };
 
 const AdornmentWrapper = props => (
   <div
-    style={{ ...defaultStyle, ...position, ...props.style}}
+    style={{ ...defaultStyle, ...props.style}}
     onClick={props.onClick}
   >
   {props.child}

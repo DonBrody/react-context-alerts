@@ -66,13 +66,9 @@ class Alert extends Component {
 
   wrapperStyles = () => {
     const { theme } = this.props;
-    switch(this.props.type) {
-      case 'info': return { background: theme.info.background };
-      case 'success': return { background: theme.success.background };
-      case 'warning': return { background: theme.warning.background };
-      case 'error': return { background: theme.error.background };
-      default: return { background: theme.info.background };
-    }
+    return {
+      background: theme[this.props.type].body.background,
+    };
   };
 
   textStyles = () => {
@@ -86,6 +82,14 @@ class Alert extends Component {
     }
   };
 
+  bodyStyles = () => {
+    const { theme } = this.props;
+    return {
+      color: theme[this.props.type].body.color,
+      background: theme[this.props.type].body.background,
+    };
+  };
+
   bodyWrapper = (header, message) => {
     const { theme, settings } = this.props;
   
@@ -95,34 +99,42 @@ class Alert extends Component {
       wrapper = theme.info.body.wrapper;
       if (wrapper && typeof wrapper === 'function') {
         return wrapper(
-          theme.info.body.header(header), theme.info.body.message(message), this.textStyles(), settings);
+          theme.info.body.header(header), theme.info.body.message(message), this.bodyStyles(), settings);
       } break;
       case 'success':
         wrapper = theme.success.body.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.success.body.header(header), theme.success.body.message(message), this.textStyles());
+            theme.success.body.header(header), theme.success.body.message(message), this.bodyStyles());
         } break;
       case 'warning':
         wrapper = theme.warning.body.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.warning.body.header(header), theme.warning.body.message(message), this.textStyles());
+            theme.warning.body.header(header), theme.warning.body.message(message), this.bodyStyles());
         } break;
       case 'error':
         wrapper = theme.error.body.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.error.body.header(header), theme.error.body.message(message), this.textStyles());
+            theme.error.body.header(header), theme.error.body.message(message), this.bodyStyles());
         } break;
       default:
         wrapper = theme.info.body.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.info.body.header(header), theme.info.body.message(message), this.textStyles());
+            theme.info.body.header(header), theme.info.body.message(message), this.bodyStyles());
         } break;
     }
     return null;
+  };
+
+  adornmentStyles = () => {
+    const { theme } = this.props;
+    return {
+      color: theme[this.props.type].adornment.color,
+      background: theme[this.props.type].adornment.background,
+    };
   };
 
   adornmentWrapper = () => {
@@ -134,37 +146,45 @@ class Alert extends Component {
       wrapper = theme.info.adornment.wrapper;
       if (wrapper && typeof wrapper === 'function') {
         return wrapper(
-          theme.info.adornment.icon, this.textStyles());
+          theme.info.adornment.icon, this.adornmentStyles());
       } break;
       case 'success':
         wrapper = theme.success.adornment.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.success.adornment.icon, this.textStyles());
+            theme.success.adornment.icon, this.adornmentStyles());
         } break;
       case 'warning':
         wrapper = theme.warning.adornment.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.warning.adornment.icon, this.textStyles());
+            theme.warning.adornment.icon, this.adornmentStyles());
         } break;
       case 'error':
         wrapper = theme.error.adornment.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.error.adornment.icon, this.textStyles());
+            theme.error.adornment.icon, this.adornmentStyles());
         } break;
       default:
         wrapper = theme.info.adornment.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.info.adornment.icon, this.textStyles());
+            theme.info.adornment.icon, this.adornmentStyles());
         } break;
     }
     return null;
   };
+  
+  actionStyles = () => {
+    const { theme } = this.props;
+    return {
+      color: theme[this.props.type].action.color,
+      background: theme[this.props.type].action.background,
+    };
+  };
 
-  buttonWrapper = (text, onClick) => {
+  actionWrapper = (text, onClick) => {
     const { theme } = this.props;
   
     let wrapper;
@@ -173,31 +193,31 @@ class Alert extends Component {
       wrapper = theme.info.action.wrapper;
       if (wrapper && typeof wrapper === 'function') {
         return wrapper(
-          theme.info.action.button(text, onClick), this.textStyles());
+          theme.info.action.button(text, onClick), this.actionStyles());
       } break;
       case 'success':
         wrapper = theme.success.action.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.success.action.button(text, onClick), this.textStyles());
+            theme.success.action.button(text, onClick), this.actionStyles());
         } break;
       case 'warning':
         wrapper = theme.warning.action.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.warning.action.button(text, onClick), this.textStyles());
+            theme.warning.action.button(text, onClick), this.actionStyles());
         } break;
       case 'error':
         wrapper = theme.error.action.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.error.action.button(text, onClick), this.textStyles());
+            theme.error.action.button(text, onClick), this.actionStyles());
         } break;
       default:
         wrapper = theme.info.action.wrapper;
         if (wrapper && typeof wrapper === 'function') {
           return wrapper(
-            theme.info.action.button(text, onClick), this.textStyles());
+            theme.info.action.button(text, onClick), this.actionStyles());
         } break;
     }
     return null;
@@ -243,10 +263,8 @@ class Alert extends Component {
   };
 
   closeButtonColumns = (settings) => {
-    return settings.showCloseButton ? 1 : 0;
+    return settings.showCloseButton ? 1 : false;
   };
-
-
 
   render() {
     const { timedOut, collapse } = this.state;
@@ -262,8 +280,6 @@ class Alert extends Component {
         <Collapse in={!collapse} onExited={this.onCollapsed} unmountOnExit>
           <Slide direction={'left'} in={!timedOut} onExited={this.onSlideExited}>
             <Paper className={classes.componentWrapper} style={this.wrapperStyles()} elevation={4}>
-            {/* <Paper className={classes.componentWrapper} style={{ background: 'cyan' }} elevation={4}>  */}
-              {/* <IndicatorIcon type={type} theme={theme} /> */}
               <Grid container spacing={0}>
                 <Grid item xs={this.adornmentColumns(settings)}>
                   {showAdornment && this.adornmentWrapper()}
@@ -273,14 +289,14 @@ class Alert extends Component {
                 </Grid>
                 <Grid item xs={this.actionButtonColumns(settings)}>
                 {showActionButton && actionText && actionClickListener &&
-                  this.buttonWrapper(actionText, actionClickListener)
+                  this.actionWrapper(actionText, actionClickListener)
                 }
                 </Grid>
                 <Grid item xs={this.closeButtonColumns(settings)}>
                   {showCloseButton &&
                     <IconButton
                       className={classes.closeButton}
-                      style={this.textStyles()}
+                      style={this.bodyStyles()}
                       onClick={this.onClose}
                     >
                       <Close className={classes.closeIcon} color="inherit" />
@@ -288,38 +304,6 @@ class Alert extends Component {
                   }
                 </Grid>
               </Grid>
-              {/* <div className={classes.textWrapper} style={this.textStyles()}>
-                {header && header.length > 0 &&
-                  <Typography
-                    style={this.headerStyles()}
-                    component="h5"
-                    variant="h6"
-                    color="inherit"
-                  >
-                    {header}
-                  </Typography>
-                }
-                <Typography
-                  component="p"
-                  variant="body1"
-                  color="inherit"
-                >
-                  {message}
-                </Typography>
-              </div> */}
-              {/* {showBody && this.bodyWrapper(header, message)} */}
-              {/* {showCloseButton &&
-                <IconButton
-                  className={classes.closeButton}
-                  style={this.textStyles()}
-                  onClick={this.onClose}
-                >
-                  <Close className={classes.closeIcon} color="inherit" />
-                </IconButton>
-              } */}
-              {/* {showActionButton && actionText && actionClickListener &&
-                this.buttonWrapper(actionText, actionClickListener)
-              } */}
             </Paper>
           </Slide>
         </Collapse>

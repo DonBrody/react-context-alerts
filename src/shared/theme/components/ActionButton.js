@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 const defaultStyle = (theme) => ({
   button: {
     fontSize: '0.65em',
+    fontWeight: 'bold',
     [theme.breakpoints.up('sm')]: {
       fontSize: '0.75em',
     },
@@ -18,6 +19,7 @@ const ActionButton = props => (
     style={props.style}
     color="inherit"
     onClick={props.onClick}
+    variant="flat"
   >
   {props.text}
   </Button>

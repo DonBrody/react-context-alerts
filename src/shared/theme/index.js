@@ -46,68 +46,84 @@ const baseElements = {
   },
 };
 
+const bodyColor = '#51525D';
+const bodyBackground = '#FFF';
+const adornmentColor = '#FFF';
+const info = '#1976D2';
+const success = '#388E3C';
+const warning = '#F57C00';
+const error = '#D32F2F';
+
 export default {
   info: {
     body: {
-      background: 'white',
-      color: '#51525d',
+      background: bodyBackground,
+      color: bodyColor,
       ...baseElements.body,
     },
     adornment: {
-      background: '#1976d2',
-      color: 'white',
+      background: info,
+      color: adornmentColor,
       icon: <Info />,
       ...baseElements.adornment,
     },
     action: {
+      background: bodyBackground,
+      color: info,
       ...baseElements.action,
     },
   },
   success: {
     body: {
-      background: 'white',
-      color: '#51525d',
+      background: bodyBackground,
+      color: bodyColor,
       ...baseElements.body,
     },
     adornment: {
-      background: '#388e3c',
-      color: 'white',
+      background: success,
+      color: adornmentColor,
       icon: <CheckCircle />,
       ...baseElements.adornment,
     },
     action: {
+      background: bodyBackground,
+      color: success,
       ...baseElements.action,
     },
   },
   warning: {
     body: {
-      background: 'white',
-      color: '#51525d',
+      background: bodyBackground,
+      color: bodyColor,
       ...baseElements.body,
     },
     adornment: {
-      background: '#f57c00',
-      color: 'white',
+      background: warning,
+      color: adornmentColor,
       icon: <Warning />,
       ...baseElements.adornment,
     },
     action: {
+      background: bodyBackground,
+      color: warning,
       ...baseElements.action,
     },
   },
   error: {
     body: {
-      background: 'white',
-      color: '#51525d',
+      background: bodyBackground,
+      color: bodyColor,
       ...baseElements.body,
     },
     adornment: {
-      background: '#d32f2f',
-      color: 'white',
+      background: error,
+      color: adornmentColor,
       icon: <Error />,
       ...baseElements.adornment,
     },
     action: {
+      background: bodyBackground,
+      color: error,
       ...baseElements.action,
     },
   },
