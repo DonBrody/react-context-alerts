@@ -54,6 +54,8 @@ const infoSettings = {
   actionClickListener: () => { console.log('Listener triggered!'); },
 };
 
+const longText = 'This is an unecessarily long message to the user!!!!';
+
 class Main extends Component {
   render() {
     const { classes } = this.props;
@@ -66,7 +68,7 @@ class Main extends Component {
               <Button
                 className={classes.info}
                 variant="contained"
-                onClick={() => context.info('Header', 'message!', infoSettings)}
+                onClick={() => context.info('Header', longText, infoSettings)}
               >
                 Info
               </Button>
@@ -87,7 +89,7 @@ class Main extends Component {
               <Button
                 className={classes.error}
                 variant="contained"
-                onClick={() => context.error('Header', 'message!')}
+                onClick={() => context.error('Header', null)}
               >
                 Error
               </Button>

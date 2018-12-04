@@ -12,6 +12,7 @@ const styles = {
   alertWrapper: {
     width: '80%',
     maxWidth: 450,
+    minWidth: 320,
     position: 'fixed',
     top: 75,
     right: 16,

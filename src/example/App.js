@@ -24,10 +24,10 @@ const muiTheme = createMuiTheme({
 });
 
 const rcaTheme = createRcaTheme({
-  info: {
-    background: '#1976d2',
-    color: 'white',
-  },
+  // info: {
+  //   background: '#1976d2',
+  //   color: 'white',
+  // },
 });
 
 const rcaSettings = createRcaSettings({
