@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Close } from '@material-ui/icons';
-import { Slide, Collapse, Paper, IconButton, Typography } from '@material-ui/core';
-import IndicatorIcon from './IndicatorIcon';
+import { Slide, Collapse, Paper, Grid,
+  IconButton, ClickAwayListener } from '@material-ui/core';
+import types from '../../utils/types';
 
 const styles = {
   componentWrapper: {
@@ -11,16 +12,10 @@ const styles = {
     marginBottom: 15,
     display: 'block',
   },
-  textWrapper: {
-    padding: 10,
-    marginLeft: 60,
-    marginRight: 10,
-    wordWrap: 'break-word',
-  },
   closeButton: {
     position: 'absolute',
-    top: 3,
-    right: 3,
+    top: 1,
+    right: 1,
   },
   closeIcon: {
     width: 15,
@@ -36,7 +31,7 @@ class Alert extends Component {
   };
 
   componentDidMount() {
-    const timeout = this.props.settings.timeout;
+    const { timeout } = this.props.settings;
     if (timeout) {
       const timeoutFunction = setTimeout(() => {
         this.onClose();
@@ -51,8 +46,9 @@ class Alert extends Component {
   };
 
   clearCurrentTimeout = () => {
-    if (this.state.timeoutFunction) {
-      clearTimeout(this.state.timeoutFunction);
+    const { timeoutFunction } = this.state;
+    if (timeoutFunction) {
+      clearTimeout(timeoutFunction);
     }
   };
 
@@ -65,66 +61,148 @@ class Alert extends Component {
   };
 
   wrapperStyles = () => {
-    const { palette } = this.props.theme;
-    switch(this.props.type) {
-      case 'info': return { background: palette.info.background };
-      case 'success': return { background: palette.success.background };
-      case 'warning': return { background: palette.warning.background };
-      case 'error': return { background: palette.error.background };
-      default: return { background: palette.info.background };
-    }
+    const { type, theme } = this.props;
+    return {
+      background: theme[type].body.background,
+    };
   };
 
-  textStyles = () => {
-    const { palette } = this.props.theme;
-    switch(this.props.type) {
-      case 'info': return { color: palette.info.color };
-      case 'success': return { color: palette.success.color };
-      case 'warning': return { color: palette.warning.color };
-      case 'error': return { color: palette.error.color };
-      default: return { color: palette.info.color };
-    }
+  bodyStyles = () => {
+    const { type, theme } = this.props;
+    return {
+      color: theme[type].body.color,
+      background: theme[type].body.background,
+    };
   };
 
-  headerStyles = () => {
-    return this.props.settings.showCloseButton ? { marginRight: 10 } : {};
+  bodyWrapper = (header, message) => {
+    const { type, theme } = this.props;
+    const wrapper = theme[type].body.wrapper;
+    return wrapper(
+      theme[type].body.header(header),
+      theme[type].body.message(message),
+      this.bodyStyles());
+  };
+
+  adornmentStyles = () => {
+    const { type, theme } = this.props;
+    return {
+      color: theme[type].adornment.color,
+      background: theme[type].adornment.background,
+    };
+  };
+
+  adornmentWrapper = () => {
+    const { type, theme } = this.props;
+    const wrapper = theme[type].adornment.wrapper;
+    return wrapper(theme[type].adornment.icon, this.adornmentStyles());
+  };
+  
+  actionStyles = () => {
+    const { type, theme } = this.props;
+    return {
+      color: theme[type].action.color,
+      background: theme[type].action.background,
+      fontWeight: theme[type].action.fontWeight,
+    };
+  };
+
+  actionWrapper = (text, onClick) => {
+    const { type, theme } = this.props;
+    const wrapper = theme[type].action.wrapper;
+    return wrapper(
+      theme[type].action.button(text, onClick),
+      this.actionStyles());
+  };
+
+  closeButtonStyles = () => {
+    const { type, theme } = this.props;
+    return {
+      color: theme[type].body.color,
+    };
+  };
+
+  mouseEventType = (settings) => {
+    return settings.enableClickAwayListener ? 'onMouseUp' : false;
+  };
+
+  touchEventType = (settings) => {
+    return settings.enableClickAwayListener ? 'onTouchEnd' : false;
+  };
+
+  onClickAway = () => {
+    this.onClose();
+  };
+
+  bodyColumns = (settings) => {
+    let bodyCols = 6;
+    if (!this.adornmentColumns(settings)) {
+      bodyCols += 2;
+    }
+    if (!this.actionButtonColumns(settings)) {
+      bodyCols += 3;
+    }
+    if (!this.closeButtonColumns(settings)) {
+      bodyCols += 1;
+    }
+    return bodyCols;
+  };
+
+  adornmentColumns = (settings) => {
+    return settings.showAdornment ? 2 : false;
+  }
+
+  actionButtonColumns = (settings) => {
+    return settings.showActionButton && settings.actionText
+      && settings.actionClickListener ? 3 : false;
+  };
+
+  closeButtonColumns = (settings) => {
+    return settings.showCloseButton ? 1 : false;
   };
 
   render() {
     const { timedOut, collapse } = this.state;
-    const { classes, header, message, type, theme, settings } = this.props;
+    const { classes, header, message, settings } = this.props;
+    const { showAdornment, showActionButton,
+      showCloseButton, actionText, actionClickListener } = settings;
     return (
-      <Collapse in={!collapse} onExited={this.onCollapsed} unmountOnExit>
-        <Slide direction={'left'} in={!timedOut} onExited={this.onSlideExited}>
-          <Paper className={classes.componentWrapper} style={this.wrapperStyles()} elevation={4}>
-            <IndicatorIcon type={type} theme={theme} />
-            <div className={classes.textWrapper} style={this.textStyles()}>
-              {header && header.length > 0 &&
-                <Typography
-                  style={this.headerStyles()}
-                  component="h5"
-                  variant="h6"
-                  color="inherit"
-                >
-                  {header}
-                </Typography>
-              }
-              <Typography
-                component="p"
-                variant="body1"
-                color="inherit"
-              >
-                {message}
-              </Typography>
-            </div>
-            {settings.showCloseButton &&
-              <IconButton className={classes.closeButton} onClick={this.onClose}>
-                <Close className={classes.closeIcon} />
-              </IconButton>
-            }
-          </Paper>
-        </Slide>
-      </Collapse>
+      <ClickAwayListener
+        mouseEvent={this.mouseEventType(settings)}
+        touchEvent={this.touchEventType(settings)}
+        onClickAway={this.onClickAway}
+      >
+        <Collapse in={!collapse} onExited={this.onCollapsed} unmountOnExit>
+          <Slide direction={'left'} in={!timedOut} onExited={this.onSlideExited}>
+            <Paper className={classes.componentWrapper} style={this.wrapperStyles()} elevation={4}>
+              <Grid container spacing={0}>
+                <Grid item xs={this.adornmentColumns(settings)}>
+                  {showAdornment && this.adornmentWrapper()}
+                </Grid>
+                <Grid item xs={this.bodyColumns(settings)}>
+                  {this.bodyWrapper(header, message)}
+                </Grid>
+                <Grid item xs={this.actionButtonColumns(settings)}>
+                {showActionButton && actionText && actionClickListener &&
+                  this.actionWrapper(actionText, actionClickListener)
+                }
+                </Grid>
+                <Grid item xs={this.closeButtonColumns(settings)}>
+                  {showCloseButton &&
+                    <IconButton
+                      className={classes.closeButton}
+                      style={this.closeButtonStyles()}
+                      onClick={this.onClose}
+                    >
+                      <Close className={classes.closeIcon} color="inherit" />
+                    </IconButton>
+                  }
+                </Grid>
+              </Grid>
+            </Paper>
+          </Slide>
+        </Collapse>
+      </ClickAwayListener>
     );
   }
 };
@@ -134,7 +212,7 @@ Alert.propTypes = {
   onClose: PropTypes.func,
   header: PropTypes.string,
   message: PropTypes.string,
-  type: PropTypes.oneOf(['info', 'success', 'warning', 'error']).isRequired,
+  type: PropTypes.oneOf([types.info, types.success, types.warning, types.error]),
   theme: PropTypes.object.isRequired,
   settings: PropTypes.object.isRequired,
 };
@@ -143,7 +221,7 @@ Alert.defaultProps = {
   onClose: () => {},
   header: null,
   message: '',
-  type: 'success',
+  type: types.info,
 };
 
 export default withStyles(styles)(Alert);

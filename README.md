@@ -20,7 +20,10 @@ import ReactDOM from 'react-dom';
 import { AlertsProvider } from 'react-context-alerts';
 import App from './App';
 
-ReactDOM.render(<AlertsProvider><App /></AlertsProvider>, document.getElementById('root'));
+ReactDOM.render(
+  <AlertsProvider>
+    <App />
+  </AlertsProvider>, document.getElementById('root'));
 ```
 Wrap any component (or group of components) that will create an alert event with the `AlertsConsumer`:
 ```
@@ -52,11 +55,9 @@ import { AlertsProvider, createRcaTheme } from 'react-context-alerts';
 import App from './App';
 
 const rcaTheme = createRcaTheme({
-  palette: {
-    info: {
-      background: '#1976d2',
-      color: 'white',
-    },
+  info: {
+    background: '#1976d2',
+    color: 'white',
   },
 });
 
@@ -69,7 +70,7 @@ The example above will set the background of the info alert body to the same col
   
 There is also a function exposed by the `AlertsConsumer` context that allows you to update the global theme. This function will update the current global theme, not the default theme (unless you have not already overridden the default theme). The code below will update the global theme to set the color of the error icon to yellow.
 ```
-const themeOverride = { palette: { error: { adornment: { color: 'yellow' } } } };
+const themeOverride = { error: { adornment: { color: 'yellow' } } };
 <AlertsConsumer>
   {alerts => {
     alerts.updateGlobalTheme(themeOverride, () => {
@@ -79,42 +80,38 @@ const themeOverride = { palette: { error: { adornment: { color: 'yellow' } } } }
   }}
 </AlertsConsumer>
 ```
-#### Full Default Theme
+#### Default Theme
 ```
-palette: {
+{
   info: {
     background: 'white',
     color: '#51525d',
+    button: {theme/components/ActionButton.js element},
+    buttonWrapper: {theme/components/ButtonWrapper.js element},
     adornment: {
       background: '#1976d2',
       color: 'white',
     },
   },
   success: {
-    background: 'white',
-    color: '#51525d',
+    ...
     adornment: {
-      background: '#388e3c',
-      color: 'white',
+      ...
     },
   },
   warning: {
-    background: 'white',
-    color: '#51525d',
+    ...
     adornment: {
-      background: '#f57c00',
-      color: 'white',
+      ...
     },
   },
   error: {
-    background: 'white',
-    color: '#51525d',
+    ...
     adornment: {
-      background: '#d32f2f',
-      color: 'white',
+      ...
     },
   },
-},
+}
 ```
 ### Settings
 #### Global Settings
@@ -126,11 +123,9 @@ import { AlertsProvider, createRcaTheme, createRcaSettings } from 'react-context
 import App from './App';
 
 const rcaTheme = createRcaTheme({
-  palette: {
-    info: {
-      background: '#1976d2',
-      color: 'white',
-    },
+  info: {
+    background: '#1976d2',
+    color: 'white',
   },
 });
 
@@ -164,11 +159,15 @@ Settings may also be updated for individual alerts. There is an optional third s
   Info Alert
 </button>
 ```
-#### Full Default Settings
+#### Default Settings
 ```
 {
   timeout: 5000,
   showCloseButton: false,
+  showActionButton: false,
+  enableClickAwayListener: false,
+  actionText: null,
+  actionClickListener: null,
 }
 ```
 More settings will be added soon!

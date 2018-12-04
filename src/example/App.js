@@ -24,12 +24,13 @@ const muiTheme = createMuiTheme({
 });
 
 const rcaTheme = createRcaTheme({
-  palette: {
-  },
 });
 
 const rcaSettings = createRcaSettings({
 });
+
+const rcaStyles = {
+};
 
 const AppBase = () => (
   <Redirect to ="/" />
@@ -49,7 +50,7 @@ class App extends Component {
               </Toolbar>
             </AppBar>
           </header>
-          <AlertsProvider theme={rcaTheme} settings={rcaSettings}>
+          <AlertsProvider theme={rcaTheme} settings={rcaSettings} style={rcaStyles}>
             <main role="main">
               <BrowserRouter>
                 <Switch>
