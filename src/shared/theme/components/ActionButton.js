@@ -19,7 +19,7 @@ const ActionButton = props => (
     style={props.style}
     color="inherit"
     onClick={props.onClick}
-    variant="flat"
+    variant="text"
   >
   {props.text}
   </Button>

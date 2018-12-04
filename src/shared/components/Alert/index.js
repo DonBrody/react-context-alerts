@@ -2,20 +2,14 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Close } from '@material-ui/icons';
-import { Slide, Collapse, Paper, Grid, IconButton, Typography, ClickAwayListener } from '@material-ui/core';
-import IndicatorIcon from './IndicatorIcon';
+import { Slide, Collapse, Paper, Grid,
+  IconButton, ClickAwayListener } from '@material-ui/core';
 
 const styles = {
   componentWrapper: {
     width: '100%',
     marginBottom: 15,
     display: 'block',
-  },
-  textWrapper: {
-    padding: 10,
-    marginLeft: 60,
-    marginRight: 150,
-    wordWrap: 'break-word',
   },
   closeButton: {
     position: 'absolute',
@@ -71,17 +65,6 @@ class Alert extends Component {
     };
   };
 
-  textStyles = () => {
-    const { theme } = this.props;
-    switch(this.props.type) {
-      case 'info': return { color: theme.info.color };
-      case 'success': return { color: theme.success.color };
-      case 'warning': return { color: theme.warning.color };
-      case 'error': return { color: theme.error.color };
-      default: return { color: theme.info.color };
-    }
-  };
-
   bodyStyles = () => {
     const { theme } = this.props;
     return {
@@ -91,42 +74,12 @@ class Alert extends Component {
   };
 
   bodyWrapper = (header, message) => {
-    const { theme, settings } = this.props;
-  
-    let wrapper;
-    switch(this.props.type) {
-      case 'info':
-      wrapper = theme.info.body.wrapper;
-      if (wrapper && typeof wrapper === 'function') {
-        return wrapper(
-          theme.info.body.header(header), theme.info.body.message(message), this.bodyStyles(), settings);
-      } break;
-      case 'success':
-        wrapper = theme.success.body.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.success.body.header(header), theme.success.body.message(message), this.bodyStyles());
-        } break;
-      case 'warning':
-        wrapper = theme.warning.body.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.warning.body.header(header), theme.warning.body.message(message), this.bodyStyles());
-        } break;
-      case 'error':
-        wrapper = theme.error.body.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.error.body.header(header), theme.error.body.message(message), this.bodyStyles());
-        } break;
-      default:
-        wrapper = theme.info.body.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.info.body.header(header), theme.info.body.message(message), this.bodyStyles());
-        } break;
-    }
-    return null;
+    const { type, theme } = this.props;
+    const wrapper = theme[type].body.wrapper;
+    return wrapper(
+      theme[type].body.header(header),
+      theme[type].body.message(message),
+      this.bodyStyles());
   };
 
   adornmentStyles = () => {
@@ -138,42 +91,9 @@ class Alert extends Component {
   };
 
   adornmentWrapper = () => {
-    const { theme } = this.props;
-  
-    let wrapper;
-    switch(this.props.type) {
-      case 'info':
-      wrapper = theme.info.adornment.wrapper;
-      if (wrapper && typeof wrapper === 'function') {
-        return wrapper(
-          theme.info.adornment.icon, this.adornmentStyles());
-      } break;
-      case 'success':
-        wrapper = theme.success.adornment.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.success.adornment.icon, this.adornmentStyles());
-        } break;
-      case 'warning':
-        wrapper = theme.warning.adornment.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.warning.adornment.icon, this.adornmentStyles());
-        } break;
-      case 'error':
-        wrapper = theme.error.adornment.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.error.adornment.icon, this.adornmentStyles());
-        } break;
-      default:
-        wrapper = theme.info.adornment.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.info.adornment.icon, this.adornmentStyles());
-        } break;
-    }
-    return null;
+    const { type, theme } = this.props;
+    const wrapper = theme[type].adornment.wrapper;
+    return wrapper(theme[type].adornment.icon, this.adornmentStyles());
   };
   
   actionStyles = () => {
@@ -185,46 +105,11 @@ class Alert extends Component {
   };
 
   actionWrapper = (text, onClick) => {
-    const { theme } = this.props;
-  
-    let wrapper;
-    switch(this.props.type) {
-      case 'info':
-      wrapper = theme.info.action.wrapper;
-      if (wrapper && typeof wrapper === 'function') {
-        return wrapper(
-          theme.info.action.button(text, onClick), this.actionStyles());
-      } break;
-      case 'success':
-        wrapper = theme.success.action.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.success.action.button(text, onClick), this.actionStyles());
-        } break;
-      case 'warning':
-        wrapper = theme.warning.action.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.warning.action.button(text, onClick), this.actionStyles());
-        } break;
-      case 'error':
-        wrapper = theme.error.action.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.error.action.button(text, onClick), this.actionStyles());
-        } break;
-      default:
-        wrapper = theme.info.action.wrapper;
-        if (wrapper && typeof wrapper === 'function') {
-          return wrapper(
-            theme.info.action.button(text, onClick), this.actionStyles());
-        } break;
-    }
-    return null;
-  };
-
-  headerStyles = () => {
-    return this.props.settings.showCloseButton ? { marginRight: 10 } : {};
+    const { type, theme } = this.props;
+    const wrapper = theme[type].action.wrapper;
+    return wrapper(
+      theme[type].action.button(text, onClick),
+      this.actionStyles());
   };
 
   mouseEventType = (settings) => {
@@ -268,7 +153,7 @@ class Alert extends Component {
 
   render() {
     const { timedOut, collapse } = this.state;
-    const { classes, header, message, type, theme, settings } = this.props;
+    const { classes, header, message, settings } = this.props;
     const { showAdornment, showActionButton,
       showCloseButton, actionText, actionClickListener } = settings;
     return (
