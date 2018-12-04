@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Close } from '@material-ui/icons';
 import { Slide, Collapse, Paper, Grid,
   IconButton, ClickAwayListener } from '@material-ui/core';
+import types from '../../utils/types';
 
 const styles = {
   componentWrapper: {
@@ -112,6 +113,13 @@ class Alert extends Component {
       this.actionStyles());
   };
 
+  closeButtonStyles = () => {
+    const { theme } = this.props;
+    return {
+      color: theme[this.props.type].body.color,
+    };
+  };
+
   mouseEventType = (settings) => {
     return settings.enableClickAwayListener ? 'onMouseUp' : false;
   };
@@ -181,7 +189,7 @@ class Alert extends Component {
                   {showCloseButton &&
                     <IconButton
                       className={classes.closeButton}
-                      style={this.bodyStyles()}
+                      style={this.closeButtonStyles()}
                       onClick={this.onClose}
                     >
                       <Close className={classes.closeIcon} color="inherit" />
@@ -202,7 +210,7 @@ Alert.propTypes = {
   onClose: PropTypes.func,
   header: PropTypes.string,
   message: PropTypes.string,
-  type: PropTypes.oneOf(['info', 'success', 'warning', 'error']).isRequired,
+  type: PropTypes.oneOf([types.info, types.success, types.warning, types.error]).isRequired,
   theme: PropTypes.object.isRequired,
   settings: PropTypes.object.isRequired,
 };
@@ -211,7 +219,7 @@ Alert.defaultProps = {
   onClose: () => {},
   header: null,
   message: '',
-  type: 'success',
+  type: types.info,
 };
 
 export default withStyles(styles)(Alert);

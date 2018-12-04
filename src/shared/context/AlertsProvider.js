@@ -6,6 +6,7 @@ import DefaultTheme from '../theme';
 import DefaultSettings from '../settings';
 import createRcaSettings from '../settings/createRcaSettings';
 import createRcaTheme from '../theme/createRcaTheme';
+import types from '../utils/types';
 
 const defaultStyles = {
   width: '80%',
@@ -89,19 +90,19 @@ class AlertsProvider extends Component {
         value={{
           state: this.state,
           info: (header, message, settings = {}) => {
-            const info = this.createAlertObject('info', header, message, settings);
+            const info = this.createAlertObject(types.info, header, message, settings);
             this.setState({ alerts: [...this.state.alerts, info ] });
           },
           success: (header, message, settings = {}) => {
-            const success = this.createAlertObject('success', header, message, settings);
+            const success = this.createAlertObject(types.success, header, message, settings);
             this.setState({ alerts: [...this.state.alerts, success ] });
           },
           warning: (header, message, settings = {}) => {
-            const warning = this.createAlertObject('warning', header, message, settings);
+            const warning = this.createAlertObject(types.warning, header, message, settings);
             this.setState({ alerts: [...this.state.alerts, warning ] });
           },
           error: (header, message, settings = {}) => {
-            const error = this.createAlertObject('error', header, message, settings);
+            const error = this.createAlertObject(types.error, header, message, settings);
             this.setState({ alerts: [...this.state.alerts, error ] });
           },
           updateGlobalTheme: (theme = {}, callback = () => {}) => {

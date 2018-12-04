@@ -24,15 +24,9 @@ const muiTheme = createMuiTheme({
 });
 
 const rcaTheme = createRcaTheme({
-  // info: {
-  //   background: '#1976d2',
-  //   color: 'white',
-  // },
 });
 
 const rcaSettings = createRcaSettings({
-  // showCloseButton: true,
-  // showActionButton: true,
 });
 
 const rcaStyles = {
