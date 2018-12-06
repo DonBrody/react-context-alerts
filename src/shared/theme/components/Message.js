@@ -12,15 +12,15 @@ const defaultStyle = theme => ({
   },
 });
 
-const Message = props => (
+const Message = ({ text, style, classes }) => (
   <Typography
-    className={props.classes.typography}
-    style={props.style}
+    className={classes.typography}
+    style={style}
     component="p"
     variant="body1"
     color="inherit"
   >
-    {props.text}
+    {text}
   </Typography>
 );
 
