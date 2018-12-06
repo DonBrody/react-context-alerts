@@ -2,7 +2,7 @@
 Simple and configurable alert library utilizing React Context
 
 ## Demo
-Demo utilizes alerts with default theming on all alers except the info alert. The info alert demonstrates an alert with a close button, action button, click away listener, and disabled timeout. Future updates to the demo will allow for custom configuration in the browser.
+Demo utilizes alerts with default theming on all alerts except the info alert. The info alert has a close button, action button, click away listener, and disabled timeout. Future updates to the demo will allow for custom configuration in the browser.  
 [react-context-alerts demo](https://react-context-alerts.herokuapp.com/)
 
 ## Prerequisites
@@ -195,12 +195,35 @@ Settings may also be updated for individual alerts. There is an optional third s
   actionClickListener: null,
 }
 ```
-More settings will be added soon!
+**IMPORTANT**: Setting `showActionButton` to true will not automatically show the action button. `actionText` and `actionClickListener` must also be defined with non-falsy values in order for the action button to render.
 
+### Styling the Alerts Wrapper
+The `AlertsProvider` exposes a third prop to allow users to override the default alerts wrapper styles. The wrapper controls the position and width of its child alerts. The example below shows the actual defaults for the alerts wrapper component, and does not change the style of the wrapper at all. This is meant to show you what styles to target if you wish to override them.
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AlertsProvider } from 'react-context-alerts';
+import App from './App';
+
+const rcaStyles = {
+  width: '80%',
+  maxWidth: 450,
+  minWidth: 320,
+  position: 'fixed',
+  top: 75,
+  right: 16,
+  zIndex: 100000,
+};
+
+ReactDOM.render(
+  <AlertsProvider style={rcaStyles}>
+    <App />
+  </AlertsProvider>, document.getElementById('root'));
+```
 ## In the Pipeline
 This is a new and evolving library. Here are some of the upcoming updates being worked on:
 * Timeout progress (along bottom of alert)
-* Alerts component (will obfuscate the use of the AlertsConsumer -- this will not depreacte the current option to trigger alerts through funciton calls)
+* Alerts component (will obfuscate the use of the `AlertsConsumer` -- this will not depreacte the current option to trigger alerts through funciton calls)
 
 ## Next Steps
 Add `react-context-alerts` to any (and hopefully all :) of your projects, customize the alerts in any way that fits your needs, and enjoy!
