@@ -2,23 +2,35 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 const defaultStyle = {
-  display: 'block',
-  maxWidth:  '100%',
-  maxHeight: '100%',
-  paddingTop: 10,
-  paddingBottom: 10,
+  display: 'flex',
+  alignItems: 'center',
+  minWidth:  '100%',
+  minHeight: '100%',
   wordWrap: 'break-word',
+  background: 'yellow',
 };
 
-const BodyWrapper = props => (
+const wrapperSpacing = {
+  paddingTop: 16,
+  paddingBottom: 16,
+};
+
+const textSpacing = {
+  paddingTop: 1,
+  paddingBottom: 1,
+};
+
+const BodyWrapper = ({ header, message, style }) => (
   <div
     style={{
       ...defaultStyle,
-      ...props.style
+      ...style
     }}
   >
-    {props.header}
-    {props.message}
+    <div style={wrapperSpacing}>
+      {header && <div style={textSpacing}>{header}</div>}
+      {message && <div style={textSpacing}>{message}</div>}
+    </div>
   </div>
 );
 

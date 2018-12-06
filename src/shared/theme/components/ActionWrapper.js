@@ -9,12 +9,11 @@ const defaultStyle = {
   minHeight: '100%',
 };
 
-const ButtonWrapper = props => (
+const ButtonWrapper = ({ child, style }) => (
   <div
-    style={{ ...defaultStyle, ...props.style }}
-    onClick={props.onClick}
+    style={{ ...defaultStyle, ...style }}
   >
-    {props.child}
+    {child}
   </div>
 );
 

@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.2
+- [fix] Center alert body vertically.
+
 ## 0.4.1
 - [fix] README.md updated to match current project configuration.
 

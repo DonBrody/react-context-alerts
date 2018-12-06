@@ -13,15 +13,15 @@ const defaultStyle = (theme) => ({
   },
 });
 
-const ActionButton = props => (
+const ActionButton = ({ text, onClick, style, classes }) => (
   <Button
-    className={props.classes.button}
-    style={props.style}
+    className={classes.button}
+    style={style}
     color="inherit"
-    onClick={props.onClick}
+    onClick={onClick}
     variant="text"
   >
-  {props.text}
+  {text}
   </Button>
 );
 

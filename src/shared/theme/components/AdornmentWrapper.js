@@ -11,12 +11,11 @@ const defaultStyle = {
   borderBottomLeftRadius: 4,
 };
 
-const AdornmentWrapper = props => (
+const AdornmentWrapper = ({ child, style }) => (
   <div
-    style={{ ...defaultStyle, ...props.style}}
-    onClick={props.onClick}
+    style={{ ...defaultStyle, ...style}}
   >
-  {props.child}
+  {child}
   </div>
 );
 

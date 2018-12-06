@@ -12,15 +12,15 @@ const defaultStyle = theme => ({
   },
 });
 
-const Header = props => (
+const Header = ({ style, text, classes }) => (
   <Typography
-    className={props.classes.typography}
-    style={props.style}
+    className={classes.typography}
+    style={style}
     component="h5"
     variant="h6"
     color="inherit"
   >
-    {props.text}
+    {text}
   </Typography>
 );
 
