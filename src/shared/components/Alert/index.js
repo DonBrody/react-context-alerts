@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Close } from '@material-ui/icons';
-import { Slide, Collapse, Paper, Grid,
-  IconButton, ClickAwayListener } from '@material-ui/core';
+import { Slide, Collapse, Paper, Grid, ClickAwayListener } from '@material-ui/core';
 import types from '../../utils/types';
 
 const styles = {
@@ -11,15 +9,6 @@ const styles = {
     width: '100%',
     marginBottom: 15,
     display: 'block',
-  },
-  closeButton: {
-    position: 'absolute',
-    top: 1,
-    right: 1,
-  },
-  closeIcon: {
-    width: 15,
-    height: 15,
   },
 };
 
@@ -70,8 +59,8 @@ class Alert extends Component {
   bodyStyles = () => {
     const { type, theme } = this.props;
     return {
-      color: theme[type].body.color,
       background: theme[type].body.background,
+      color: theme[type].body.color,
     };
   };
 
@@ -87,8 +76,8 @@ class Alert extends Component {
   adornmentStyles = () => {
     const { type, theme } = this.props;
     return {
-      color: theme[type].adornment.color,
       background: theme[type].adornment.background,
+      color: theme[type].adornment.color,
     };
   };
 
@@ -101,8 +90,8 @@ class Alert extends Component {
   actionStyles = () => {
     const { type, theme } = this.props;
     return {
-      color: theme[type].action.color,
       background: theme[type].action.background,
+      color: theme[type].action.color,
       fontWeight: theme[type].action.fontWeight,
     };
   };
@@ -115,11 +104,21 @@ class Alert extends Component {
       this.actionStyles());
   };
 
-  closeButtonStyles = () => {
+  closeStyles = () => {
     const { type, theme } = this.props;
     return {
-      color: theme[type].body.color,
+      background: theme[type].close.background,
+      color: theme[type].close.color,
     };
+  };
+
+  closeWrapper = (onClick) => {
+    const { type, theme } = this.props;
+    const wrapper = theme[type].close.wrapper;
+    const icon = theme[type].close.icon;
+    return wrapper(
+      theme[type].close.button(icon, onClick),
+      this.closeStyles());
   };
 
   mouseEventType = (settings) => {
@@ -188,15 +187,7 @@ class Alert extends Component {
                 }
                 </Grid>
                 <Grid item xs={this.closeButtonColumns(settings)}>
-                  {showCloseButton &&
-                    <IconButton
-                      className={classes.closeButton}
-                      style={this.closeButtonStyles()}
-                      onClick={this.onClose}
-                    >
-                      <Close className={classes.closeIcon} color="inherit" />
-                    </IconButton>
-                  }
+                  {showCloseButton && this.closeWrapper(this.onClose)}
                 </Grid>
               </Grid>
             </Paper>
