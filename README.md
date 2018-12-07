@@ -81,21 +81,25 @@ const themeOverride = { error: { adornment: { color: 'yellow' } } };
 </AlertsConsumer>
 ```
 #### Default Theme
-```
-// These base elements can be overriden, and proivded with a function
+```// These base elements can be overriden, and proivded with a function
 // that takes in the parameters in the signatures below and returns an element/component.
 const baseElements = {
   body: {
-    wrapper: createBodyWrapper, // const createBodyWrapper = (header, message, style) => ...
-    header: createHeader, // const createHeader = (text, style) => ...
-    message: createMessage, // const createMessage = (text, style) => ...
+    wrapper: createBodyWrapper, // const createBodyWrapper = (header, message, style = {}) => ...
+    header: createHeader, // const createHeader = (text, style = {}) => ...
+    message: createMessage, // const createMessage = (text, style = {}) => ...
   },
   adornment: {
-    wrapper: createAdornmentWrapper, // const createAdornmentWrapper = (child, style) => ...
+    wrapper: createAdornmentWrapper, // const createAdornmentWrapper = (child, style = {}) => ...
   },
   action: {
-    wrapper: createActionWrapper, // const createActionWrapper = (child, style) => ...
-    button: createActionButton, // const createActionButton = (text, onClick, style) => ...
+    wrapper: createActionWrapper, // const createActionWrapper = (child, style = {}) => ...
+    button: createActionButton, // const createActionButton = (text, onClick, style = {}) => ...
+  },
+  close: {
+    wrapper: createCloseWrapper, // const createCloseWrapper = (child, style = {}) => ...
+    button: createCloseButton, // const createCloseButton = (icon, onClick, style = {}) => ...
+    icon: <Close style={{ width: 15, height: 15 }} />,
   },
 };
 
@@ -107,7 +111,12 @@ const success = '#388E3C';
 const warning = '#F57C00';
 const error = '#D32F2F';
 
-{
+const closePalette = {
+  background: bodyBackground,
+  color: bodyColor,
+};
+
+export default {
   info: {
     body: {
       background: bodyBackground,
@@ -124,6 +133,10 @@ const error = '#D32F2F';
       background: bodyBackground,
       color: info,
       ...baseElements.action,
+    },
+    close: {
+      ...closePalette,
+      ...baseElements.close,
     },
   },
   success: {
