@@ -36,7 +36,7 @@ export default () => (
         <button onClick={() => alerts.info('Info Header', 'Info message')}>Info Alert</button>
         <button onClick={() => alerts.success('Success Header', 'Success message')}>Success Alert</button>
         <button onClick={() => alerts.warning('Warning Header', 'Warning message')}>Warning Alert</button>
-        <button onClick={() => alerts.error('Error Header', 'error message')}>Error Alert</button>
+        <button onClick={() => alerts.error('Error Header', 'Error message')}>Error Alert</button>
       </section>
     )}
   </AlertsConsumer>
@@ -56,8 +56,10 @@ import App from './App';
 
 const rcaTheme = createRcaTheme({
   info: {
-    background: '#1976d2',
-    color: 'white',
+    body: {
+      background: '#1976d2',
+      color: 'white',
+    },
   },
 });
 
@@ -68,9 +70,16 @@ ReactDOM.render(
 ```
 The example above will set the background of the info alert body to the same color as the adornment (The adornment background is blue by default and the body background is white. The above code overrides the background and text color of the body to match the adornment).  
   
-There is also a function exposed by the `AlertsConsumer` context that allows you to update the global theme. This function will update the current global theme, not the default theme (unless you have not already overridden the default theme). The code below will update the global theme to set the color of the error icon to yellow.
+There is also a function exposed by the `AlertsConsumer` context that allows you to update the global theme. This function will update the current global theme, not the default theme (the default theme is always the fallback for any global values that have not been set/overriden). The code below will update the global theme to set the color of the error icon to yellow.
 ```
-const themeOverride = { error: { adornment: { color: 'yellow' } } };
+const themeOverride = {
+  error: {
+    adornment: {
+      color: 'yellow',
+    },
+  },
+};
+
 <AlertsConsumer>
   {alerts => {
     alerts.updateGlobalTheme(themeOverride, () => {
@@ -161,8 +170,10 @@ import App from './App';
 
 const rcaTheme = createRcaTheme({
   info: {
-    background: '#1976d2',
-    color: 'white',
+    body: {
+      background: '#1976d2',
+      color: 'white',
+    },
   },
 });
 
@@ -178,7 +189,7 @@ ReactDOM.render(
 ```
 The example above will disable the default timeout (you can provide a timeout in ms - default is 5000) and enable a close button.  
   
-There is also a function exposed by the `AlertsConsumer` context that allows you to update the global settings. This function will update the current global settings, not the default settings (unless you have not already overridden the default settings). The code below will update the global settings to enable the close button on all alerts.
+There is also a function exposed by the `AlertsConsumer` context that allows you to update the global settings. This function will update the current global settings, not the default settings (the default settings are always the fallback for any global values that have not been set/overriden). The code below will update the global settings to enable the close button on all alerts.
 ```
 <AlertsConsumer>
   {alerts => {
