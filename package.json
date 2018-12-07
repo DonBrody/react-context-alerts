@@ -31,9 +31,10 @@
     "url": "https://github.com/DonBrody/react-context-alerts/issues"
   },
   "keywords": [
-    "alert",
-    "notification",
-    "context"
+    "react",
+    "context",
+    "alerts",
+    "notifications"
   ],
   "devDependencies": {
     "@babel/cli": "^7.1.5",
