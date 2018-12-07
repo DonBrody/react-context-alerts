@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.3
+- [new] Attach close components to theme object.
+- [new] Add basic TypeScript definitions.
+
 ## 0.4.2
 - [fix] Center alert body vertically.
 
@@ -10,7 +14,6 @@
 - [new] Remove 'palette' wrapper object from theme object (simplify theme object).
 - [new] Optional click away listener setting.
 - [new] Optional action button theme and settings.
-- [new] Attach adornment icons to theme object.
 - [new] Attach adornment components to theme object.
 - [new] Attach body components to theme object.
 - [new] Attach action button components to theme object.
