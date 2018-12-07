@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.4.4
+- [fix] Add type index file to root (causes warning without one).
+
 ## 0.4.3
 - [new] Attach close components to theme object.
 - [new] Add basic TypeScript definitions.
