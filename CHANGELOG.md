@@ -2,6 +2,7 @@
 
 ## 0.4.3
 - [new] Attach close components to theme object.
+- [new] Add basic TypeScript definitions.
 
 ## 0.4.2
 - [fix] Center alert body vertically.
