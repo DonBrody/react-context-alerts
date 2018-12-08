@@ -1,7 +1,10 @@
 # Change Log
 
-## 0.4.4
+## 0.5.0
+- [new] Global type settings.
+- [new] Decouple body content and expose through theme.
 - [fix] Add type index file to root (causes warning without one).
+- [fix] Add padding to body when adornment is hidden.
 
 ## 0.4.3
 - [new] Attach close components to theme object.
