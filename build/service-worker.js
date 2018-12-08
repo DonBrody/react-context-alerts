@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/DonBrody/react-context-alerts/precache-manifest.e036a39b8dcfb6152df965b8db0153af.js"
+  "/DonBrody/react-context-alerts/precache-manifest.ff8f2d7971fd42b1d4124e1e31a11dbb.js"
 );
 
 workbox.clientsClaim();
