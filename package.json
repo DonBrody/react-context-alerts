@@ -8,6 +8,8 @@
     "node": "8.11.4"
   },
   "scripts": {
+    "start": "cd example/rca-demo && npm run start",
+    "build": "cd example/rca-demo && npm run build",
     "build:npm": "npm run build:cjs --optimize",
     "build:cjs": "BABEL_ENV=cjs babel src/shared -d lib/",
     "tag": "git tag v$npm_package_version",
