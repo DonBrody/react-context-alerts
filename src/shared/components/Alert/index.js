@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Slide, Collapse, Paper, Grid, ClickAwayListener } from '@material-ui/core';
+import { keys as settingsKeys } from '../../settings';
 import types from '../../utils/types';
 
 const styles = {
@@ -12,7 +13,15 @@ const styles = {
   },
 };
 
-class Alert extends Component {
+class Alert extends Component {  
+  static determineValue = (globalValue, typeValue) => {
+    return (typeValue || typeValue === false) ? typeValue : globalValue;
+  };
+
+  static settingValue = (key, type, settings) => {
+    return Alert.determineValue(settings[key], settings[type][key]);
+  };
+
   state = {
     timedOut: false,
     collapse: false,
@@ -20,7 +29,9 @@ class Alert extends Component {
   };
 
   componentDidMount() {
-    const { timeout } = this.props.settings;
+    const { type, settings } = this.props;
+    const timeout = Alert.settingValue(
+      settingsKeys.timeout, type, settings);
     if (timeout) {
       const timeoutFunction = setTimeout(() => {
         this.onClose();
@@ -56,7 +67,7 @@ class Alert extends Component {
     };
   };
 
-  bodyStyles = () => {
+  bodyWrapperStyles = () => {
     const { type, theme } = this.props;
     return {
       background: theme[type].body.background,
@@ -64,13 +75,29 @@ class Alert extends Component {
     };
   };
 
+  bodyContentStyles = () => {
+    const { settings } = this.props;
+    const paddingLeft = this.showAdornment(settings) ? 0 : 16;
+    return {
+      paddingLeft,
+    };
+  };
+
+  bodyContent = (header, message) => {
+    const { type, theme } = this.props;
+    const content = theme[type].body.content;
+    return content(
+      theme[type].body.header(header),
+      theme[type].body.message(message),
+      this.bodyContentStyles());
+  };
+
   bodyWrapper = (header, message) => {
     const { type, theme } = this.props;
     const wrapper = theme[type].body.wrapper;
     return wrapper(
-      theme[type].body.header(header),
-      theme[type].body.message(message),
-      this.bodyStyles());
+      this.bodyContent(header, message),
+      this.bodyWrapperStyles());
   };
 
   adornmentStyles = () => {
@@ -96,9 +123,13 @@ class Alert extends Component {
     };
   };
 
-  actionWrapper = (text, onClick) => {
+  actionWrapper = (settings) => {
     const { type, theme } = this.props;
     const wrapper = theme[type].action.wrapper;
+    const text = Alert.settingValue(
+      settingsKeys.actionText, type, settings);
+    const onClick = Alert.settingValue(
+      settingsKeys.actionClickListener, type, settings);
     return wrapper(
       theme[type].action.button(text, onClick),
       this.actionStyles());
@@ -122,11 +153,17 @@ class Alert extends Component {
   };
 
   mouseEventType = (settings) => {
-    return settings.enableClickAwayListener ? 'onMouseUp' : false;
+    const { type } = this.props;
+    const enableClickAwayListener = Alert.settingValue(
+      settingsKeys.enableClickAwayListener, type, settings);
+    return enableClickAwayListener ? 'onMouseUp' : false;
   };
 
   touchEventType = (settings) => {
-    return settings.enableClickAwayListener ? 'onTouchEnd' : false;
+    const { type } = this.props;
+    const enableClickAwayListener = Alert.settingValue(
+      settingsKeys.enableClickAwayListener, type, settings);
+    return enableClickAwayListener ? 'onTouchEnd' : false;
   };
 
   onClickAway = () => {
@@ -148,23 +185,39 @@ class Alert extends Component {
   };
 
   adornmentColumns = (settings) => {
-    return settings.showAdornment ? 2 : false;
-  }
+    return this.showAdornment(settings) ? 2 : false;
+  };
 
   actionButtonColumns = (settings) => {
-    return settings.showActionButton && settings.actionText
-      && settings.actionClickListener ? 3 : false;
+    return this.showAction(settings) ? 3 : false;
   };
 
   closeButtonColumns = (settings) => {
-    return settings.showCloseButton ? 1 : false;
+    return this.showClose(settings) ? 1 : false;
+  };
+
+  showAdornment = (settings) => {
+    const { type } = this.props;
+    return Alert.settingValue(
+      settingsKeys.showAdornment, type, settings);
+  };
+
+  showAction = (settings) => {
+    const { type } = this.props;
+    return Alert.settingValue(settingsKeys.showActionButton, type, settings) &&
+      Alert.settingValue(settingsKeys.actionText, type, settings) &&
+      Alert.settingValue(settingsKeys.actionClickListener, type, settings);
+  };
+
+  showClose = (settings) => {
+    const { type } = this.props;
+    return Alert.settingValue(
+      settingsKeys.showCloseButton, type, settings);
   };
 
   render() {
     const { timedOut, collapse } = this.state;
     const { classes, header, message, settings } = this.props;
-    const { showAdornment, showActionButton,
-      showCloseButton, actionText, actionClickListener } = settings;
     return (
       <ClickAwayListener
         mouseEvent={this.mouseEventType(settings)}
@@ -176,18 +229,24 @@ class Alert extends Component {
             <Paper className={classes.componentWrapper} style={this.wrapperStyles()} elevation={4}>
               <Grid container spacing={0}>
                 <Grid item xs={this.adornmentColumns(settings)}>
-                  {showAdornment && this.adornmentWrapper()}
+                  {this.showAdornment(settings) && 
+                    this.adornmentWrapper()
+                  }
                 </Grid>
                 <Grid item xs={this.bodyColumns(settings)}>
-                  {this.bodyWrapper(header, message)}
+                  {// always show body
+                    this.bodyWrapper(header, message)
+                  }
                 </Grid>
                 <Grid item xs={this.actionButtonColumns(settings)}>
-                {showActionButton && actionText && actionClickListener &&
-                  this.actionWrapper(actionText, actionClickListener)
-                }
+                  {this.showAction(settings) &&
+                    this.actionWrapper(settings)
+                  }
                 </Grid>
                 <Grid item xs={this.closeButtonColumns(settings)}>
-                  {showCloseButton && this.closeWrapper(this.onClose)}
+                  {this.showClose(settings) &&
+                    this.closeWrapper(this.onClose)
+                  }
                 </Grid>
               </Grid>
             </Paper>

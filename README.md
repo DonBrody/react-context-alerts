@@ -40,7 +40,7 @@ export default () => (
       </section>
     )}
   </AlertsConsumer>
-};
+);
 ```
 And that's it! The above code is all you need to get up and running with default styling.
 
@@ -90,11 +90,13 @@ const themeOverride = {
 </AlertsConsumer>
 ```
 #### Default Theme
-```// These base elements can be overriden, and proivded with a function
+```
+// These base elements can be overriden, and proivded with a function
 // that takes in the parameters in the signatures below and returns an element/component.
 const baseElements = {
   body: {
-    wrapper: createBodyWrapper, // const createBodyWrapper = (header, message, style = {}) => ...
+    wrapper: createBodyWrapper, // const createBodyWrapper = (child, style = {}) => ...
+    content: createBodyContent, // const createBodyContent = (header, message, style = {}) => ...
     header: createHeader, // const createHeader = (text, style = {}) => ...
     message: createMessage, // const createMessage = (text, style = {}) => ...
   },
@@ -217,8 +219,14 @@ Settings may also be updated for individual alerts. There is an optional third s
   enableClickAwayListener: false,
   actionText: null,
   actionClickListener: null,
+  info:    {/* Info alert overrides */},
+  success: {/* Success alert overrides */},
+  warning: {/* Warning alert overrides */},
+  error:   {/* Error alert overrides */},
 }
 ```
+Notice that it is also possible to override global type settings. Global settings override default settings. Global type setttings override global settings. Instance settings override global and default settings, and instance type settings override global and default type settings.
+  
 **IMPORTANT**: Setting `showActionButton` to true will not automatically show the action button. `actionText` and `actionClickListener` must also be defined with non-falsy values in order for the action button to render.
 
 ### Styling the Alerts Wrapper

@@ -8,6 +8,10 @@ declare interface RcaSettings {
   enableClickAwayListener: boolean,
   actionText: string,
   actionClickListener: any,
+  info: any,
+  success: any,
+  warning: any,
+  error: any,
 }
 
 export default RcaSettings;

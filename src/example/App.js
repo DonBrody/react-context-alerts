@@ -27,10 +27,6 @@ const rcaTheme = createRcaTheme({
 });
 
 const rcaSettings = createRcaSettings({
-  showCloseButton: true,
-  showActionButton: true,
-  actionText: 'Example Button!',
-  actionClickListener: () => { console.log('Listener triggered!'); },
 });
 
 const rcaStyles = {
