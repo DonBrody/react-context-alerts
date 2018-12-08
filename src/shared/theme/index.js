@@ -2,6 +2,7 @@ import React from 'react';
 import { Info, CheckCircle, Warning, Error, Close } from '@material-ui/icons';
 import Header from './components/Header';
 import Message from './components/Message';
+import Body from './components/Body';
 import BodyWrapper from './components/BodyWrapper';
 import AdornmentWrapper from './components/AdornmentWrapper';
 import ActionWrapper from './components/ActionWrapper';
@@ -17,8 +18,12 @@ const createMessage = (text, style = {}) => (
   <Message text={text} style={style} />
 );
 
-const createBodyWrapper = (header, message, style = {}) => (
-  <BodyWrapper header={header} message={message} style={style} />
+const createBodyContent = (header, message, style = {}) => (
+  <Body header={header} message={message} style={style} />
+);
+
+const createBodyWrapper = (child, style = {}) => (
+  <BodyWrapper child={child} style={style} />
 );
 
 const createAdornmentWrapper = (child, style = {}) => (
@@ -52,6 +57,7 @@ const error = '#D32F2F';
 const baseElements = {
   body: {
     wrapper: createBodyWrapper,
+    content: createBodyContent,
     header: createHeader,
     message: createMessage,
   },

@@ -67,7 +67,7 @@ class Alert extends Component {
     };
   };
 
-  bodyStyles = () => {
+  bodyWrapperStyles = () => {
     const { type, theme } = this.props;
     return {
       background: theme[type].body.background,
@@ -75,13 +75,29 @@ class Alert extends Component {
     };
   };
 
+  bodyContentStyles = () => {
+    const { settings } = this.props;
+    const paddingLeft = this.showAdornment(settings) ? 0 : 16;
+    return {
+      paddingLeft,
+    };
+  };
+
+  bodyContent = (header, message) => {
+    const { type, theme } = this.props;
+    const content = theme[type].body.content;
+    return content(
+      theme[type].body.header(header),
+      theme[type].body.message(message),
+      this.bodyContentStyles());
+  };
+
   bodyWrapper = (header, message) => {
     const { type, theme } = this.props;
     const wrapper = theme[type].body.wrapper;
     return wrapper(
-      theme[type].body.header(header),
-      theme[type].body.message(message),
-      this.bodyStyles());
+      this.bodyContent(header, message),
+      this.bodyWrapperStyles());
   };
 
   adornmentStyles = () => {
@@ -107,9 +123,13 @@ class Alert extends Component {
     };
   };
 
-  actionWrapper = (text, onClick) => {
+  actionWrapper = (settings) => {
     const { type, theme } = this.props;
     const wrapper = theme[type].action.wrapper;
+    const text = Alert.settingValue(
+      settingsKeys.actionText, type, settings);
+    const onClick = Alert.settingValue(
+      settingsKeys.actionClickListener, type, settings);
     return wrapper(
       theme[type].action.button(text, onClick),
       this.actionStyles());
@@ -198,7 +218,6 @@ class Alert extends Component {
   render() {
     const { timedOut, collapse } = this.state;
     const { classes, header, message, settings } = this.props;
-    const { actionText, actionClickListener } = settings;
     return (
       <ClickAwayListener
         mouseEvent={this.mouseEventType(settings)}
@@ -221,7 +240,7 @@ class Alert extends Component {
                 </Grid>
                 <Grid item xs={this.actionButtonColumns(settings)}>
                   {this.showAction(settings) &&
-                    this.actionWrapper(actionText, actionClickListener)
+                    this.actionWrapper(settings)
                   }
                 </Grid>
                 <Grid item xs={this.closeButtonColumns(settings)}>
