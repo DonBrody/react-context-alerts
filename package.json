@@ -59,9 +59,6 @@
     "react": "^16.3.0",
     "react-dom": "^16.3.0"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
