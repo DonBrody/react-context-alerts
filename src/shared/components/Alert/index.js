@@ -159,10 +159,12 @@ class Alert extends Component {
   progressWrapper = (settings) => {
     const { type, theme } = this.props;
     const wrapper = theme[type].progress.wrapper;
+    const timeout = Alert.settingValue(
+      settingsKeys.timeout, type, settings);
     return wrapper(
       theme[type].progress.barColor,
       theme[type].progress.progressColor,
-      settings.timeout
+      timeout
     );
   };
 
