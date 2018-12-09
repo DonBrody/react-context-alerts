@@ -33,7 +33,6 @@ class Alert extends Component {
       settingsKeys.timeout, type, settings);
     if (timeout) {
       this.timeoutFunction = setTimeout(() => {
-        console.log('timed out');
         this.onClose();
       }, timeout);
     }
@@ -154,10 +153,9 @@ class Alert extends Component {
     const timeout = Alert.settingValue(
       settingsKeys.timeout, type, settings);
     return wrapper(
-      theme[type].progress.barColor,
-      theme[type].progress.progressColor,
-      timeout
-    );
+      theme[type].progress.containerColor,
+      theme[type].progress.bar(
+        theme[type].progress.barColor, timeout));
   };
 
   mouseEventType = (settings) => {

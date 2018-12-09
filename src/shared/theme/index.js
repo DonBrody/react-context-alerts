@@ -9,6 +9,7 @@ import ActionWrapper from './components/ActionWrapper';
 import ActionButton from './components/ActionButton';
 import CloseWrapper from './components/CloseWrapper';
 import CloseButton from './components/CloseButton';
+import ProgressBar from './components/ProgressBar';
 import ProgressWrapper from './components/ProgressWrapper';
 
 const createHeader = (text, style = {}) => (
@@ -47,13 +48,12 @@ const createCloseButton = (icon, onClick, style = {}) => (
   <CloseButton icon={icon} onClick={onClick} style={style} />
 );
 
-const createProgressWrapper = (barColor, progressColor, timeout, style = {}) => (
-  <ProgressWrapper
-    barColor={barColor}
-    progressColor={progressColor}
-    timeout={timeout}
-    style={style}
-  />
+const createProgressBar = (progressColor, timeout, style = {}) => (
+  <ProgressBar progressColor={progressColor} timeout={timeout} style={style} />
+);
+
+const createProgressWrapper = (containerColor, child, style = {}) => (
+  <ProgressWrapper containerColor={containerColor} child={child} style={style} />
 );
 
 const bodyColor = '#51525D';
@@ -85,6 +85,7 @@ const baseElements = {
   },
   progress: {
     wrapper: createProgressWrapper,
+    bar: createProgressBar,
   },
 };
 
@@ -116,8 +117,8 @@ export default {
       ...baseElements.close,
     },
     progress: {
-      barColor: '#90CAF9',
-      progressColor: info,
+      containerColor: '#90CAF9',
+      barColor: info,
       ...baseElements.progress,
     },
   },
@@ -143,8 +144,8 @@ export default {
       ...baseElements.close,
     },
     progress: {
-      barColor: '#A5D6A7',
-      progressColor: success,
+      containerColor: '#A5D6A7',
+      barColor: success,
       ...baseElements.progress,
     },
   },
@@ -170,8 +171,8 @@ export default {
       ...baseElements.close,
     },
     progress: {
-      barColor: '#FFCC80',
-      progressColor: warning,
+      containerColor: '#FFCC80',
+      barColor: warning,
       ...baseElements.progress,
     },
   },
@@ -198,8 +199,8 @@ export default {
       ...baseElements.close,
     },
     progress: {
-      barColor: '#EF9A9A',
-      progressColor: error,
+      containerColor: '#EF9A9A',
+      barColor: error,
       ...baseElements.progress,
     },
   },
