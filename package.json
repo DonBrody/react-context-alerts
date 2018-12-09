@@ -9,6 +9,7 @@
   },
   "scripts": {
     "preinstall": "cd example/rca-demo && npm i",
+    "start:playground": "react-scripts start",
     "start": "cd example/rca-demo && npm run start",
     "build": "cd example/rca-demo && npm run build",
     "build:npm": "npm run build:cjs --optimize",
@@ -56,7 +57,8 @@
     "@material-ui/icons": "^3.0.1",
     "deepmerge": "^2.2.1",
     "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.1"
   },
   "peerDependencies": {
     "react": "^16.3.0",
