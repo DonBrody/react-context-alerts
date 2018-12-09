@@ -8,7 +8,6 @@
     "node": "8.11.4"
   },
   "scripts": {
-    "preinstall": "cd example/rca-demo && npm i",
     "start:playground": "react-scripts start",
     "start": "cd example/rca-demo && npm run start",
     "build": "cd example/rca-demo && npm run build",

@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.6.1
+## 0.6.2
 - [fix] Build/install process infinite loop.
 
 ## 0.6.0
