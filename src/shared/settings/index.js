@@ -3,6 +3,7 @@ const defaultSettings = {
   showAdornment: true,
   showActionButton: false,
   showCloseButton: false,
+  showProgressBar: false,
   enableClickAwayListener: false,
   actionText: null,
   actionClickListener: null,

@@ -9,6 +9,7 @@ import ActionWrapper from './components/ActionWrapper';
 import ActionButton from './components/ActionButton';
 import CloseWrapper from './components/CloseWrapper';
 import CloseButton from './components/CloseButton';
+import ProgressWrapper from './components/ProgressWrapper';
 
 const createHeader = (text, style = {}) => (
   <Header text={text} style={style} />
@@ -46,6 +47,15 @@ const createCloseButton = (icon, onClick, style = {}) => (
   <CloseButton icon={icon} onClick={onClick} style={style} />
 );
 
+const createProgressWrapper = (barColor, progressColor, timeout, style = {}) => (
+  <ProgressWrapper
+    barColor={barColor}
+    progressColor={progressColor}
+    timeout={timeout}
+    style={style}
+  />
+);
+
 const bodyColor = '#51525D';
 const bodyBackground = '#FFF';
 const adornmentColor = '#FFF';
@@ -72,6 +82,9 @@ const baseElements = {
     wrapper: createCloseWrapper,
     button: createCloseButton,
     icon: <Close style={{ width: 15, height: 15 }} />,
+  },
+  progress: {
+    wrapper: createProgressWrapper,
   },
 };
 
@@ -102,6 +115,11 @@ export default {
       ...closePalette,
       ...baseElements.close,
     },
+    progress: {
+      barColor: '#90CAF9',
+      progressColor: info,
+      ...baseElements.progress,
+    },
   },
   success: {
     body: {
@@ -123,6 +141,11 @@ export default {
     close: {
       ...closePalette,
       ...baseElements.close,
+    },
+    progress: {
+      barColor: '#A5D6A7',
+      progressColor: success,
+      ...baseElements.progress,
     },
   },
   warning: {
@@ -146,6 +169,11 @@ export default {
       ...closePalette,
       ...baseElements.close,
     },
+    progress: {
+      barColor: '#FFCC80',
+      progressColor: warning,
+      ...baseElements.progress,
+    },
   },
   error: {
     body: {
@@ -168,6 +196,11 @@ export default {
     close: {
       ...closePalette,
       ...baseElements.close,
+    },
+    progress: {
+      barColor: '#EF9A9A',
+      progressColor: error,
+      ...baseElements.progress,
     },
   },
 };

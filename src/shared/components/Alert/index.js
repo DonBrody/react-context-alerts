@@ -101,11 +101,15 @@ class Alert extends Component {
   };
 
   adornmentStyles = () => {
-    const { type, theme } = this.props;
-    return {
+    const { type, theme, settings } = this.props;
+    const styles = {
       background: theme[type].adornment.background,
       color: theme[type].adornment.color,
     };
+    if (this.showProgress(settings)) {
+      styles.borderBottomLeftRadius = 0;
+    }
+    return styles;
   };
 
   adornmentWrapper = () => {
@@ -150,6 +154,16 @@ class Alert extends Component {
     return wrapper(
       theme[type].close.button(icon, onClick),
       this.closeStyles());
+  };
+
+  progressWrapper = (settings) => {
+    const { type, theme } = this.props;
+    const wrapper = theme[type].progress.wrapper;
+    return wrapper(
+      theme[type].progress.barColor,
+      theme[type].progress.progressColor,
+      settings.timeout
+    );
   };
 
   mouseEventType = (settings) => {
@@ -215,6 +229,12 @@ class Alert extends Component {
       settingsKeys.showCloseButton, type, settings);
   };
 
+  showProgress = (settings) => {
+    const { type } = this.props;
+    return Alert.settingValue(
+      settingsKeys.showProgressBar, type, settings);
+  };
+
   render() {
     const { timedOut, collapse } = this.state;
     const { classes, header, message, settings } = this.props;
@@ -249,6 +269,9 @@ class Alert extends Component {
                   }
                 </Grid>
               </Grid>
+              {this.showProgress(settings) &&
+                this.progressWrapper(settings)
+              }
             </Paper>
           </Slide>
         </Collapse>
