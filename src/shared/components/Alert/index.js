@@ -25,7 +25,6 @@ class Alert extends Component {
   state = {
     timedOut: false,
     collapse: false,
-    timeoutFunction: null,
   };
 
   componentDidMount() {
@@ -33,23 +32,16 @@ class Alert extends Component {
     const timeout = Alert.settingValue(
       settingsKeys.timeout, type, settings);
     if (timeout) {
-      const timeoutFunction = setTimeout(() => {
+      this.timeoutFunction = setTimeout(() => {
+        console.log('timed out');
         this.onClose();
       }, timeout);
-      this.setState({ timeoutFunction });
     }
   };
 
   onClose = () => {
-    this.clearCurrentTimeout();
+    clearTimeout(this.timeoutFunction);
     this.setState({ timedOut: true, timeoutFunction: null });
-  };
-
-  clearCurrentTimeout = () => {
-    const { timeoutFunction } = this.state;
-    if (timeoutFunction) {
-      clearTimeout(timeoutFunction);
-    }
   };
 
   onSlideExited = () => {

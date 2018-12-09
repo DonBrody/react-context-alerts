@@ -28,6 +28,7 @@ const rcaSettings = createRcaSettings({
   showProgressBar: true,
   success: {
     timeout: 3000,
+    enableClickAwayListener: true,
   },
   warning: {
     timeout: 8000,
