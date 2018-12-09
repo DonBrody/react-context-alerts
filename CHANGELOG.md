@@ -2,6 +2,7 @@
 
 ## 0.5.1
 - [fix] Decouple example application.
+- [new] Add developer playground for shared components.
 
 ## 0.5.0
 - [new] Global type settings.
