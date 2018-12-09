@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import defaultColors from '../../utils/colors';
 
 const styles = {
   barContainer: {
@@ -34,7 +35,7 @@ ProgressWrapper.propTypes = {
 };
 
 ProgressWrapper.defaultProps = {
-  containerColor: '#1976D2',
+  containerColor: defaultColors.info.light,
   child: null,
   style: {},
 };

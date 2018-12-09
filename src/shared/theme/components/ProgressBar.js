@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import defaultColors from '../../utils/colors';
 
 const defaultStyle = {
   position: 'absolute',
@@ -36,7 +37,7 @@ ProgressBar.propTypes = {
 };
 
 ProgressBar.defaultProps = {
-  progressColor: '#1976D2',
+  progressColor: defaultColors.info.primary,
   timeout: 5000,
 };
 
