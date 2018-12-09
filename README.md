@@ -2,7 +2,7 @@
 Simple and configurable alert library utilizing React Context
 
 ## Demo
-Demo utilizes alerts with default theming on all alerts except the info alert. The info alert has a close button, action button, click away listener, and disabled timeout. Future updates to the demo will allow for custom configuration in the browser.  
+Demonstrates the use of each alert type with custom settings. The info alert has a disabled timeout, click away listener, close button, and action button with listener. The success alert has a timeout of three seconds. The warning alert has a default timeout of five seconds and a click away listener.  And, the error alert has a timeout of ten seconds, progress bar, and close button. Future updates to the demo will allow for custom configuration in the browser.  
 [react-context-alerts demo](https://react-context-alerts.herokuapp.com/)
 
 ## Prerequisites
@@ -112,42 +112,52 @@ const baseElements = {
     button: createCloseButton, // const createCloseButton = (icon, onClick, style = {}) => ...
     icon: <Close style={{ width: 15, height: 15 }} />,
   },
+  progress: {
+    wrapper: createProgressWrapper, // const createProgressWrapper = (containerColor, child, style = {}) => ...
+    bar: createProgressBar, // const createProgressBar = (progressColor, timeout, style = {}) => ...
+  },
 };
 
-const bodyColor = '#51525D';
-const bodyBackground = '#FFF';
-const adornmentColor = '#FFF';
-const info = '#1976D2';
-const success = '#388E3C';
-const warning = '#F57C00';
-const error = '#D32F2F';
+const colors = {
+  body: { color: '#51525D', background: '#FFF' },
+  adornment: { color: "#FFF" },
+  info: { primary: '#1976D2', light: '#90CAF9' },
+  success: { primary: '#388E3C', light: '#A5D6A7' },
+  warning: { primary: '#F57C00', light: '#FFCC80' },
+  error: { primary: '#D32F2F', light: '#EF9A9A' },
+};
 
 const closePalette = {
-  background: bodyBackground,
-  color: bodyColor,
+  background: colors.body.background,
+  color: colors.body.color,
 };
 
 export default {
   info: {
     body: {
-      background: bodyBackground,
-      color: bodyColor,
+      background: colors.body.background,
+      color: colors.body.color,
       ...baseElements.body,
     },
     adornment: {
-      background: info,
-      color: adornmentColor,
+      background: colors.info.primary,
+      color: colors.adornment.color,
       icon: <Info />,
       ...baseElements.adornment,
     },
     action: {
-      background: bodyBackground,
-      color: info,
+      background: colors.body.background,
+      color: colors.info.primary,
       ...baseElements.action,
     },
     close: {
       ...closePalette,
       ...baseElements.close,
+    },
+    progress: {
+      containerColor: colors.info.light,
+      barColor: colors.info.primary,
+      ...baseElements.progress,
     },
   },
   success: {
@@ -216,6 +226,7 @@ Settings may also be updated for individual alerts. There is an optional third s
   showAdornment: true,
   showActionButton: false,
   showCloseButton: false,
+  showProgressBar: false,
   enableClickAwayListener: false,
   actionText: null,
   actionClickListener: null,
@@ -252,10 +263,6 @@ ReactDOM.render(
     <App />
   </AlertsProvider>, document.getElementById('root'));
 ```
-## In the Pipeline
-This is a new and evolving library. Here are some of the upcoming updates being worked on:
-* Timeout progress (along bottom of alert)
-* Alerts component (will obfuscate the use of the `AlertsConsumer` -- this will not depreacte the current option to trigger alerts through funciton calls)
 
 ## Next Steps
 Add `react-context-alerts` to any (and hopefully all :) of your projects, customize the alerts in any way that fits your needs, and enjoy!
