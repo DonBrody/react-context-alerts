@@ -7,7 +7,7 @@ import Main from './views/main';
 
 const muiTheme = createMuiTheme({
   palette: {
-    primary: { main: '#2196F3' },
+    primary: { main: '#1976d2' },
     secondary: { main: '#FFF' },
     info: { main: '#1976d2', darker: '#0d47a1' },
     success: { main: '#388e3c', darker: '#1b5e20' },
@@ -25,6 +25,17 @@ const rcaTheme = createRcaTheme({
 });
 
 const rcaSettings = createRcaSettings({
+  success: {
+    timeout: 3000,
+  },
+  warning: {
+    enableClickAwayListener: true,
+  },
+  error: {
+    timeout: 10000,
+    showCloseButton: true,
+    showProgressBar: true,
+  },
 });
 
 const rcaStyles = {

@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.6.0
+- [new] Optional progress bar theme and setting.
+
 ## 0.5.2
 - [new] Add developer playground for shared components.
 

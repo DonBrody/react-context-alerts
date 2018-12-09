@@ -50,7 +50,7 @@ const infoSettings = {
   showCloseButton: true,
   showActionButton: true,
   enableClickAwayListener: true,
-  actionText: 'Custom Message!!!',
+  actionText: 'Click Me!!!',
   actionClickListener: () => { console.log('Listener triggered!'); },
 };
 

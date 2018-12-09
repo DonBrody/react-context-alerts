@@ -25,6 +25,17 @@ const rcaTheme = createRcaTheme({
 });
 
 const rcaSettings = createRcaSettings({
+  success: {
+    timeout: 3000,
+  },
+  warning: {
+    enableClickAwayListener: true,
+  },
+  error: {
+    timeout: 10000,
+    showCloseButton: true,
+    showProgressBar: true,
+  },
 });
 
 const rcaStyles = {

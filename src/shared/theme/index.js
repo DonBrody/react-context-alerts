@@ -9,6 +9,9 @@ import ActionWrapper from './components/ActionWrapper';
 import ActionButton from './components/ActionButton';
 import CloseWrapper from './components/CloseWrapper';
 import CloseButton from './components/CloseButton';
+import ProgressBar from './components/ProgressBar';
+import ProgressWrapper from './components/ProgressWrapper';
+import colors from '../utils/colors';
 
 const createHeader = (text, style = {}) => (
   <Header text={text} style={style} />
@@ -46,13 +49,13 @@ const createCloseButton = (icon, onClick, style = {}) => (
   <CloseButton icon={icon} onClick={onClick} style={style} />
 );
 
-const bodyColor = '#51525D';
-const bodyBackground = '#FFF';
-const adornmentColor = '#FFF';
-const info = '#1976D2';
-const success = '#388E3C';
-const warning = '#F57C00';
-const error = '#D32F2F';
+const createProgressBar = (progressColor, timeout, style = {}) => (
+  <ProgressBar progressColor={progressColor} timeout={timeout} style={style} />
+);
+
+const createProgressWrapper = (containerColor, child, style = {}) => (
+  <ProgressWrapper containerColor={containerColor} child={child} style={style} />
+);
 
 const baseElements = {
   body: {
@@ -73,101 +76,125 @@ const baseElements = {
     button: createCloseButton,
     icon: <Close style={{ width: 15, height: 15 }} />,
   },
+  progress: {
+    wrapper: createProgressWrapper,
+    bar: createProgressBar,
+  },
 };
 
 const closePalette = {
-  background: bodyBackground,
-  color: bodyColor,
+  background: colors.body.background,
+  color: colors.body.color,
 };
 
 export default {
   info: {
     body: {
-      background: bodyBackground,
-      color: bodyColor,
+      background: colors.body.background,
+      color: colors.body.color,
       ...baseElements.body,
     },
     adornment: {
-      background: info,
-      color: adornmentColor,
+      background: colors.info.primary,
+      color: colors.adornment.color,
       icon: <Info />,
       ...baseElements.adornment,
     },
     action: {
-      background: bodyBackground,
-      color: info,
+      background: colors.body.background,
+      color: colors.info.primary,
       ...baseElements.action,
     },
     close: {
       ...closePalette,
       ...baseElements.close,
+    },
+    progress: {
+      containerColor: colors.info.light,
+      barColor: colors.info.primary,
+      ...baseElements.progress,
     },
   },
   success: {
     body: {
-      background: bodyBackground,
-      color: bodyColor,
+      background: colors.body.background,
+      color: colors.body.color,
       ...baseElements.body,
     },
     adornment: {
-      background: success,
-      color: adornmentColor,
+      background: colors.success.primary,
+      color: colors.adornment.color,
       icon: <CheckCircle />,
       ...baseElements.adornment,
     },
     action: {
-      background: bodyBackground,
-      color: success,
+      background: colors.body.background,
+      color: colors.success.primary,
       ...baseElements.action,
     },
     close: {
       ...closePalette,
       ...baseElements.close,
+    },
+    progress: {
+      containerColor: colors.success.light,
+      barColor: colors.success.primary,
+      ...baseElements.progress,
     },
   },
   warning: {
     body: {
-      background: bodyBackground,
-      color: bodyColor,
+      background: colors.body.background,
+      color: colors.body.color,
       ...baseElements.body,
     },
     adornment: {
-      background: warning,
-      color: adornmentColor,
+      background: colors.warning.primary,
+      color: colors.adornment.color,
       icon: <Warning />,
       ...baseElements.adornment,
     },
     action: {
-      background: bodyBackground,
-      color: warning,
+      background: colors.body.background,
+      color: colors.warning.primary,
       ...baseElements.action,
     },
     close: {
       ...closePalette,
       ...baseElements.close,
     },
+    progress: {
+      containerColor: colors.warning.light,
+      barColor: colors.warning.primary,
+      ...baseElements.progress,
+    },
   },
   error: {
     body: {
-      background: bodyBackground,
-      color: bodyColor,
+      background: colors.body.background,
+      color: colors.body.color,
       ...baseElements.body,
     },
     adornment: {
-      background: error,
-      color: adornmentColor,
+      background: colors.error.primary,
+      color: colors.adornment.color,
       icon: <Error />,
       ...baseElements.adornment,
     },
     action: {
-      background: bodyBackground,
-      color: error,
+      background: colors.body.background,
+      color: colors.error.primary,
       fontWeight: 'bold',
       ...baseElements.action,
     },
     close: {
       ...closePalette,
       ...baseElements.close,
+    },
+    progress: {
+      containerColor: colors.error.light,
+      barColor: colors.error.primary,
+      ...baseElements.progress,
     },
   },
 };
