@@ -25,16 +25,16 @@ const rcaTheme = createRcaTheme({
 });
 
 const rcaSettings = createRcaSettings({
-  showProgressBar: true,
   success: {
     timeout: 3000,
-    enableClickAwayListener: true,
   },
   warning: {
-    timeout: 8000,
+    enableClickAwayListener: true,
   },
   error: {
     timeout: 10000,
+    showCloseButton: true,
+    showProgressBar: true,
   },
 });
 
