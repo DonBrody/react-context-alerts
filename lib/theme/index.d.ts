@@ -29,6 +29,12 @@ declare interface RcaTheme {
       button: any,
       icon: React.ComponentType<{}>,
     },
+    progress: {
+      containerColor: string,
+      barColor: string,
+      wrapper: any,
+      bar: any,
+    },
   },
   success: {
     body: {
@@ -57,6 +63,12 @@ declare interface RcaTheme {
       wrapper: any,
       button: any,
       icon: React.ComponentType<{}>,
+    },
+    progress: {
+      containerColor: string,
+      barColor: string,
+      wrapper: any,
+      bar: any,
     },
   },
   warning: {
@@ -87,6 +99,12 @@ declare interface RcaTheme {
       button: any,
       icon: React.ComponentType<{}>,
     },
+    progress: {
+      containerColor: string,
+      barColor: string,
+      wrapper: any,
+      bar: any,
+    },
   },
   error: {
     body: {
@@ -115,6 +133,12 @@ declare interface RcaTheme {
       wrapper: any,
       button: any,
       icon: React.ComponentType<{}>,
+    },
+    progress: {
+      containerColor: string,
+      barColor: string,
+      wrapper: any,
+      bar: any,
     },
   }
 }
