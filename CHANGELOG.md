@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.6.2
+- [fix] Build/install process infinite loop.
+
 ## 0.6.0
 - [new] Optional progress bar theme and setting.
 
