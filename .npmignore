@@ -1,5 +1,6 @@
 # Dependency directory
 node_modules
+example/rca_demo/node_modules
 
 # Optional npm cache directory
 .npm
