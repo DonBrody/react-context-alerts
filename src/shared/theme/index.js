@@ -92,6 +92,8 @@ export default {
     body: {
       background: colors.body.background,
       color: colors.body.color,
+      headerColor: colors.body.color,
+      messageColor: colors.body.color,
       ...baseElements.body,
     },
     adornment: {
@@ -119,6 +121,8 @@ export default {
     body: {
       background: colors.body.background,
       color: colors.body.color,
+      headerColor: colors.body.color,
+      messageColor: colors.body.color,
       ...baseElements.body,
     },
     adornment: {
@@ -146,6 +150,8 @@ export default {
     body: {
       background: colors.body.background,
       color: colors.body.color,
+      headerColor: colors.body.color,
+      messageColor: colors.body.color,
       ...baseElements.body,
     },
     adornment: {
@@ -173,6 +179,8 @@ export default {
     body: {
       background: colors.body.background,
       color: colors.body.color,
+      headerColor: colors.body.color,
+      messageColor: colors.body.color,
       ...baseElements.body,
     },
     adornment: {

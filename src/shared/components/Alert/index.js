@@ -74,12 +74,26 @@ class Alert extends Component {
     };
   };
 
+  headerStyles = () => {
+    const { type, theme } = this.props;
+    return {
+      color: theme[type].body.headerColor,
+    };
+  };
+
+  messageStyles = () => {
+    const { type, theme } = this.props;
+    return {
+      color: theme[type].body.messageColor,
+    };
+  };
+
   bodyContent = (header, message) => {
     const { type, theme } = this.props;
     const content = theme[type].body.content;
     return content(
-      theme[type].body.header(header),
-      theme[type].body.message(message),
+      theme[type].body.header(header, this.headerStyles()),
+      theme[type].body.message(message, this.messageStyles()),
       this.bodyContentStyles());
   };
 

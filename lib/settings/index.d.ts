@@ -5,6 +5,7 @@ declare interface RcaSettings {
   showAdornment: boolean,
   showActionButton: boolean,
   showCloseButton: boolean,
+  showProgressBar: boolean,
   enableClickAwayListener: boolean,
   actionText: string,
   actionClickListener: any,

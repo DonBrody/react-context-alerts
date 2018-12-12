@@ -137,6 +137,8 @@ export default {
     body: {
       background: colors.body.background,
       color: colors.body.color,
+      headerColor: colors.body.color,
+      messageColor: colors.body.color,
       ...baseElements.body,
     },
     adornment: {
@@ -171,6 +173,7 @@ export default {
   },
 }
 ```
+*Note* that setting the color of the body will set the text color of the header and the message, however, that color may be overrident by setting the `headerColor` or `messageColor` of the body. These both have higher specificity.  
 ### Settings
 #### Global Settings
 The `AlertsProvider` exposes a `settings` prop that expects an object. You can override the default settings by using the provided `createRcaSettings` function. Here is how we can customize the settings for the example above:

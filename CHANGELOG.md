@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.6.3
+- [new] Optionally style header and message colors individually.
+
 ## 0.6.2
 - [fix] Build/install process infinite loop.
 
