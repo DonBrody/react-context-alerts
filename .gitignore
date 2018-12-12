@@ -1,7 +1,7 @@
 # dependencies
 /node_modules
-/example/rca_demo/node_modules
-/example/rca_demo/build
+/example/rca-demo/node_modules
+/example/rca-demo/build
 
 # misc
 .DS_Store
