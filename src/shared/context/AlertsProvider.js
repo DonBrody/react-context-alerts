@@ -30,7 +30,7 @@ const DEFAULT_STATE = {
   settings: DefaultSettings,
 };
 
-const AlertsContext = React.createContext(DEFAULT_STATE);
+export const AlertsContext = React.createContext(DEFAULT_STATE);
 export const AlertsConsumer = AlertsContext.Consumer;
 
 let count = 0;
@@ -62,15 +62,16 @@ class AlertsProvider extends Component {
   onAlertClose = (alert) => {
     this.setState({ alerts: this.state.alerts.filter((current) => (
       alert !== current
-    ))});
+    ))}, alert.callback);
   };
 
-  createAlertObject = (type, header, message, instanceSettings) => {
+  createAlertObject = (type, header, message, callback, instanceSettings) => {
     return {
       id: count++,
       type,
       header,
       message,
+      callback,
       settings: this.createCustomSettings(instanceSettings),
     };
   };
@@ -89,20 +90,20 @@ class AlertsProvider extends Component {
       <AlertsContext.Provider
         value={{
           state: this.state,
-          info: (header, message, settings = {}) => {
-            const info = this.createAlertObject(types.info, header, message, settings);
+          info: (header, message, callback = null, settings = {}) => {
+            const info = this.createAlertObject(types.info, header, message, callback, settings);
             this.setState({ alerts: [...this.state.alerts, info ] });
           },
-          success: (header, message, settings = {}) => {
-            const success = this.createAlertObject(types.success, header, message, settings);
+          success: (header, message, callback = null, settings = {}) => {
+            const success = this.createAlertObject(types.success, header, message, callback, settings);
             this.setState({ alerts: [...this.state.alerts, success ] });
           },
-          warning: (header, message, settings = {}) => {
-            const warning = this.createAlertObject(types.warning, header, message, settings);
+          warning: (header, message, callback = null, settings = {}) => {
+            const warning = this.createAlertObject(types.warning, header, message, callback, settings);
             this.setState({ alerts: [...this.state.alerts, warning ] });
           },
-          error: (header, message, settings = {}) => {
-            const error = this.createAlertObject(types.error, header, message, settings);
+          error: (header, message, callback = null, settings = {}) => {
+            const error = this.createAlertObject(types.error, header, message, callback, settings);
             this.setState({ alerts: [...this.state.alerts, error ] });
           },
           updateGlobalTheme: (theme = {}, callback = () => {}) => {

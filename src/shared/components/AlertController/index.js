@@ -13,13 +13,13 @@ const styles = {
   },
 };
 
-class Alert extends Component {  
+class AlertController extends Component {  
   static determineValue = (globalValue, typeValue) => {
     return (typeValue || typeValue === false) ? typeValue : globalValue;
   };
 
   static settingValue = (key, type, settings) => {
-    return Alert.determineValue(settings[key], settings[type][key]);
+    return AlertController.determineValue(settings[key], settings[type][key]);
   };
 
   state = {
@@ -29,7 +29,7 @@ class Alert extends Component {
 
   componentDidMount() {
     const { type, settings } = this.props;
-    const timeout = Alert.settingValue(
+    const timeout = AlertController.settingValue(
       settingsKeys.timeout, type, settings);
     if (timeout) {
       this.timeoutFunction = setTimeout(() => {
@@ -135,9 +135,9 @@ class Alert extends Component {
   actionWrapper = (settings) => {
     const { type, theme } = this.props;
     const wrapper = theme[type].action.wrapper;
-    const text = Alert.settingValue(
+    const text = AlertController.settingValue(
       settingsKeys.actionText, type, settings);
-    const onClick = Alert.settingValue(
+    const onClick = AlertController.settingValue(
       settingsKeys.actionClickListener, type, settings);
     return wrapper(
       theme[type].action.button(text, onClick),
@@ -164,7 +164,7 @@ class Alert extends Component {
   progressWrapper = (settings) => {
     const { type, theme } = this.props;
     const wrapper = theme[type].progress.wrapper;
-    const timeout = Alert.settingValue(
+    const timeout = AlertController.settingValue(
       settingsKeys.timeout, type, settings);
     return wrapper(
       theme[type].progress.containerColor,
@@ -174,14 +174,14 @@ class Alert extends Component {
 
   mouseEventType = (settings) => {
     const { type } = this.props;
-    const enableClickAwayListener = Alert.settingValue(
+    const enableClickAwayListener = AlertController.settingValue(
       settingsKeys.enableClickAwayListener, type, settings);
     return enableClickAwayListener ? 'onMouseUp' : false;
   };
 
   touchEventType = (settings) => {
     const { type } = this.props;
-    const enableClickAwayListener = Alert.settingValue(
+    const enableClickAwayListener = AlertController.settingValue(
       settingsKeys.enableClickAwayListener, type, settings);
     return enableClickAwayListener ? 'onTouchEnd' : false;
   };
@@ -218,26 +218,26 @@ class Alert extends Component {
 
   showAdornment = (settings) => {
     const { type } = this.props;
-    return Alert.settingValue(
+    return AlertController.settingValue(
       settingsKeys.showAdornment, type, settings);
   };
 
   showAction = (settings) => {
     const { type } = this.props;
-    return Alert.settingValue(settingsKeys.showActionButton, type, settings) &&
-      Alert.settingValue(settingsKeys.actionText, type, settings) &&
-      Alert.settingValue(settingsKeys.actionClickListener, type, settings);
+    return AlertController.settingValue(settingsKeys.showActionButton, type, settings) &&
+      AlertController.settingValue(settingsKeys.actionText, type, settings) &&
+      AlertController.settingValue(settingsKeys.actionClickListener, type, settings);
   };
 
   showClose = (settings) => {
     const { type } = this.props;
-    return Alert.settingValue(
+    return AlertController.settingValue(
       settingsKeys.showCloseButton, type, settings);
   };
 
   showProgress = (settings) => {
     const { type } = this.props;
-    return Alert.settingValue(
+    return AlertController.settingValue(
       settingsKeys.showProgressBar, type, settings);
   };
 
@@ -286,7 +286,7 @@ class Alert extends Component {
   }
 };
 
-Alert.propTypes = {
+AlertController.propTypes = {
   id: PropTypes.number.isRequired,
   onClose: PropTypes.func,
   header: PropTypes.string,
@@ -296,11 +296,11 @@ Alert.propTypes = {
   settings: PropTypes.object.isRequired,
 };
 
-Alert.defaultProps = {
+AlertController.defaultProps = {
   onClose: () => {},
   header: null,
   message: '',
   type: types.info,
 };
 
-export default withStyles(styles)(Alert);
+export default withStyles(styles)(AlertController);

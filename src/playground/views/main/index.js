@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { AlertsConsumer } from '../../../shared';
+import { Alert, AlertsConsumer } from '../../../shared';
+import types from '../../../shared/utils/types';
 
 const baseButtonStyles = {
   display: 'block',
@@ -57,45 +58,58 @@ const infoSettings = {
 const longText = 'This is an unecessarily long message to the user!!!!';
 
 class Main extends Component {
+  state = {
+    open: false,
+  };
+
   render() {
     const { classes } = this.props;
-
     return (
-      <AlertsConsumer>
-        {context => {
-          return (
-            <section className={classes.buttonGroup}>
-              <Button
-                className={classes.info}
-                variant="contained"
-                onClick={() => context.info('Header', longText, infoSettings)}
-              >
-                Info
-              </Button>
-              <Button
-                className={classes.success}
-                variant="contained"
-                onClick={() => context.success('Header', 'message!')}
-              >
-                Success
-              </Button>
-              <Button
-                className={classes.warning}
-                variant="contained"
-                onClick={() => context.warning(null, 'message!')}
-              >
-                Warning
-              </Button>
-              <Button
-                className={classes.error}
-                variant="contained"
-                onClick={() => context.error('Header', null)}
-              >
-                Error
-              </Button>
-            </section>
-        )}}
-      </AlertsConsumer>
+      <div>
+        <Alert
+          open={this.state.open}
+          onClose={() => this.setState({ open: false })}
+          type={types.success}
+          header={'Header!'}
+          message={'message'}
+        />
+        <AlertsConsumer>
+          {context => {
+            return (
+              <section className={classes.buttonGroup}>
+                <Button
+                  className={classes.info}
+                  variant="contained"
+                  onClick={() => context.info('Header', longText, null, infoSettings)}
+                >
+                  Info
+                </Button>
+                <Button
+                  className={classes.success}
+                  variant="contained"
+                  // onClick={() => context.success('Header', 'message!')}
+                  onClick={() => this.setState({ open: true })}
+                >
+                  Success
+                </Button>
+                <Button
+                  className={classes.warning}
+                  variant="contained"
+                  onClick={() => context.warning(null, 'message!')}
+                >
+                  Warning
+                </Button>
+                <Button
+                  className={classes.error}
+                  variant="contained"
+                  onClick={() => context.error('Header', null)}
+                >
+                  Error
+                </Button>
+              </section>
+          )}}
+        </AlertsConsumer>
+      </div>
     );
   }
 };
