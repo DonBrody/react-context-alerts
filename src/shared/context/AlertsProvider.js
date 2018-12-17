@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Alert from '../components/Alert';
+import AlertController from '../components/AlertController';
 import DefaultTheme from '../theme';
 import DefaultSettings from '../settings';
 import createRcaSettings from '../settings/createRcaSettings';
@@ -121,7 +121,7 @@ class AlertsProvider extends Component {
         <MuiThemeProvider theme={muiTheme}>
           <aside style={{ ...defaultStyles, ...this.props.style }}>
             {this.state.alerts.map((alert) => (
-              <Alert
+              <AlertController
                 key={alert.id}
                 id={alert.id}
                 header={alert.header}
