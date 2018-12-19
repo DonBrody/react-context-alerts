@@ -4,36 +4,6 @@ import { AlertsContext } from '../../context/AlertsProvider';
 import { createRcaSettings } from '../..';
 import types from '../../utils/types';
 
-// info: {
-//   body: {
-//     background: colors.body.background,
-//     color: colors.body.color,
-//     headerColor: colors.body.color,
-//     messageColor: colors.body.color,
-//     ...baseElements.body,
-//   },
-//   adornment: {
-//     background: colors.info.primary,
-//     color: colors.adornment.color,
-//     icon: <Info />,
-//     ...baseElements.adornment,
-//   },
-//   action: {
-//     background: colors.body.background,
-//     color: colors.info.primary,
-//     ...baseElements.action,
-//   },
-//   close: {
-//     ...closePalette,
-//     ...baseElements.close,
-//   },
-//   progress: {
-//     containerColor: colors.info.light,
-//     barColor: colors.info.primary,
-//     ...baseElements.progress,
-//   },
-// },
-
 class Alert extends Component {
   state = {};
 
@@ -69,7 +39,7 @@ class Alert extends Component {
   extractInstanceSettingsFromProps = () => {
     const { type } = this.props;
     const instanceSettings = { [type]: {} };
-    
+
     if (this.props.timeout !== undefined) {
       instanceSettings.timeout = this.props.timeout;
       instanceSettings[type].timeout = this.props.timeout;
