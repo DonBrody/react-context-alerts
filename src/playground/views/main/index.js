@@ -47,12 +47,15 @@ const styles = theme => ({
 });
 
 const infoSettings = {
-  timeout: null,
-  showCloseButton: true,
-  showActionButton: true,
-  enableClickAwayListener: true,
-  actionText: 'Click Me!!!',
-  actionClickListener: () => { console.log('Listener triggered!'); },
+  info : {
+    timeout: null,
+    showCloseButton: true,
+    showActionButton: true,
+    showProgressBar: true,
+    enableClickAwayListener: true,
+    actionText: 'Click Me!!!',
+    actionClickListener: () => { console.log('Listener triggered!'); },
+  },
 };
 
 const longText = 'This is an unecessarily long message to the user!!!!';
@@ -72,6 +75,14 @@ class Main extends Component {
           type={types.success}
           header={'Header!'}
           message={'message'}
+          timeout={null}
+          showAdornment={false}
+          showActionButton
+          showCloseButton
+          showProgressBar
+          enableClickAwayListener
+          actionText={'text'}
+          actionClickListener={() => {}}
         />
         <AlertsConsumer>
           {context => {

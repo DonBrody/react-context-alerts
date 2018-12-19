@@ -25,6 +25,9 @@ const rcaTheme = createRcaTheme({
 });
 
 const rcaSettings = createRcaSettings({
+  info: {
+    timeout: 5000,
+  },
   success: {
     timeout: 3000,
   },

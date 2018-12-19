@@ -89,7 +89,6 @@ class AlertsProvider extends Component {
     return (
       <AlertsContext.Provider
         value={{
-          state: this.state,
           info: (header, message, callback = null, settings = {}) => {
             const info = this.createAlertObject(types.info, header, message, callback, settings);
             this.setState({ alerts: [...this.state.alerts, info ] });
@@ -115,6 +114,12 @@ class AlertsProvider extends Component {
             this.setState({ settings: this.createCustomSettings(settings) }, () => {
               callback();
             });
+          },
+          globalTheme: () => {
+            return this.state.theme;
+          },
+          globalSettings: () => {
+            return this.state.settings;
           },
         }}
       >

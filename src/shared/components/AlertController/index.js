@@ -14,12 +14,15 @@ const styles = {
 };
 
 class AlertController extends Component {  
-  static determineValue = (globalValue, typeValue) => {
-    return (typeValue || typeValue === false) ? typeValue : globalValue;
+  static determineValue = (globalValue, typeValue, allowNull = false) => {
+    const validNull = allowNull && typeValue === null;
+    return (typeValue || typeValue === false || validNull) ? typeValue : globalValue;
   };
 
   static settingValue = (key, type, settings) => {
-    return AlertController.determineValue(settings[key], settings[type][key]);
+    // This is ugly. Have to allow null values for timeout (signifies disabled)
+    return AlertController.determineValue(
+      settings[key], settings[type][key], key === settingsKeys.timeout);
   };
 
   state = {
