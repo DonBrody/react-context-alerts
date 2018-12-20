@@ -9,6 +9,7 @@ export interface AlertsProviderProps {
 }
 
 declare const AlertsProvider: React.ComponentType<AlertsProviderProps>;
+export const AlertsContext: React.ComponentType<{}>;
 export const AlertsConsumer: React.ComponentType<{}>;
 
 export default AlertsProvider;
