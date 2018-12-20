@@ -127,6 +127,11 @@ The example above will first disable the timeout for all `Alert`s, and enable/sh
 
 Although there are not nearly as many settings options as theming options, I encourage you to take a look at the [source][2] if you are interested in making advanced settings overrides.
 
+## Advanced Use
+The `Alert` component obfuscates the use of the React context consumer. Obfuscating this functionality somewhat limits the potential uses of this library, however, the context consumer is exposed if you decide you need more control over the functionality of this library. If you get to this point, it is probably best to read through the full [source][3] to understand what's going on and how to use all of the available features (it's a relatively small set of files).  
+
+In addition to reading through the source, there is a [developers playground][4] available. Just run `npm run start:playground` once all of your dependencies are installed. It'll pop up a simple app that can be used to play around with any of the features you want. It utilizes [react-scripts][5], so you'll get hot reloads as well.
+
 ## Next Steps
 Add `react-context-alerts` to any (and hopefully all :) of your projects, customize the alerts in any way that fits your needs, and enjoy!
 
@@ -139,3 +144,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 [1]:src/shared/theme/index.js
 [2]:src/shared/settings/index.js
+[3]:src/shared
+[4]:src/playground
+[5]:https://github.com/facebook/create-react-app#readme
