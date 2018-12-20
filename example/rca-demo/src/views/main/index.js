@@ -68,7 +68,7 @@ class Main extends Component {
               <Button
                 className={classes.info}
                 variant="contained"
-                onClick={() => context.info('Header', longText, infoSettings)}
+                onClick={() => context.info('Header', longText, null, infoSettings)}
               >
                 Info
               </Button>
