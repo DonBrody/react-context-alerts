@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.7.0
+- [new] Alert wrapper component (obfuscates context functions).
+- [fix] Merge null timeout instance setting values.
+
 ## 0.6.3
 - [new] Optionally style header and message colors individually.
 

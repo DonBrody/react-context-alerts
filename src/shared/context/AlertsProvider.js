@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Alert from '../components/Alert';
+import AlertController from '../components/AlertController';
 import DefaultTheme from '../theme';
 import DefaultSettings from '../settings';
 import createRcaSettings from '../settings/createRcaSettings';
@@ -30,7 +30,7 @@ const DEFAULT_STATE = {
   settings: DefaultSettings,
 };
 
-const AlertsContext = React.createContext(DEFAULT_STATE);
+export const AlertsContext = React.createContext(DEFAULT_STATE);
 export const AlertsConsumer = AlertsContext.Consumer;
 
 let count = 0;
@@ -62,15 +62,16 @@ class AlertsProvider extends Component {
   onAlertClose = (alert) => {
     this.setState({ alerts: this.state.alerts.filter((current) => (
       alert !== current
-    ))});
+    ))}, alert.callback);
   };
 
-  createAlertObject = (type, header, message, instanceSettings) => {
+  createAlertObject = (type, header, message, callback, instanceSettings) => {
     return {
       id: count++,
       type,
       header,
       message,
+      callback,
       settings: this.createCustomSettings(instanceSettings),
     };
   };
@@ -88,21 +89,20 @@ class AlertsProvider extends Component {
     return (
       <AlertsContext.Provider
         value={{
-          state: this.state,
-          info: (header, message, settings = {}) => {
-            const info = this.createAlertObject(types.info, header, message, settings);
+          info: (header, message, callback = null, settings = {}) => {
+            const info = this.createAlertObject(types.info, header, message, callback, settings);
             this.setState({ alerts: [...this.state.alerts, info ] });
           },
-          success: (header, message, settings = {}) => {
-            const success = this.createAlertObject(types.success, header, message, settings);
+          success: (header, message, callback = null, settings = {}) => {
+            const success = this.createAlertObject(types.success, header, message, callback, settings);
             this.setState({ alerts: [...this.state.alerts, success ] });
           },
-          warning: (header, message, settings = {}) => {
-            const warning = this.createAlertObject(types.warning, header, message, settings);
+          warning: (header, message, callback = null, settings = {}) => {
+            const warning = this.createAlertObject(types.warning, header, message, callback, settings);
             this.setState({ alerts: [...this.state.alerts, warning ] });
           },
-          error: (header, message, settings = {}) => {
-            const error = this.createAlertObject(types.error, header, message, settings);
+          error: (header, message, callback = null, settings = {}) => {
+            const error = this.createAlertObject(types.error, header, message, callback, settings);
             this.setState({ alerts: [...this.state.alerts, error ] });
           },
           updateGlobalTheme: (theme = {}, callback = () => {}) => {
@@ -115,13 +115,19 @@ class AlertsProvider extends Component {
               callback();
             });
           },
+          globalTheme: () => {
+            return this.state.theme;
+          },
+          globalSettings: () => {
+            return this.state.settings;
+          },
         }}
       >
         {this.props.children}
         <MuiThemeProvider theme={muiTheme}>
           <aside style={{ ...defaultStyles, ...this.props.style }}>
             {this.state.alerts.map((alert) => (
-              <Alert
+              <AlertController
                 key={alert.id}
                 id={alert.id}
                 header={alert.header}

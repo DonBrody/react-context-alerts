@@ -1,6 +1,12 @@
 # Dependency directory
 node_modules
-example/rca_demo/node_modules
+
+# Example client source
+example
+
+# Project source
+public
+src
 
 # Optional npm cache directory
 .npm
