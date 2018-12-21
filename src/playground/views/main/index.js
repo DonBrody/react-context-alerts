@@ -47,18 +47,18 @@ const styles = theme => ({
 });
 
 const infoSettings = {
-  info : {
-    timeout: null,
-    showCloseButton: true,
-    showActionButton: true,
-    showProgressBar: true,
-    enableClickAwayListener: true,
-    actionText: 'Click Me!!!',
-    actionClickListener: () => { console.log('Listener triggered!'); },
-  },
+  // info : {
+  //   timeout: null,
+  //   showCloseButton: true,
+  //   showActionButton: true,
+  //   showProgressBar: true,
+  //   enableClickAwayListener: true,
+  //   actionText: 'Click Me!!!',
+  //   actionClickListener: () => { console.log('Listener triggered!'); },
+  // },
 };
 
-const longText = 'This is an unnecessarily long message to the user!!!!';
+// const longText = 'This is a little longer than normal message to the user!';
 
 class Main extends Component {
   state = {
@@ -69,7 +69,7 @@ class Main extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <Alert
+        {/* <Alert
           open={this.state.open}
           onClose={() => this.setState({ open: false })}
           type={types.success}
@@ -83,7 +83,7 @@ class Main extends Component {
           enableClickAwayListener
           actionText={'text'}
           actionClickListener={() => {}}
-        />
+        /> */}
         <AlertsConsumer>
           {context => {
             return (
@@ -91,29 +91,41 @@ class Main extends Component {
                 <Button
                   className={classes.info}
                   variant="contained"
-                  onClick={() => context.info('Header', longText, null, infoSettings)}
+                  onClick={() =>
+                    context.info(
+                      'Info Header',
+                      'Info message! -- default theme and settings')}
                 >
                   Info
                 </Button>
                 <Button
                   className={classes.success}
                   variant="contained"
-                  // onClick={() => context.success('Header', 'message!')}
-                  onClick={() => this.setState({ open: true })}
+                  onClick={() => 
+                    context.success(
+                    'Yellow Success Header',
+                    'White success message! -- no adornment, green body background, 7 second timeout')}
+                  // onClick={() => this.setState({ open: true })}
                 >
                   Success
                 </Button>
                 <Button
                   className={classes.warning}
                   variant="contained"
-                  onClick={() => context.warning(null, 'message!')}
+                  onClick={() => 
+                    context.warning(
+                      null,
+                      'White warning message! -- null header, orange body background, click away listener enabled, 10 second timeout')}
                 >
                   Warning
                 </Button>
                 <Button
                   className={classes.error}
                   variant="contained"
-                  onClick={() => context.error('Header', null)}
+                  onClick={() =>
+                    context.error(
+                      'Error Header',
+                      'Error message! -- progress bar enabled, 10 second timeout, close button enabled')}
                 >
                   Error
                 </Button>
