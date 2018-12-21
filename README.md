@@ -1,6 +1,9 @@
 # react-context-alerts
 Simple and configurable alert library utilizing React Context
 
+## Example
+<img src="/rca_demo.gif?raw=true" width="700px">
+
 ## Prerequisites
 `react-context-alerts` utilizes the React context api, which relies on peer dependencies `react` and `react-dom` v16.3.0 or greater.
 
