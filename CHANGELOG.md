@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.7.2
+- [fix] Padding added to body when no action or close button present.
+
 ## 0.7.1
 - [fix] Update TypeScript definitions for new wrapper.
 - [fix] Update README for new wrapper.

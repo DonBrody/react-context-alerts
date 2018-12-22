@@ -72,8 +72,11 @@ class AlertController extends Component {
   bodyContentStyles = () => {
     const { settings } = this.props;
     const paddingLeft = this.showAdornment(settings) ? 0 : 16;
+    const paddingRight = 
+      (this.showAction(settings) || this.showClose(settings)) ? 0 : 16;
     return {
       paddingLeft,
+      paddingRight,
     };
   };
 
