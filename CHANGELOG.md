@@ -1,7 +1,8 @@
 # Change Log
 
 ## 0.7.2
-- [fix] Padding added to body when no action or close button present.
+- [fix] Add padding to body when no action or close button present.
+- [fix] Add border radius to body when no adornment is present.
 
 ## 0.7.1
 - [fix] Update TypeScript definitions for new wrapper.
