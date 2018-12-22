@@ -8,5 +8,8 @@ example
 public
 src
 
+# README gif
+rca_demo.gif
+
 # Optional npm cache directory
 .npm
