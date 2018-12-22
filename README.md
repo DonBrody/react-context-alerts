@@ -2,8 +2,8 @@
 Simple and configurable alert library utilizing React Context
 
 ## Example
-<img src="/rca_demo.gif?raw=true" width="700px">
-This demo can be found [here][5]. Give it a second to load. It's running in a free Heroku sandbox.
+The demo below can be found [here](https://react-context-alerts.herokuapp.com). Give it a second to load. It's running in a free Heroku sandbox.
+<img src="/rca_demo.gif?raw=true" width="700px">  
 
 ## Prerequisites
 `react-context-alerts` utilizes the React context api, which relies on peer dependencies `react` and `react-dom` v16.3.0 or greater.
@@ -151,4 +151,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [3]:src/shared
 [4]:src/playground
 [5]:https://github.com/facebook/create-react-app#readme
-[6]:https://react-context-alerts.herokuapp.com/
