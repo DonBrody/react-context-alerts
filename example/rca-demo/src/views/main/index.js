@@ -45,57 +45,63 @@ const styles = theme => ({
   },
 });
 
-const infoSettings = {
-  timeout: null,
-  showCloseButton: true,
-  showActionButton: true,
-  enableClickAwayListener: true,
-  actionText: 'Click Me!!!',
-  actionClickListener: () => { console.log('Listener triggered!'); },
-};
-
-const longText = 'This is an unnecessarily long message to the user!!!!';
-
 class Main extends Component {
+  state = {
+    open: false,
+  };
+
   render() {
     const { classes } = this.props;
-
     return (
-      <AlertsConsumer>
-        {context => {
-          return (
-            <section className={classes.buttonGroup}>
-              <Button
-                className={classes.info}
-                variant="contained"
-                onClick={() => context.info('Header', longText, null, infoSettings)}
-              >
-                Info
-              </Button>
-              <Button
-                className={classes.success}
-                variant="contained"
-                onClick={() => context.success('Header', 'message!')}
-              >
-                Success
-              </Button>
-              <Button
-                className={classes.warning}
-                variant="contained"
-                onClick={() => context.warning(null, 'message!')}
-              >
-                Warning
-              </Button>
-              <Button
-                className={classes.error}
-                variant="contained"
-                onClick={() => context.error('Header', null)}
-              >
-                Error
-              </Button>
-            </section>
-        )}}
-      </AlertsConsumer>
+      <div>
+        <AlertsConsumer>
+          {context => {
+            return (
+              <section className={classes.buttonGroup}>
+                <Button
+                  className={classes.info}
+                  variant="contained"
+                  onClick={() =>
+                    context.info(
+                      'Info Header',
+                      'Info message! -- default theme and settings')}
+                >
+                  Info
+                </Button>
+                <Button
+                  className={classes.success}
+                  variant="contained"
+                  onClick={() => 
+                    context.success(
+                    'Yellow Success Header',
+                    'White success message! -- no adornment, green body background, 7 second timeout')}
+                >
+                  Success
+                </Button>
+                <Button
+                  className={classes.warning}
+                  variant="contained"
+                  onClick={() => 
+                    context.warning(
+                      null,
+                      'White warning message! -- null header, orange body background, click away listener enabled, 10 second timeout')}
+                >
+                  Warning
+                </Button>
+                <Button
+                  className={classes.error}
+                  variant="contained"
+                  onClick={() =>
+                    context.error(
+                      'Error Header',
+                      'Error message! -- progress bar enabled, 10 second timeout, close button enabled')}
+                >
+                  Error
+                </Button>
+              </section>
+          )}}
+        </AlertsConsumer>
+      </div>
     );
   }
 };
