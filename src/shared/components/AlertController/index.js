@@ -87,16 +87,14 @@ class AlertController extends Component {
 
   headerStyles = () => {
     const { type, theme } = this.props;
-    return {
-      color: theme[type].body.headerColor,
-    };
+    const specificColor = theme[type].body.headerColor;
+    return specificColor ? { color: specificColor } : {};
   };
 
   messageStyles = () => {
     const { type, theme } = this.props;
-    return {
-      color: theme[type].body.messageColor,
-    };
+    const specificColor = theme[type].body.messageColor;
+    return specificColor ? { color: specificColor } : {};
   };
 
   bodyContent = (header, message) => {

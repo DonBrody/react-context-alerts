@@ -32,7 +32,7 @@ const rcaTheme = createRcaTheme({
   warning: {
     body: {
       background: '#F57C00',
-      messageColor: 'white',
+      color: 'white',
     },
   },
 });

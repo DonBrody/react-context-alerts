@@ -46,20 +46,14 @@ const styles = theme => ({
   },
 });
 
-const infoSettings = {
-  // info : {
-  //   timeout: null,
-  //   showCloseButton: true,
-  //   showActionButton: true,
-  //   showProgressBar: true,
-  //   enableClickAwayListener: true,
-  //   actionText: 'Click Me!!!',
-  //   actionClickListener: () => { console.log('Listener triggered!'); },
-  // },
-};
-
-// const longText = 'This is a little longer than normal message to the user!';
-
+/**
+ * NOTE ABOUT DEVELOPMENT PLAYGROUND:
+ * The playground is setup to instantiate alerts directly through the AlertsConsumer (as seen below).
+ * This is considered advanced usage in the documentation, and does give you more control over the
+ * alerts. There is also an Alert component setup for you at the top of the render function. To use
+ * the Alert component, just uncomment the onClick on line 102, and comment out the onClick on lines
+ * 99-101 below. This is a good way to get an understanding of how the two approaches work.
+ */
 class Main extends Component {
   state = {
     open: false,
@@ -69,7 +63,7 @@ class Main extends Component {
     const { classes } = this.props;
     return (
       <div>
-        {/* <Alert
+        <Alert
           open={this.state.open}
           onClose={() => this.setState({ open: false })}
           type={types.success}
@@ -82,8 +76,8 @@ class Main extends Component {
           showProgressBar
           enableClickAwayListener
           actionText={'text'}
-          actionClickListener={() => {}}
-        /> */}
+          actionClickListener={() => console.log('Clicked!')}
+        />
         <AlertsConsumer>
           {context => {
             return (
