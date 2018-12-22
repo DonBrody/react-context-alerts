@@ -62,33 +62,39 @@ class AlertController extends Component {
   };
 
   bodyWrapperStyles = () => {
-    const { type, theme } = this.props;
-    return {
+    const { type, theme, settings } = this.props;
+    const styles = {
       background: theme[type].body.background,
       color: theme[type].body.color,
     };
+    if (!this.showAdornment(settings)) {
+      styles.borderTopLeftRadius = 4;
+      styles.borderBottomLeftRadius = 4;
+    }
+    return styles;
   };
 
   bodyContentStyles = () => {
     const { settings } = this.props;
     const paddingLeft = this.showAdornment(settings) ? 0 : 16;
+    const paddingRight = 
+      (this.showAction(settings) || this.showClose(settings)) ? 0 : 16;
     return {
       paddingLeft,
+      paddingRight,
     };
   };
 
   headerStyles = () => {
     const { type, theme } = this.props;
-    return {
-      color: theme[type].body.headerColor,
-    };
+    const specificColor = theme[type].body.headerColor;
+    return specificColor ? { color: specificColor } : {};
   };
 
   messageStyles = () => {
     const { type, theme } = this.props;
-    return {
-      color: theme[type].body.messageColor,
-    };
+    const specificColor = theme[type].body.messageColor;
+    return specificColor ? { color: specificColor } : {};
   };
 
   bodyContent = (header, message) => {
