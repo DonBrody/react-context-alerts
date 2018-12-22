@@ -22,13 +22,28 @@ const muiTheme = createMuiTheme({
 });
 
 const rcaTheme = createRcaTheme({
+  success: {
+    body: {
+      background: '#388E3C',
+      headerColor: 'yellow',
+      messageColor: 'white',
+    },
+  },
+  warning: {
+    body: {
+      background: '#F57C00',
+      messageColor: 'white',
+    },
+  },
 });
 
 const rcaSettings = createRcaSettings({
   success: {
-    timeout: 3000,
+    timeout: 7000,
+    showAdornment: false,
   },
   warning: {
+    timeout: 10000,
     enableClickAwayListener: true,
   },
   error: {

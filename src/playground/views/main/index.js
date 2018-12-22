@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { AlertsConsumer } from '../../../shared';
+import { Alert, AlertsConsumer } from '../../../shared';
+import types from '../../../shared/utils/types';
 
 const baseButtonStyles = {
   display: 'block',
@@ -46,56 +47,92 @@ const styles = theme => ({
 });
 
 const infoSettings = {
-  timeout: null,
-  showCloseButton: true,
-  showActionButton: true,
-  enableClickAwayListener: true,
-  actionText: 'Click Me!!!',
-  actionClickListener: () => { console.log('Listener triggered!'); },
+  // info : {
+  //   timeout: null,
+  //   showCloseButton: true,
+  //   showActionButton: true,
+  //   showProgressBar: true,
+  //   enableClickAwayListener: true,
+  //   actionText: 'Click Me!!!',
+  //   actionClickListener: () => { console.log('Listener triggered!'); },
+  // },
 };
 
-const longText = 'This is an unecessarily long message to the user!!!!';
+// const longText = 'This is a little longer than normal message to the user!';
 
 class Main extends Component {
+  state = {
+    open: false,
+  };
+
   render() {
     const { classes } = this.props;
-
     return (
-      <AlertsConsumer>
-        {context => {
-          return (
-            <section className={classes.buttonGroup}>
-              <Button
-                className={classes.info}
-                variant="contained"
-                onClick={() => context.info('Header', longText, infoSettings)}
-              >
-                Info
-              </Button>
-              <Button
-                className={classes.success}
-                variant="contained"
-                onClick={() => context.success('Header', 'message!')}
-              >
-                Success
-              </Button>
-              <Button
-                className={classes.warning}
-                variant="contained"
-                onClick={() => context.warning(null, 'message!')}
-              >
-                Warning
-              </Button>
-              <Button
-                className={classes.error}
-                variant="contained"
-                onClick={() => context.error('Header', null)}
-              >
-                Error
-              </Button>
-            </section>
-        )}}
-      </AlertsConsumer>
+      <div>
+        {/* <Alert
+          open={this.state.open}
+          onClose={() => this.setState({ open: false })}
+          type={types.success}
+          header={'Header!'}
+          message={'message'}
+          timeout={null}
+          showAdornment={false}
+          showActionButton
+          showCloseButton
+          showProgressBar
+          enableClickAwayListener
+          actionText={'text'}
+          actionClickListener={() => {}}
+        /> */}
+        <AlertsConsumer>
+          {context => {
+            return (
+              <section className={classes.buttonGroup}>
+                <Button
+                  className={classes.info}
+                  variant="contained"
+                  onClick={() =>
+                    context.info(
+                      'Info Header',
+                      'Info message! -- default theme and settings')}
+                >
+                  Info
+                </Button>
+                <Button
+                  className={classes.success}
+                  variant="contained"
+                  onClick={() => 
+                    context.success(
+                    'Yellow Success Header',
+                    'White success message! -- no adornment, green body background, 7 second timeout')}
+                  // onClick={() => this.setState({ open: true })}
+                >
+                  Success
+                </Button>
+                <Button
+                  className={classes.warning}
+                  variant="contained"
+                  onClick={() => 
+                    context.warning(
+                      null,
+                      'White warning message! -- null header, orange body background, click away listener enabled, 10 second timeout')}
+                >
+                  Warning
+                </Button>
+                <Button
+                  className={classes.error}
+                  variant="contained"
+                  onClick={() =>
+                    context.error(
+                      'Error Header',
+                      'Error message! -- progress bar enabled, 10 second timeout, close button enabled')}
+                >
+                  Error
+                </Button>
+              </section>
+          )}}
+        </AlertsConsumer>
+      </div>
     );
   }
 };

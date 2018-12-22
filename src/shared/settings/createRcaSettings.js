@@ -2,5 +2,6 @@ import deepmerge from 'deepmerge';
 import rcaDefaults from './index';
 
 export default (customSettings, defaultSettings = rcaDefaults) => {
-  return customSettings ? deepmerge(defaultSettings, customSettings) : defaultSettings;
+  const settings = customSettings ? deepmerge(defaultSettings, customSettings) : defaultSettings;
+  return settings;
 };

@@ -54,7 +54,7 @@ const infoSettings = {
   actionClickListener: () => { console.log('Listener triggered!'); },
 };
 
-const longText = 'This is an unecessarily long message to the user!!!!';
+const longText = 'This is an unnecessarily long message to the user!!!!';
 
 class Main extends Component {
   render() {
@@ -68,7 +68,7 @@ class Main extends Component {
               <Button
                 className={classes.info}
                 variant="contained"
-                onClick={() => context.info('Header', longText, infoSettings)}
+                onClick={() => context.info('Header', longText, null, infoSettings)}
               >
                 Info
               </Button>
