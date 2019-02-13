@@ -42,7 +42,6 @@
     "@babel/core": "7.1.6",
     "@babel/plugin-proposal-class-properties": "7.1.0",
     "@material-ui/core": "^3.0.0",
-    "babel-loader": "8.0.5",
     "babel-plugin-inline-react-svg": "1.0.1",
     "babel-plugin-inline-svg": "1.0.0",
     "babel-plugin-transform-replace-object-assign": "2.0.0",
