@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.7.3
+- [fix] Make @material-ui/core a peer dependency.
+
 ## 0.7.2
 - [fix] Add padding to body when no action or close button present.
 - [fix] Add border radius to body when no adornment is present.
