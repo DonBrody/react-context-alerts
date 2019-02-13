@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.0.0
+- [fix] Remove unnecessary dependencies from exporting as part of npm build.
+- [fix] Lock down dependency versions.
+- [fix] Reduce @material-ui/core peer version requirement.
+- [fix] Reduce @material-ui/icons dependency version requirement.
+
 ## 0.7.3
 - [fix] Make @material-ui/core a peer dependency.
 
