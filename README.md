@@ -72,7 +72,7 @@ class SampleComponent extends Component {
 |---|---|---|
 |theme|object|Override default theming. Check below for more information on overriding the default theme.|
 |settings|object|Override default settings. Check below for more information on overriding the default settings.|
-|style|object|Override the `Alert` wrapper styles (i.e. { bottom: 15 } will cause the `Alert`s to slide out along the bottom of the screen instead of the top.)|
+|style|object|Override the `Alert` wrapper styles (i.e. { top: 0, right: 0 } will adjust the absolute positioning of the `Alert` wrapper to the very top right corner of the screen.)|
 
 ## Theming
 `react-context-alerts` are **fully customizable**. You can set the coloring of the text/icon and background of the adornment, body, action button, and close button. Or, you can replace them with your own custom components! The simplest way to do this is by using the provided `createRcaTheme` function:
