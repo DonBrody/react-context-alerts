@@ -6,7 +6,7 @@ The demo below can be found [here](https://react-context-alerts.herokuapp.com). 
 <img src="/rca_demo.gif?raw=true" width="700px">  
 
 ## Prerequisites
-`react-context-alerts` utilizes the React context api, which relies on peer dependencies `react` and `react-dom` v16.3.0 or greater.
+`react-context-alerts` utilizes the React context api, which relies on peer dependencies `react` and `react-dom` v16.3.0 or greater. `@material-ui/core` v 3.0.0 or greater is also a peer dependency.
 
 ## Getting Started
 Install `react-context-alerts`:
