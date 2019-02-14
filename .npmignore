@@ -8,6 +8,12 @@ example
 public
 src
 
+# Project files
+.babelrc
+.eslintignore
+.gitignore
+static.json
+
 # README gif
 rca_demo.gif
 

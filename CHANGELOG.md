@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.1
+- [fix] Optimize Babel build process.
+
 ## 1.0.0
 - [fix] Remove unnecessary dependencies from exporting as part of npm build.
 - [fix] Lock down dependency versions.
