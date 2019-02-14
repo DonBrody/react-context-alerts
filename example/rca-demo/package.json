@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm i && react-scripts build",
+    "build": "npm i && react-scripts --max_old_space_size=4096 build",
     "test": "react-scripts test"
   },
   "eslintConfig": {
