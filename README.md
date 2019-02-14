@@ -25,7 +25,9 @@ ReactDOM.render(
     <App />
   </AlertsProvider>, document.getElementById('root'));
 ```
-Add the `Alert` component (or multiple `Alert` components) anywhere inside of the component tree that is wrapped by `AlertsProvider`. Trigger the `Alert` by setting its `open` prop to `true`. And, that's all it takes to get the default `Alert` to render!
+**IMPORTANT**: If you are using `@material-ui/core` and `jss` in your application, you must place the `AlertsProvider` inside of your existing `MuiThemeProvider`. `react-context-alerts` uses its own `MuiThemeProvider` internally. Placing the `AlertsProvider` outside of your existing `MuiThemeProvider` will cause unexpected UI behavior/styling because the two providers must work together to generate `jss` class names.
+
+Next, add the `Alert` component (or multiple `Alert` components) anywhere inside of the component tree that is wrapped by `AlertsProvider`. Trigger the `Alert` by setting its `open` prop to `true`. And, that's all it takes to get the default `Alert` to render!
 ```
 import React, { Component } from 'react';
 import { Alert } from 'react-context-alerts';
@@ -72,7 +74,7 @@ class SampleComponent extends Component {
 |---|---|---|
 |theme|object|Override default theming. Check below for more information on overriding the default theme.|
 |settings|object|Override default settings. Check below for more information on overriding the default settings.|
-|style|object|Override the `Alert` wrapper styles (i.e. { top: 0, right: 0 } will adjust the absolute positioning of the `Alert` wrapper to the very top right corner of the screen.)|
+|style|object|Override the `Alert` wrapper styles (i.e. { top: 0, right: 0 } will adjust the absolute positioning of the `Alert` wrapper to the very top right corner of the screen.) Any styles you add will be merged with the [default styles][1].|
 
 ## Theming
 `react-context-alerts` are **fully customizable**. You can set the coloring of the text/icon and background of the adornment, body, action button, and close button. Or, you can replace them with your own custom components! The simplest way to do this is by using the provided `createRcaTheme` function:
@@ -98,7 +100,7 @@ ReactDOM.render(
 ```
 The example above will set the background color of the info `Alert` body to the same shade of blue as the default info `Alert` adornment, and will set its text color to white.  
 
-The theme object is fairly large, so I encourage you to take a look at the [source][1] if you are interested in making advanced theming overrides.
+The theme object is fairly large, so I encourage you to take a look at the [source][2] if you are interested in making advanced theming overrides.
 
 ## Settings
 `react-context-alerts` allows you to override the default `Alert` settings for all of your `Alert` components. The simplest way to do this is by using the provided `createRcaSettings` function:
@@ -129,25 +131,26 @@ The example above will first disable the timeout for all `Alert`s, and enable/sh
 
 **It's important to understand specificity here:** The top level object properties override the default settings for all `Alert`s. Then the more specific type named objects will override the default settings for all `Alert`s of their specified type. Then any props that are passed into an `Alert` component (these are considered the most specific settings) will override all other overrides, but only for that instance of the `Alert`.
 
-Although there are not nearly as many settings options as theming options, I encourage you to take a look at the [source][2] if you are interested in making advanced settings overrides.
+Although there are not nearly as many settings options as theming options, I encourage you to take a look at the [source][3] if you are interested in making advanced settings overrides.
 
 ## Advanced Use
-The `Alert` component obfuscates the use of the React context consumer. Obfuscating this functionality somewhat limits the potential uses of this library, however, the context consumer is exposed if you decide you need more control over the functionality of this library. If you get to this point, it is probably best to read through the full [source][3] to understand what's going on and how to use all of the available features (it's a relatively small set of files).  
+The `Alert` component obfuscates the use of the React context consumer. Obfuscating this functionality somewhat limits the potential uses of this library, however, the context consumer is exposed if you decide you need more control over the functionality of this library. If you get to this point, it is probably best to read through the full [source][4] to understand what's going on and how to use all of the available features (it's a relatively small set of files).  
 
-In addition to reading through the source, there is a [developers playground][4] available. Just run `npm run start:playground` once all of your dependencies are installed. It'll pop up a simple app that can be used to play around with any of the features you want. It utilizes [react-scripts][5], so you'll get hot reloads as well.
+In addition to reading through the source, there is a [developers playground][5] available. Just run `npm run start:playground` once all of your dependencies are installed. It'll pop up a simple app that can be used to play around with any of the features you want. It utilizes [react-scripts][6], so you'll get hot reloads as well.
 
 ## Next Steps
 Add `react-context-alerts` to any (and hopefully all :) of your projects, customize the alerts in any way that fits your needs, and enjoy!
 
-## Main Dependencies
+## Peer Dependencies
 * [React](https://github.com/facebook/react)
 * [Material UI](https://github.com/mui-org/material-ui)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-[1]:src/shared/theme/index.js
-[2]:src/shared/settings/index.js
-[3]:src/shared
-[4]:src/playground
-[5]:https://github.com/facebook/create-react-app#readme
+[1]:https://github.com/DonBrody/react-context-alerts/blob/master/src/shared/context/AlertsProvider.js
+[2]:src/shared/theme/index.js
+[3]:src/shared/settings/index.js
+[4]:src/shared
+[5]:src/playground
+[6]:https://github.com/facebook/create-react-app#readme
