@@ -11,6 +11,7 @@ src
 # Project files
 .babelrc
 .eslintignore
+.gitignore
 static.json
 
 # README gif
