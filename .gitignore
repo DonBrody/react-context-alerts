@@ -1,5 +1,7 @@
 # dependencies
 /node_modules
+
+# example project
 /example/rca-demo/node_modules
 /example/rca-demo/build
 
