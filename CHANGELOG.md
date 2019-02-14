@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.2
+- [fix] Update README.md with important details needed to avoid build issues.
+
 ## 1.0.1
 - [fix] Optimize Babel build process.
 
