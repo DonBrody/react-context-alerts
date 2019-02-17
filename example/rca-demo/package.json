@@ -10,9 +10,13 @@
     "react-dom": "16.8.1",
     "react-scripts": "2.1.5"
   },
+  "devDependencies": {
+    "gh-pages": "2.0.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "npm i && react-scripts --max_old_space_size=4096 build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test"
   },
   "eslintConfig": {
