@@ -2,7 +2,7 @@
 Simple and configurable alert library utilizing React Context
 
 ## Example
-The demo below can be found [here](https://react-context-alerts.herokuapp.com). Give it a second to load. It's running in a free Heroku sandbox.
+The demo below can be found [here](https://donbrody.github.io/react-context-alerts).
 <img src="/rca_demo.gif?raw=true" width="700px">  
 
 ## Prerequisites
