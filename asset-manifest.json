@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.8d756571.chunk.css",
-  "main.js": "/static/js/main.fb54c560.chunk.js",
-  "main.js.map": "/static/js/main.fb54c560.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.fdfcfda2.js",
-  "runtime~main.js.map": "/static/js/runtime~main.fdfcfda2.js.map",
-  "static/js/2.2c5d6913.chunk.js": "/static/js/2.2c5d6913.chunk.js",
-  "static/js/2.2c5d6913.chunk.js.map": "/static/js/2.2c5d6913.chunk.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.e16501c40a134be1b5992c85e44edc1b.js": "/precache-manifest.e16501c40a134be1b5992c85e44edc1b.js",
-  "service-worker.js": "/service-worker.js",
-  "static/css/main.8d756571.chunk.css.map": "/static/css/main.8d756571.chunk.css.map"
+  "main.css": "/react-context-alerts/static/css/main.8d756571.chunk.css",
+  "main.js": "/react-context-alerts/static/js/main.fb54c560.chunk.js",
+  "main.js.map": "/react-context-alerts/static/js/main.fb54c560.chunk.js.map",
+  "runtime~main.js": "/react-context-alerts/static/js/runtime~main.bf7ba6fd.js",
+  "runtime~main.js.map": "/react-context-alerts/static/js/runtime~main.bf7ba6fd.js.map",
+  "static/js/2.2c5d6913.chunk.js": "/react-context-alerts/static/js/2.2c5d6913.chunk.js",
+  "static/js/2.2c5d6913.chunk.js.map": "/react-context-alerts/static/js/2.2c5d6913.chunk.js.map",
+  "index.html": "/react-context-alerts/index.html",
+  "precache-manifest.db627492d0b13153905a04175d7cdfa1.js": "/react-context-alerts/precache-manifest.db627492d0b13153905a04175d7cdfa1.js",
+  "service-worker.js": "/react-context-alerts/service-worker.js",
+  "static/css/main.8d756571.chunk.css.map": "/react-context-alerts/static/css/main.8d756571.chunk.css.map"
 }
