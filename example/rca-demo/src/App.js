@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { AlertsProvider, createRcaTheme, createRcaSettings } from 'react-context-alerts';
@@ -76,12 +76,12 @@ class App extends Component {
           </header>
           <AlertsProvider theme={rcaTheme} settings={rcaSettings} style={rcaStyles}>
             <main role="main">
-              <BrowserRouter>
+              <HashRouter>
                 <Switch>
                   <Route exact path="/" component={Main}/>
                   <Route path="/" component={AppBase} />
                 </Switch>
-              </BrowserRouter>
+              </HashRouter>
             </main>
           </AlertsProvider>
           <footer style={{ marginTop: 60, textAlign: 'center' }}>
